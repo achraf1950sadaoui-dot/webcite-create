@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NÛR — Luxury Dining, Dubai</title>
+  <meta name="description" content="NÛR — A Michelin-inspired luxury dining experience in the heart of Dubai. Reservations open." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="loader-mark">N<span>Û</span>R</div>
+    <div class="loader-bar"><span></span></div>
+    <p class="loader-sub">Preparing your table…</p>
+  </div>
+
+  <!-- Navigation -->
+  <header class="nav">
+    <a href="#" class="brand">N<span>Û</span>R<small>· DUBAI</small></a>
+    <nav>
+      <a href="#story">Story</a>
+      <a href="#menu">Menu</a>
+      <a href="#chef">Chef</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <a href="#reserve" class="btn-ghost">Reserve</a>
+  </header>
+
+  <!-- Hero with 3D canvas -->
+  <section class="hero">
+    <canvas id="scene"></canvas>
+    <div class="hero-overlay">
+      <p class="eyebrow">Burj Khalifa District · Est. 2024</p>
+      <h1 class="display">
+        Where the desert<br/>
+        meets <em>gold</em>.
+      </h1>
+      <p class="lede">
+        A twenty-two course tasting menu inspired by the dunes of the Empty Quarter,
+        the spice routes of the Gulf, and the audacity of modern Dubai.
+      </p>
+      <div class="hero-cta">
+        <a href="#reserve" class="btn-primary">Reserve a Table</a>
+        <a href="#menu" class="btn-link">Discover the Menu →</a>
+      </div>
+      <div class="hero-meta">
+        <span>★★★★★</span>
+        <span>Condé Nast 2025</span>
+        <span>The World's 50 Best</span>
+      </div>
+    </div>
+    <div class="hero-scroll">Scroll<span></span></div>
+  </section>
+
+  <!-- Story -->
+  <section id="story" class="section dark">
+    <div class="grid-2">
+      <div class="reveal">
+        <p class="eyebrow gold">Our Philosophy</p>
+        <h2 class="display sm">An ode to the<br/><em>seven emirates.</em></h2>
+        <p class="body">
+          NÛR — meaning <em>light</em> in Arabic — is the culinary vision of
+          Chef Yasmin Al-Hashimi. Each course is a study in contrast:
+          the heat of the dunes and the chill of the Gulf, the heritage
+          of bedouin spice and the precision of Parisian technique.
+        </p>
+        <p class="body">
+          Twelve tables. One chef's counter. Zero compromises.
+        </p>
+        <ul class="ledger">
+          <li><strong>22</strong><span>Courses</span></li>
+          <li><strong>14</strong><span>Sommeliers' picks</span></li>
+          <li><strong>1</strong><span>Michelin star · 2025</span></li>
+        </ul>
+      </div>
+      <div class="reveal frame">
+        <div class="frame-inner"></div>
+        <p class="caption">The dining room, photographed at golden hour.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Signature Menu -->
+  <section id="menu" class="section">
+    <div class="section-head">
+      <p class="eyebrow gold">Signature Tasting</p>
+      <h2 class="display sm">A menu, <em>told as a story.</em></h2>
+    </div>
+    <div class="menu-grid">
+      <article class="dish reveal">
+        <span class="course">I · Awakening</span>
+        <h3>Saffron & Pearl</h3>
+        <p>Hammour ceviche, Iranian saffron pearls, finger lime, gold leaf.</p>
+        <span class="price">AED 240</span>
+      </article>
+      <article class="dish reveal">
+        <span class="course">VII · Desert</span>
+        <h3>Smoked Camel Tartare</h3>
+        <p>Aged camel loin, sumac, black lime emulsion, charred flatbread.</p>
+        <span class="price">AED 320</span>
+      </article>
+      <article class="dish reveal">
+        <span class="course">XII · Gulf</span>
+        <h3>Lobster Machboos</h3>
+        <p>Omani blue lobster, aged basmati, dried lime, bisque foam.</p>
+        <span class="price">AED 480</span>
+      </article>
+      <article class="dish reveal">
+        <span class="course">XVII · Fire</span>
+        <h3>Wagyu A5 · Oud Smoke</h3>
+        <p>Japanese A5 wagyu, oud-wood smoke, date jus, truffle labneh.</p>
+        <span class="price">AED 720</span>
+      </article>
+      <article class="dish reveal">
+        <span class="course">XX · Garden</span>
+        <h3>Rose & Pistachio</h3>
+        <p>Damascus rose sorbet, Aleppo pistachio, candied rose petals.</p>
+        <span class="price">AED 180</span>
+      </article>
+      <article class="dish reveal">
+        <span class="course">XXII · Farewell</span>
+        <h3>The Golden Date</h3>
+        <p>Medjool date filled with 24k gold ganache, cardamom coffee.</p>
+        <span class="price">AED 120</span>
+      </article>
+    </div>
+    <div class="menu-cta">
+      <p>Full tasting · <strong>AED 1,850</strong> per guest · wine pairing +AED 950</p>
+      <a href="#reserve" class="btn-primary">Reserve</a>
+    </div>
+  </section>
+
+  <!-- Chef -->
+  <section id="chef" class="section chef-section">
+    <div class="grid-2 reverse">
+      <div class="reveal portrait">
+        <div class="portrait-inner"></div>
+        <span class="portrait-badge">Chef Yasmin Al-Hashimi</span>
+      </div>
+      <div class="reveal">
+        <p class="eyebrow gold">Behind the Counter</p>
+        <h2 class="display sm">Twelve years of <em>obsession.</em></h2>
+        <p class="body">
+          Trained at L'Arpège in Paris and Noma in Copenhagen, Chef Yasmin
+          returned to Dubai with a singular question: <em>what would the
+          cuisine of the Arabian peninsula taste like if it had never paused
+          to look elsewhere?</em>
+        </p>
+        <p class="body">
+          NÛR is the answer — a kitchen rooted in ancestral spice, sharpened
+          by Nordic discipline, and plated with Parisian restraint.
+        </p>
+        <blockquote>
+          "We do not chase trends. We chase memory."
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visit -->
+  <section id="visit" class="section dark">
+    <div class="section-head">
+      <p class="eyebrow gold">Find Us</p>
+      <h2 class="display sm">The 124th floor.<br/><em>The skyline below.</em></h2>
+    </div>
+    <div class="visit-grid">
+      <div class="visit-card reveal">
+        <h4>Address</h4>
+        <p>Burj Khalifa, Level 124<br/>1 Sheikh Mohammed bin Rashid Blvd<br/>Downtown Dubai, U.A.E.</p>
+      </div>
+      <div class="visit-card reveal">
+        <h4>Hours</h4>
+        <p>Tuesday — Sunday<br/>Seatings at 18:30 & 21:00<br/><em>Closed Mondays</em></p>
+      </div>
+      <div class="visit-card reveal">
+        <h4>Contact</h4>
+        <p>+971 4 888 1908<br/>reserve@nur-dubai.ae<br/>Valet & helipad available</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reservation -->
+  <section id="reserve" class="section reserve-section">
+    <div class="reserve-wrap reveal">
+      <p class="eyebrow gold">Reserve Your Table</p>
+      <h2 class="display sm">Two seatings.<br/><em>Twelve tables.</em></h2>
+      <form class="reserve-form" onsubmit="event.preventDefault(); this.querySelector('.confirm').classList.add('show');">
+        <div class="field"><label>Name</label><input required type="text" placeholder="Your full name"/></div>
+        <div class="field"><label>Email</label><input required type="email" placeholder="you@example.com"/></div>
+        <div class="row">
+          <div class="field"><label>Date</label><input required type="date"/></div>
+          <div class="field"><label>Seating</label>
+            <select>
+              <option>18:30 — First Seating</option>
+              <option>21:00 — Second Seating</option>
+            </select>
+          </div>
+          <div class="field"><label>Guests</label>
+            <select>
+              <option>2 guests</option><option>3 guests</option>
+              <option>4 guests</option><option>5 guests</option>
+              <option>6 guests</option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label>Occasion <em>(optional)</em></label>
+          <input type="text" placeholder="Anniversary, business, celebration…"/>
+        </div>
+        <button type="submit" class="btn-primary full">Request Reservation</button>
+        <p class="confirm">Thank you. Our concierge will confirm your table within 24 hours.</p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-row">
+      <div class="brand-lg">N<span>Û</span>R</div>
+      <div class="foot-links">
+        <a href="#story">Story</a>
+        <a href="#menu">Menu</a>
+        <a href="#chef">Chef</a>
+        <a href="#visit">Visit</a>
+        <a href="#reserve">Reserve</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 NÛR Dubai · All rights reserved</span>
+      <span>Crafted in the desert · Plated in gold</span>
+    </div>
+  </footer>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+    }
+  }
+  </script>
+  <script type="module" src="script.js"></script>
+</body>
+</html>
