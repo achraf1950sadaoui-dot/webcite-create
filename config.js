@@ -3,7 +3,16 @@
 //  ────────────────────────────────────────────────────────────────
 //  Bach tbidel ay haja f site, bidel ghir hna.
 //  To rebrand for a new client: change values in this file only.
-// ════════════════════════════════════════════════════════════════
+//
+//  ⚠️  CHECKLIST QBEL MA T-DEPLOY  (replace every "[…]" placeholder)
+//  ────────────────────────────────────────────────────────────────
+//    [ ] brand.name + brand.tagline + brand.domain
+//    [ ] hero.eyebrow + hero.badges (use REAL awards only)
+//    [ ] visit.cards — address, hours, phone, email
+//    [ ] chef.name + chef.body + chef.quote
+//    [ ] menu.categories — prices in your local currency
+//    [ ] footer.copyright — restaurant name
+//  ════════════════════════════════════════════════════════════════
 
 // Unsplash 4K food photos — change these if you want different imagery.
 // Format: https://images.unsplash.com/photo-XXX?auto=format&fit=crop&w=2400&q=90
@@ -13,11 +22,12 @@ const IMG = (id, w = 2400) =>
 export const CONFIG = {
 
   // ─── Brand ─────────────────────────────────────────────────────
+  // ⚠️ REPLACE with the real restaurant's brand info before going live.
   brand: {
-    name: 'ISMA',
-    accent: '',
-    tagline: 'DUBAI',
-    domain: 'isma-dubai.ae',
+    name: 'ISMA',                // <-- Restaurant name
+    accent: '',                  // optional accent letter to highlight
+    tagline: 'DUBAI',            // city / sub-line under brand
+    domain: 'your-domain.ae',    // <-- used in emails / copy
   },
 
   // ─── Theme: bottle green + white ──────────────────────────────
@@ -39,13 +49,15 @@ export const CONFIG = {
 
   // ─── Hero ──────────────────────────────────────────────────────
   hero: {
-    eyebrow: 'Downtown Dubai · Est. 2024',
+    eyebrow: '[Neighbourhood, City · Est. YYYY]',
     title: ['Where flavour', 'meets', 'craft.'],
     italicWord: 'craft.',
     lede: 'A bottle-green sanctuary in the heart of Dubai — twenty dining moments from sunrise breakfast to midnight shisha, every dish plated with the same obsession.',
     ctaPrimary: 'Reserve a Table',
     ctaSecondary: 'Explore the Menu',
-    badges: ['★★★★★', 'Time Out Dubai 2025', 'Tripadvisor Travellers\' Choice'],
+    // ⚠️ Badges below are PLACEHOLDERS. Use only awards the restaurant
+    //    has actually received — never fake press / reviews.
+    badges: ['★★★★★', '[Press / award #1]', '[Press / award #2]'],
   },
 
   // ─── 3D hero food images (load real 4K plates) ────────────────
@@ -292,27 +304,42 @@ export const CONFIG = {
   },
 
   // ─── Chef ──────────────────────────────────────────────────────
+  // ⚠️ Chef name + bio are PLACEHOLDERS — replace with the real chef's story.
   chef: {
     eyebrow: 'Behind the Counter',
     title: 'Twelve years of obsession.',
     italicWord: 'obsession.',
-    name: 'Chef Yasmin Al-Hashimi',
+    name: '[Chef Name]',
     body: [
-      "Trained at L'Arpège in Paris and Noma in Copenhagen, Chef Yasmin returned to Dubai with a singular vision: a restaurant for every hour, where breakfast, lunch, dinner, and after-midnight are all held to the same uncompromising standard.",
-      'ISMA is the answer — twenty menu sections, one kitchen, zero shortcuts.',
+      '[Short paragraph about the chef — background, training, philosophy. Two or three sentences works best.]',
+      '[Second paragraph — what makes this restaurant unique under their leadership.]',
     ],
-    quote: 'A restaurant is not a meal. It is a hundred meals, all of them perfect.',
+    quote: '[A short quote from the chef — 1 sentence.]',
   },
 
   // ─── Visit ─────────────────────────────────────────────────────
+  // ⚠️ All address / phone / email below are PLACEHOLDERS.
+  //    Replace with the real restaurant's details before publishing.
   visit: {
     eyebrow: 'Find Us',
     title: 'Downtown Dubai. The skyline outside.',
     italicWord: 'The skyline outside.',
     cards: [
-      { title: 'Address',  lines: ['DIFC Gate Village', 'Building 6, Ground Floor', 'Dubai International Financial Centre, U.A.E.'] },
-      { title: 'Hours',    lines: ['Every day', '08:00 — 02:00', '<em>Breakfast served until 12:00</em>'] },
-      { title: 'Contact',  lines: ['+971 4 888 1908', 'reserve@isma-dubai.ae', 'Valet parking available'] },
+      { title: 'Address',  lines: [
+          '[Street address line 1]',
+          '[Street address line 2]',
+          '[City, Emirate, U.A.E.]',
+      ] },
+      { title: 'Hours',    lines: [
+          '[Opening days]',
+          '[Opening hours]',
+          '<em>[Optional sub-line, e.g. breakfast hours]</em>',
+      ] },
+      { title: 'Contact',  lines: [
+          '[+971 X XXX XXXX]',
+          '[reserve@your-domain.ae]',
+          '[Parking / valet note]',
+      ] },
     ],
   },
 
@@ -328,7 +355,7 @@ export const CONFIG = {
 
   // ─── Footer ────────────────────────────────────────────────────
   footer: {
-    copyright: '© 2026 ISMA Dubai · All rights reserved',
+    copyright: '© 2026 [Restaurant Name] · All rights reserved',
     motto: 'Every hour. Every table. The same standard.',
   },
 
