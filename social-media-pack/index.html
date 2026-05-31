@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>POSTCRAFT — Social Media Template Studio</title>
+  <meta name="description" content="A pack of 12 fully-editable social media post templates. Pick a design, change the text and colors, download a crisp PNG. No design skills needed." />
+  <meta property="og:title" content="POSTCRAFT — Social Media Template Studio" />
+  <meta property="og:description" content="12 editable templates · 10 color themes · 3 sizes · instant PNG export." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="nav" id="top">
+    <a href="#top" class="brand">
+      <span class="brand-dot"></span>
+      <span class="brand-name" data-bind="brand-name"></span>
+      <small class="brand-tag" data-bind="brand-tag"></small>
+    </a>
+    <nav class="nav-links">
+      <a href="#templates">Templates</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+    <a class="btn btn-primary" data-bind="order-cta"></a>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <p class="eyebrow" data-bind="hero-eyebrow"></p>
+      <h1 class="hero-title" data-bind="hero-title"></h1>
+      <p class="hero-lede" data-bind="hero-lede"></p>
+      <div class="hero-cta">
+        <a href="#templates" class="btn btn-primary lg" data-bind="hero-cta-1"></a>
+        <a href="#pricing" class="btn btn-ghost lg" data-bind="hero-cta-2"></a>
+      </div>
+      <ul class="hero-stats" data-bind="hero-stats"></ul>
+    </div>
+    <div class="hero-strip" data-bind="hero-strip" aria-hidden="true"></div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="templates" class="gallery">
+    <div class="section-head">
+      <p class="eyebrow">THE PACK</p>
+      <h2>Tap a template to customize it.</h2>
+    </div>
+    <div class="filters" data-bind="filters"></div>
+    <div class="grid" data-bind="gallery"></div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how" class="steps">
+    <div class="section-head">
+      <p class="eyebrow" data-bind="steps-eyebrow"></p>
+      <h2 data-bind="steps-title"></h2>
+    </div>
+    <div class="steps-grid" data-bind="steps-grid"></div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="pricing">
+    <div class="section-head">
+      <p class="eyebrow" data-bind="pricing-eyebrow"></p>
+      <h2 data-bind="pricing-title"></h2>
+      <p class="muted" data-bind="pricing-note"></p>
+    </div>
+    <div class="tiers" data-bind="tiers"></div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-row">
+      <span class="brand-name" data-bind="brand-name"></span>
+      <nav class="foot-links">
+        <a href="#templates">Templates</a>
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span data-bind="footer-copy"></span>
+      <span data-bind="footer-motto"></span>
+    </div>
+  </footer>
+
+  <!-- ===================== EDITOR MODAL ===================== -->
+  <div class="editor" id="editor" hidden>
+    <div class="editor-backdrop" data-close></div>
+    <div class="editor-panel" role="dialog" aria-modal="true" aria-label="Template editor">
+      <button class="editor-close" data-close aria-label="Close">&times;</button>
+
+      <!-- Live preview -->
+      <div class="editor-stage">
+        <div class="stage-wrap">
+          <canvas id="preview"></canvas>
+        </div>
+        <div class="stage-meta">
+          <span id="editor-name"></span>
+          <span id="editor-dims" class="muted"></span>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="editor-controls">
+        <div class="ctrl-block">
+          <label class="ctrl-label">Size</label>
+          <div class="seg" id="format-seg"></div>
+        </div>
+
+        <div class="ctrl-block">
+          <label class="ctrl-label">Color theme</label>
+          <div class="swatches" id="palette-swatches"></div>
+        </div>
+
+        <div class="ctrl-block">
+          <label class="ctrl-label">Text</label>
+          <div id="fields"></div>
+        </div>
+
+        <div class="ctrl-actions">
+          <label class="hd-toggle">
+            <input type="checkbox" id="hd-toggle" /> HD export (2×)
+          </label>
+          <button class="btn btn-primary full" id="download-btn">Download PNG</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
