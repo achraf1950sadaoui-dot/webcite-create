@@ -1,75 +1,71 @@
-# ISMA — Luxury Dubai Restaurant
+# TAWAKULL — Landing Page Skincare (COD Maroc)
 
-A cinematic, single-page website for a fine-dining restaurant. Designed
-to feel like a Michelin guide entry, animated like a luxury fragrance ad.
+Page de vente **single-product** optimisée pour la conversion + **paiement à
+la livraison (COD)**, pensée pour le marché marocain et le trafic publicitaire
+(Facebook / Instagram / TikTok Ads).
 
-**Live demo:** open `index.html` in any modern browser.
-
----
-
-## What's inside
-
-- **Hero 3D scene** (Three.js): rotating gold plate, glass cloche that breathes
-  open to reveal a saffron-pearl dish, orbiting gold rings, drifting spice
-  particles, dune silhouette, cursor parallax, scroll-linked camera dolly.
-- **Custom gold cursor** with magnetic buttons and 3D tilt on framed elements.
-- **Word-by-word hero title reveal** after preloader.
-- **Scroll progress bar** in gold.
-- **Sections:** Story · 22-course tasting menu · Chef · Visit (Burj Khalifa
-  L124) · Reservation form (client-side confirmation).
-- **Fully responsive**, mobile-optimized (custom cursor disables on touch).
+**Aperçu :** ouvre `index.html` f ay navigateur.
 
 ---
 
-## One file controls everything
+## Wach kayn f had l-page
 
-All copy, colors, menu items, hours, contact info — `config.js`.
+- **Hero** : galerie d teswir, prix + prix barré, note (étoiles), CTA.
+- **Bandeau de confiance** : livraison, COD, satisfait ou remboursé.
+- **Problème → Solution** : accroche émotionnelle.
+- **Bénéfices** · **Avant/Après** · **Mode d'emploi** · **Avis clients**.
+- **Offres / Packs** (1, 2, 3 unités) → kayzid l-panier moyen (AOV).
+- **Formulaire COD** : Nom · Téléphone · Ville · Adresse · Offre.
+  - Validation d ra9m marocain (06/07…).
+  - Commande katmchi l-**WhatsApp** dyalek (b automatique), w/wla l-**Google Sheet**.
+- **FAQ** · **CTA collant** f mobile · **minuterie** d'urgence.
+
+---
+
+## ⚙️ Wahed file kaytre7em 3la kolchi : `config.js`
+
+Bdel GHIR f `config.js` :
 
 ```js
-export const CONFIG = {
-  brand: { name: 'ISMA', tagline: 'DUBAI', ... },
-  theme: { gold: '#d4af6a', goldBright: '#f1d28a', ... },
-  hero:  { eyebrow: '...', title: [...], lede: '...' },
-  menu:  { dishes: [ { course, name, desc, price }, ... ] },
-  visit: { cards: [ { title, lines: [...] }, ... ] },
-  ...
-};
+product: { name, subtitle, images:[…], price, compareAt }   // produit + asmane
+offers:  { packs:[ {label, qty, price, compareAt} ] }        // packs
+order:   { whatsapp:'2126XXXXXXXX', sheetEndpoint:'', cities:[…] }
+reviews: { items:[…] }    // ⚠️ avis 7A9I9IYIN ghir
+theme:   { primary, accent, … }   // couleurs
 ```
 
-To rebrand for a new client:
-
-1. Open `config.js`
-2. Change `brand.name`, `brand.tagline`, theme colors, dish list, contact info.
-3. Refresh the page. Done.
-
-No build step. No framework. Pure HTML + CSS + ES modules.
+### ⚠️ Checklist qbel ma t-lance
+- [ ] `product` : ism, teswir 7a9i9i, asmane (men TrendTrack).
+- [ ] `order.whatsapp` : ra9m WhatsApp dyalek (format `2126XXXXXXXX`).
+- [ ] `reviews.items` : avis d clients 7a9i9iyin (matkdebch).
+- [ ] `brand.phone` / `instagram`.
 
 ---
 
-## Tech
+## 📦 Commandes (COD) — kifach kaymchiw
 
-- **Three.js** r160 (via jsDelivr CDN)
-- **Google Fonts** — Cinzel (display), Cormorant Garamond (serif), Inter (sans)
-- **No build, no npm install** — just open `index.html`
-
----
-
-## Deploy
-
-Drop the folder into:
-
-- **Netlify** — drag & drop the directory
-- **Vercel** — `vercel deploy` in the folder
-- **GitHub Pages** — push to `gh-pages` branch
-- **Any static host** — upload 4 files (`index.html`, `styles.css`,
-  `script.js`, `config.js`)
+1. **WhatsApp (par défaut, bla backend)** : ملي العميل يصيفط، كتفتح WhatsApp
+   عندك بالطلب كامل (نوم/تيليفون/مدينة/عنوان/الأوفر).
+2. **Google Sheet (optionnel)** : 7ot URL d Google Apps Script f
+   `order.sheetEndpoint` → kol commande katsjjel f Sheet automatiquement.
+3. **Shopify (backend)** : دير الطلبات اللي توصلك فـ Shopify (Brouillon/Order)
+   باش تستافد من tracking, COD app, و إحصائيات.
 
 ---
 
-## Pricing tiers (suggestion for clients)
+## 🚀 Déploiement
 
-| Tier | What's included |
-|------|-----------------|
-| **Basic** | Site as-is, your branding/colors/menu, deployed to a domain |
-| **Pro** | + reservation form connected to email (Formspree/EmailJS), Google Maps embed, Instagram feed |
-| **Premium** | + bilingual EN/AR with RTL, full photo gallery, custom 3D scene tailored to the cuisine, custom domain + SSL |
+Static site (HTML/CSS/JS, bla build) — 7ot l-4 files f:
+
+- **Netlify** — drag & drop d dossier
+- **Vercel** — `vercel deploy`
+- **GitHub Pages** — push l-branche `gh-pages`
+- ay hébergeur static
+
+---
+
+## 🛠️ Tech
+
+- HTML + CSS + JavaScript (ES modules) — **bla framework, bla npm**.
+- Google Fonts : Playfair Display · Cormorant · Inter.
+- Mobile-first, responsive, rapide (mohim l-conversion f ads).

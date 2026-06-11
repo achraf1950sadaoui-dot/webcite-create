@@ -1,174 +1,186 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ISMA — Luxury Dining, Dubai</title>
-  <meta name="description" content="ISMA — A bottle-green sanctuary in Dubai. Breakfast to midnight shisha, twenty menu sections, one obsession." />
-  <meta property="og:title" content="ISMA — Luxury Dining, Dubai" />
-  <meta property="og:description" content="Breakfast, BBQ, pasta, sheesha — every hour, every table, the same standard." />
+  <title data-bind="meta-title">TAWAKULL — Soins de la peau</title>
+  <meta name="description" data-bind="meta-desc" content="Sérum éclat & soins de la peau. Paiement à la livraison partout au Maroc." />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <div class="cursor-dot"></div>
-  <div class="cursor-ring"></div>
-  <div class="scroll-progress"><span></span></div>
+  <!-- Barre d'annonce -->
+  <div class="announce" data-bind="announce"></div>
 
-  <div id="preloader">
-    <div class="loader-mark" data-bind="brand-mark"></div>
-    <div class="loader-bar"><span></span></div>
-    <p class="loader-sub">Setting your table…</p>
-  </div>
-
+  <!-- Header -->
   <header class="nav">
-    <a href="#" class="brand">
-      <span data-bind="brand-mark"></span>
+    <a href="#top" class="brand">
+      <span data-bind="brand-name"></span>
       <small data-bind="brand-tagline"></small>
     </a>
-    <nav>
-      <a href="#story">Story</a>
-      <a href="#menu">Menu</a>
-      <a href="#chef">Chef</a>
-      <a href="#visit">Visit</a>
-    </nav>
-    <a href="#reserve" class="btn-ghost magnetic">Reserve</a>
+    <a href="#commander" class="btn-primary sm magnetic">Commander</a>
   </header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <canvas id="scene"></canvas>
-    <div class="hero-vignette"></div>
-    <div class="hero-overlay">
-      <p class="eyebrow" data-bind="hero-eyebrow"></p>
-      <h1 class="display split" data-bind="hero-title"></h1>
-      <p class="lede" data-bind="hero-lede"></p>
-      <div class="hero-cta">
-        <a href="#reserve" class="btn-primary magnetic" data-bind="hero-cta-primary"></a>
-        <a href="#menu" class="btn-link" data-bind="hero-cta-secondary"></a>
-      </div>
-      <div class="hero-meta" data-bind="hero-badges"></div>
-    </div>
-    <div class="hero-scroll">Scroll<span></span></div>
-  </section>
+  <main id="top">
 
-  <!-- Story -->
-  <section id="story" class="section dark">
-    <div class="grid-2">
-      <div class="reveal">
-        <p class="eyebrow" data-bind="story-eyebrow"></p>
-        <h2 class="display sm" data-bind="story-title"></h2>
-        <div data-bind="story-body"></div>
-        <ul class="ledger" data-bind="story-stats"></ul>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-gallery">
+        <div class="hero-main"><img data-bind="hero-img" alt="" /></div>
+        <div class="hero-thumbs" data-bind="hero-thumbs"></div>
       </div>
-      <div class="reveal frame tilt">
-        <div class="frame-inner"></div>
-        <p class="caption">The dining room at golden hour.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Menu -->
-  <section id="menu" class="section menu-section">
-    <div class="section-head">
-      <p class="eyebrow green" data-bind="menu-eyebrow"></p>
-      <h2 class="display sm" data-bind="menu-title"></h2>
-    </div>
-    <div class="menu-tabs" data-bind="menu-tabs"></div>
-    <div class="menu-display">
-      <div class="menu-hero" data-bind="menu-hero">
-        <div class="menu-hero-label">
-          <small data-bind="menu-active-id">Category</small>
-          <h3 data-bind="menu-active-name"></h3>
+      <div class="hero-info">
+        <div class="stars-row">
+          <span class="stars" data-bind="hero-stars"></span>
+          <span class="muted" data-bind="hero-reviews"></span>
+        </div>
+        <h1 class="display" data-bind="product-name"></h1>
+        <p class="lede" data-bind="product-subtitle"></p>
+        <ul class="badge-list" data-bind="product-badges"></ul>
+        <div class="price-row">
+          <span class="price" data-bind="product-price"></span>
+          <span class="price-old" data-bind="product-compare"></span>
+          <span class="price-save" data-bind="product-save"></span>
+        </div>
+        <a href="#commander" class="btn-primary full magnetic">🛒 Commander maintenant</a>
+        <div class="reassure-mini" data-bind="reassure-mini"></div>
+        <div class="countdown" data-bind="countdown" hidden>
+          <span>⏳ Offre se termine dans</span> <b data-bind="countdown-time"></b>
         </div>
       </div>
-      <div class="menu-dishes" data-bind="menu-dishes"></div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Chef -->
-  <section id="chef" class="section chef-section">
-    <div class="grid-2 reverse">
-      <div class="reveal portrait tilt">
-        <div class="portrait-inner"></div>
-        <span class="portrait-badge" data-bind="chef-name"></span>
+    <!-- Bandeau garanties -->
+    <section class="trust-strip" data-bind="trust-strip"></section>
+
+    <!-- PROBLÈME -->
+    <section class="section problem">
+      <p class="eyebrow" data-bind="problem-eyebrow"></p>
+      <h2 class="display sm" data-bind="problem-title"></h2>
+      <ul class="problem-list" data-bind="problem-points"></ul>
+      <p class="solution" data-bind="problem-solution"></p>
+    </section>
+
+    <!-- BÉNÉFICES -->
+    <section class="section benefits">
+      <p class="eyebrow" data-bind="benefits-eyebrow"></p>
+      <h2 class="display sm" data-bind="benefits-title"></h2>
+      <div class="benefit-grid" data-bind="benefit-grid"></div>
+    </section>
+
+    <!-- AVANT / APRÈS -->
+    <section class="section results">
+      <h2 class="display sm" data-bind="results-title"></h2>
+      <div class="results-wrap">
+        <div class="results-img"><img data-bind="results-img" alt="Avant après" /></div>
+        <div class="results-side">
+          <div class="result-stats" data-bind="result-stats"></div>
+          <p class="caption" data-bind="results-caption"></p>
+          <p class="micro" data-bind="results-disclaimer"></p>
+        </div>
       </div>
-      <div class="reveal">
-        <p class="eyebrow green" data-bind="chef-eyebrow"></p>
-        <h2 class="display sm" data-bind="chef-title"></h2>
-        <div data-bind="chef-body"></div>
-        <blockquote data-bind="chef-quote"></blockquote>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Visit -->
-  <section id="visit" class="section dark">
-    <div class="section-head">
-      <p class="eyebrow" data-bind="visit-eyebrow"></p>
-      <h2 class="display sm" data-bind="visit-title"></h2>
-    </div>
-    <div class="visit-grid" data-bind="visit-grid"></div>
-  </section>
+    <!-- MODE D'EMPLOI -->
+    <section class="section howto">
+      <h2 class="display sm" data-bind="howto-title"></h2>
+      <div class="steps" data-bind="howto-steps"></div>
+    </section>
 
-  <!-- Reserve -->
-  <section id="reserve" class="section reserve-section">
-    <div class="reserve-wrap reveal">
-      <p class="eyebrow green" data-bind="reserve-eyebrow"></p>
-      <h2 class="display sm" data-bind="reserve-title"></h2>
-      <form class="reserve-form" onsubmit="event.preventDefault(); this.querySelector('.confirm').classList.add('show');">
-        <div class="field"><label>Name</label><input required type="text" placeholder="Your full name"/></div>
-        <div class="field"><label>Email</label><input required type="email" placeholder="you@example.com"/></div>
-        <div class="row">
-          <div class="field"><label>Date</label><input required type="date"/></div>
-          <div class="field"><label>Seating</label>
-            <select data-bind="reserve-seatings"></select>
+    <!-- AVIS -->
+    <section class="section reviews">
+      <h2 class="display sm" data-bind="reviews-title"></h2>
+      <div class="review-grid" data-bind="review-grid"></div>
+    </section>
+
+    <!-- OFFRES / PACKS -->
+    <section class="section offers" id="offres">
+      <h2 class="display sm" data-bind="offers-title"></h2>
+      <p class="muted center" data-bind="offers-subtitle"></p>
+      <div class="pack-grid" data-bind="pack-grid"></div>
+    </section>
+
+    <!-- FORMULAIRE COD -->
+    <section class="section order" id="commander">
+      <div class="order-card">
+        <h2 class="display sm" data-bind="order-title"></h2>
+        <p class="muted" data-bind="order-subtitle"></p>
+
+        <div class="order-summary" data-bind="order-summary"></div>
+
+        <form class="order-form" id="cod-form" novalidate>
+          <div class="field">
+            <label>Nom complet *</label>
+            <input name="name" type="text" required placeholder="Votre nom et prénom" />
+            <span class="err"></span>
           </div>
-          <div class="field"><label>Guests</label>
-            <select>
-              <option>2 guests</option><option>3 guests</option>
-              <option>4 guests</option><option>5 guests</option>
-              <option>6 guests</option><option>8 guests</option>
-            </select>
+          <div class="field">
+            <label>Téléphone *</label>
+            <input name="phone" type="tel" required inputmode="numeric" placeholder="06 12 34 56 78" />
+            <span class="err"></span>
           </div>
-        </div>
-        <div class="field"><label>Occasion <em>(optional)</em></label>
-          <input type="text" placeholder="Anniversary, business, celebration…"/>
-        </div>
-        <button type="submit" class="btn-primary full magnetic" data-bind="reserve-submit"></button>
-        <p class="confirm" data-bind="reserve-confirm"></p>
-      </form>
-    </div>
-  </section>
+          <div class="row">
+            <div class="field">
+              <label>Ville *</label>
+              <select name="city" required data-bind="order-cities"></select>
+              <span class="err"></span>
+            </div>
+            <div class="field">
+              <label>Offre *</label>
+              <select name="pack" required data-bind="order-packs"></select>
+              <span class="err"></span>
+            </div>
+          </div>
+          <div class="field">
+            <label>Adresse *</label>
+            <input name="address" type="text" required placeholder="Quartier, rue, n°…" />
+            <span class="err"></span>
+          </div>
+          <div class="field">
+            <label>Remarque <em>(optionnel)</em></label>
+            <input name="note" type="text" placeholder="Heure de livraison préférée…" />
+          </div>
 
+          <div class="order-total" data-bind="order-total"></div>
+
+          <button type="submit" class="btn-primary full big magnetic">
+            ✅ Confirmer la commande
+          </button>
+          <p class="form-reassure" data-bind="form-reassure"></p>
+          <p class="confirm" data-bind="order-success"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq">
+      <h2 class="display sm" data-bind="faq-title"></h2>
+      <div class="faq-list" data-bind="faq-list"></div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
   <footer class="footer">
-    <div class="footer-row">
-      <div class="brand-lg" data-bind="brand-mark"></div>
-      <div class="foot-links">
-        <a href="#story">Story</a>
-        <a href="#menu">Menu</a>
-        <a href="#chef">Chef</a>
-        <a href="#visit">Visit</a>
-        <a href="#reserve">Reserve</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span data-bind="footer-copyright"></span>
-      <span data-bind="footer-motto"></span>
-    </div>
+    <div class="brand-lg" data-bind="brand-name"></div>
+    <p class="muted" data-bind="footer-note"></p>
+    <div class="foot-contact" data-bind="foot-contact"></div>
+    <p class="micro" data-bind="footer-copyright"></p>
   </footer>
 
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
-    }
-  }
-  </script>
+  <!-- CTA collant (mobile) -->
+  <div class="sticky-cta">
+    <div class="sticky-price">
+      <span data-bind="sticky-price"></span>
+      <small data-bind="sticky-old"></small>
+    </div>
+    <a href="#commander" class="btn-primary magnetic">Commander 🛒</a>
+  </div>
+
   <script type="module" src="script.js"></script>
 </body>
 </html>
