@@ -27,29 +27,36 @@ la livraison (COD)**, pensée pour le marché marocain et le trafic publicitaire
 Bdel GHIR f `config.js` :
 
 ```js
-product: { name, subtitle, images:[…], price, compareAt }   // produit + asmane
-offers:  { packs:[ {label, qty, price, compareAt} ] }        // packs
-order:   { whatsapp:'2126XXXXXXXX', sheetEndpoint:'', cities:[…] }
+shopify: { domain:'xxx.myshopify.com', variantId:'123…' }    // store + produit
+product: { name, subtitle, images:[…], price, compareAt }    // = nefs taman Shopify
+offers:  { packs:[ {label, qty, price, compareAt} ] }         // packs (price = qty × prix)
 reviews: { items:[…] }    // ⚠️ avis 7A9I9IYIN ghir
 theme:   { primary, accent, … }   // couleurs
 ```
 
 ### ⚠️ Checklist qbel ma t-lance
-- [ ] `product` : ism, teswir 7a9i9i, asmane (men TrendTrack).
-- [ ] `order.whatsapp` : ra9m WhatsApp dyalek (format `2126XXXXXXXX`).
+- [ ] `shopify.domain` / `variantId` : store + produit dyalek f Shopify.
+- [ ] `product` : ism, teswir 7a9i9i, asmane (= nefs taman f Shopify).
 - [ ] `reviews.items` : avis d clients 7a9i9iyin (matkdebch).
 - [ ] `brand.phone` / `instagram`.
+- [ ] F Shopify : COD mfa3el · produit publié f "Online Store" · stock kaysmer l-bi3.
 
 ---
 
-## 📦 Commandes (COD) — kifach kaymchiw
+## 📦 Commandes (COD) — kaymchiw DIRECT l-Shopify
 
-1. **WhatsApp (par défaut, bla backend)** : ملي العميل يصيفط، كتفتح WhatsApp
-   عندك بالطلب كامل (نوم/تيليفون/مدينة/عنوان/الأوفر).
-2. **Google Sheet (optionnel)** : 7ot URL d Google Apps Script f
-   `order.sheetEndpoint` → kol commande katsjjel f Sheet automatiquement.
-3. **Shopify (backend)** : دير الطلبات اللي توصلك فـ Shopify (Brouillon/Order)
-   باش تستافد من tracking, COD app, و إحصائيات.
+ملي العميل يكليكي **«Commander»**، كيتّرّدّد لـ **checkout د Shopify** والمنتوج
+ديجا فالـ panier. كيكمّل المعلومات ديالو (نوم/مدينة/عنوان) وكيختار **الدفع عند
+الاستلام**، والكوماندة كتبان مباشرة فـ **Shopify → Orders** (مع tracking,
+إحصائيات, و apps د التوصيل COD).
+
+> الربط كيتدار عبر *cart permalink* : `https://STORE.myshopify.com/cart/VARIANT:QTY`
+> شوف `shopify` و `offers.packs` فـ `config.js`.
+
+**باش يخدم checkout (مرة وحدة فـ Shopify):**
+1. **Settings → Payments → (Manuel) Cash on Delivery** : فعّلو.
+2. **Produit publié** فـ "Online Store" (sales channel).
+3. **Stock** : خلّي المخزون كيسمح بالبيع (ولا طفّي inventory tracking).
 
 ---
 

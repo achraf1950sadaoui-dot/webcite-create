@@ -104,7 +104,7 @@
       <div class="pack-grid" data-bind="pack-grid"></div>
     </section>
 
-    <!-- FORMULAIRE COD -->
+    <!-- COMMANDER (→ Shopify checkout · paiement à la livraison) -->
     <section class="section order" id="commander">
       <div class="order-card">
         <h2 class="display sm" data-bind="order-title"></h2>
@@ -112,47 +112,18 @@
 
         <div class="order-summary" data-bind="order-summary"></div>
 
-        <form class="order-form" id="cod-form" novalidate>
-          <div class="field">
-            <label>Nom complet *</label>
-            <input name="name" type="text" required placeholder="Votre nom et prénom" />
-            <span class="err"></span>
-          </div>
-          <div class="field">
-            <label>Téléphone *</label>
-            <input name="phone" type="tel" required inputmode="numeric" placeholder="06 12 34 56 78" />
-            <span class="err"></span>
-          </div>
-          <div class="row">
-            <div class="field">
-              <label>Ville *</label>
-              <select name="city" required data-bind="order-cities"></select>
-              <span class="err"></span>
-            </div>
-            <div class="field">
-              <label>Offre *</label>
-              <select name="pack" required data-bind="order-packs"></select>
-              <span class="err"></span>
-            </div>
-          </div>
-          <div class="field">
-            <label>Adresse *</label>
-            <input name="address" type="text" required placeholder="Quartier, rue, n°…" />
-            <span class="err"></span>
-          </div>
-          <div class="field">
-            <label>Remarque <em>(optionnel)</em></label>
-            <input name="note" type="text" placeholder="Heure de livraison préférée…" />
-          </div>
+        <div class="field" style="margin-top:.4rem">
+          <label>Choisissez votre offre</label>
+          <select data-bind="order-pack-select"></select>
+        </div>
 
-          <div class="order-total" data-bind="order-total"></div>
+        <div class="order-total" data-bind="order-total"></div>
 
-          <button type="submit" class="btn-primary full big magnetic">
-            ✅ Confirmer la commande
-          </button>
-          <p class="form-reassure" data-bind="form-reassure"></p>
-          <p class="confirm" data-bind="order-success"></p>
-        </form>
+        <a class="btn-primary full big magnetic" data-bind="checkout-btn" href="#" rel="nofollow">
+          <span data-bind="checkout-label">Commander</span>
+        </a>
+        <p class="form-reassure" data-bind="form-reassure"></p>
+        <p class="micro center" data-bind="checkout-note"></p>
       </div>
     </section>
 

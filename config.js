@@ -6,12 +6,15 @@
 //
 //  ⚠️  CHECKLIST QBEL MA T-LANCE  (bidel kol "[…]" / placeholder):
 //  ────────────────────────────────────────────────────────────────
-//    [ ] product.name / subtitle / images   → produit dyalek l-7a9i9i (TrendTrack)
-//    [ ] product.price / compareAt / offers  → asmane dyalek
-//    [ ] order.whatsapp                       → ra9m WhatsApp dyalek (COD)
-//    [ ] order.sheetEndpoint                  → (optionnel) Google Sheet / API
-//    [ ] reviews.items                        → avis 7A9I9IYIN (3omrek matkdeb avis!)
+//    [ ] shopify.domain / variantId           → store + produit dyalek f Shopify
+//    [ ] product.name / subtitle / images     → produit dyalek l-7a9i9i (teswir!)
+//    [ ] product.price / compareAt / offers    → asmane (= nefs taman f Shopify!)
+//    [ ] reviews.items                         → avis 7A9I9IYIN (3omrek matkdeb avis!)
 //    [ ] brand.phone / instagram / domain
+//  ────────────────────────────────────────────────────────────────
+//  📦 COMMANDES: kaymchiw DIRECT l-checkout d Shopify (paiement à la
+//     livraison). Khass f Shopify: (1) COD mfa3el, (2) produit publié
+//     f "Online Store", (3) stock kaysmer l-bi3 (ou inventory OFF).
 //  ════════════════════════════════════════════════════════════════
 
 // Images Unsplash (placeholder). Bidel l-IDs wla 7ot teswir d produit dyalek.
@@ -45,10 +48,18 @@ export const CONFIG = {
   // ─── Barre d'annonce (urgence) ────────────────────────────────
   announce: "🔥 Offre limitée — LIVRAISON GRATUITE aujourd'hui · Paiement à la livraison",
 
-  // ─── PRODUIT  ⚠️ bidel b produit dyalek mn TrendTrack ─────────
+  // ─── Shopify (checkout direct · COD) ──────────────────────────
+  //  L-bouton "Commander" kayreddi l-client DIRECT l-checkout d Shopify
+  //  b l-produit déjà f panier. ⚠️ ila bdelti l-produit, bdel variantId.
+  shopify: {
+    domain: 'xpt7tm-ue.myshopify.com',   // ⚠️ store dyalek
+    variantId: '43837137190978',          // ⚠️ Sérum Éclat à la Vitamine C 30ml
+  },
+
+  // ─── PRODUIT  ⚠️ khass ykoun nefs l-produit f Shopify ─────────
   product: {
-    name: 'Sérum Éclat Vitamine C',
-    subtitle: 'Anti-taches · Éclat · Anti-âge — pour tous types de peau',
+    name: 'Sérum Éclat à la Vitamine C',
+    subtitle: 'Sérum 30ml · Anti-taches · Éclat · Anti-âge — tous types de peau',
     rating: 4.8,
     reviewsCount: 213,
     // ⚠️ 7ot teswir 7a9i9i d produit dyalek (l-luwla = principale)
@@ -57,8 +68,8 @@ export const CONFIG = {
       IMG('1612817288484-6f916006741a'),
       IMG('1608248543803-ba4f8c70ae0b'),
     ],
-    price: 299,        // ⚠️ taman l-bi3
-    compareAt: 499,    // ⚠️ taman m-chettb (prix barré) — khass ykoun >= price
+    price: 149,        // ✅ prix réel (= nefs taman f Shopify)
+    compareAt: 249,    // ⚠️ prix barré (marketing) — 7ot l-prix régulier wla 0 bach yt7iyyed
     currency: 'MAD',
     badges: ['100% Naturel', 'Résultats en 2 semaines', 'Sans parabènes'],
   },
@@ -127,10 +138,12 @@ export const CONFIG = {
   offers: {
     title: 'Choisissez votre offre',
     subtitle: 'Plus vous prenez, plus vous économisez',
+    //  ⚠️ price = qty × prix unitaire Shopify (149) bach ytwafe9 m3a checkout.
+    //  Bach tzid remise réelle 3la packs, dir discount f Shopify w 7ot code hna.
     packs: [
-      { id: '1u', label: '1 Unité',  qty: 1, price: 299, compareAt: 499, badge: '' },
-      { id: '2u', label: 'Pack 2',   qty: 2, price: 499, compareAt: 998, badge: 'Économisez 199 DH' },
-      { id: '3u', label: 'Pack 3',   qty: 3, price: 649, compareAt: 1497, badge: 'Le + populaire', popular: true },
+      { id: '1u', label: '1 Unité',  qty: 1, price: 149, compareAt: 249, badge: '' },
+      { id: '2u', label: 'Pack 2',   qty: 2, price: 298, compareAt: 498, badge: 'Économisez 200 DH' },
+      { id: '3u', label: 'Pack 3',   qty: 3, price: 447, compareAt: 747, badge: 'Le + populaire', popular: true },
     ],
   },
 
@@ -155,22 +168,12 @@ export const CONFIG = {
     ],
   },
 
-  // ─── Formulaire de commande (COD) ─────────────────────────────
+  // ─── Commande (→ Shopify checkout · COD) ──────────────────────
   order: {
     title: 'Commandez maintenant',
-    subtitle: 'Remplissez le formulaire — on vous rappelle pour confirmer',
-    // ⚠️ MOUHIM: 7ot ra9m WhatsApp dyalek (format dwali bla "+" wla "00")
-    //    Mital: 212612345678
-    whatsapp: '212600000000',
-    // (Optionnel) Google Apps Script / API URL bach tsjjel commandes f Sheet.
-    // Khelliها '' ila ma3endekch — ghadi tmchi l-commande l-WhatsApp directement.
-    sheetEndpoint: '',
-    cities: [
-      'Casablanca', 'Rabat', 'Marrakech', 'Fès', 'Tanger', 'Agadir', 'Meknès',
-      'Oujda', 'Kénitra', 'Tétouan', 'Salé', 'Mohammedia', 'El Jadida', 'Nador',
-      'Béni Mellal', 'Khouribga', 'Settat', 'Safi', 'Berrechid', 'Autre ville',
-    ],
-    success: 'Merci ! 🎉 Votre commande est enregistrée. Notre équipe vous appelle pour confirmer.',
+    subtitle: 'Choisissez votre offre — paiement à la livraison',
+    ctaLabel: '🛒 Commander',   // texte du bouton (le total s'ajoute automatiquement)
+    note: 'Vous allez être redirigé vers notre page de commande sécurisée. Paiement à la livraison.',
   },
 
   // ─── Footer ───────────────────────────────────────────────────

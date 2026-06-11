@@ -15,6 +15,10 @@ const stars = (n) => '★'.repeat(Math.round(n)) + '☆'.repeat(5 - Math.round(n
 const C = CONFIG;
 let selectedPack = null;
 
+// Lien vers le checkout Shopify (cart permalink) — produit pré-ajouté au panier
+const checkoutUrl = (qty = 1) =>
+  `https://${C.shopify.domain}/cart/${C.shopify.variantId}:${qty}`;
+
 // ─── 1) Couleurs ──────────────────────────────────────────────
 function applyTheme() {
   const t = C.theme, r = document.documentElement.style;
@@ -105,15 +109,12 @@ function render() {
        <div class="p-cta">Choisir →</div></div>
      </div>`).join(''));
 
-  // Formulaire
+  // Commander (→ Shopify checkout)
   setText('order-title', C.order.title);
   setText('order-subtitle', C.order.subtitle);
-  setText('order-success', C.order.success);
   setText('form-reassure', '🔒 Sans paiement en ligne · Vous payez à la livraison');
-  $('[data-bind="order-cities"]').innerHTML =
-    `<option value="" disabled selected>Choisir votre ville…</option>` +
-    C.order.cities.map(c => `<option>${c}</option>`).join('');
-  $('[data-bind="order-packs"]').innerHTML =
+  setText('checkout-note', C.order.note || '');
+  $('[data-bind="order-pack-select"]').innerHTML =
     C.offers.packs.map(p => `<option value="${p.id}" ${p.popular ? 'selected' : ''}>${p.label} — ${money(p.price)}</option>`).join('');
 
   // FAQ
@@ -143,75 +144,21 @@ function pickPack(id) {
      <small class="muted">${p.label} · ${p.qty} unité${p.qty > 1 ? 's' : ''}</small></div>
      <span class="os-price">${money(p.price)}</span>`);
   setHTML('order-total', `<span>Total à payer</span><span class="ot-val">${money(p.price)}</span>`);
-  const sel = $('[data-bind="order-packs"]');
+  setText('checkout-label', `${C.order.ctaLabel} · ${money(p.price)}`);
+  setAttr('checkout-btn', 'href', checkoutUrl(p.qty));
+  const sel = $('[data-bind="order-pack-select"]');
   if (sel && sel.value !== id) sel.value = id;
   $$('.pack').forEach(el => el.classList.toggle('popular', el.dataset.pack === id));
 }
 
-// ─── 4) Téléphone Maroc ───────────────────────────────────────
-function normPhone(raw) {
-  let d = (raw || '').replace(/\D/g, '');
-  if (d.startsWith('212')) d = '0' + d.slice(3);
-  else if (d.startsWith('00212')) d = '0' + d.slice(5);
-  else if (d.length === 9 && /^[5-7]/.test(d)) d = '0' + d;
-  return d;
-}
-const validPhone = (raw) => /^0[5-7]\d{8}$/.test(normPhone(raw));
-
-// ─── 5) Commande (validation + WhatsApp + Sheet) ──────────────
-function setupForm() {
-  const form = $('#cod-form');
-  const fieldOf = (name) => form.querySelector(`[name="${name}"]`).closest('.field');
-  const setErr = (name, msg) => {
-    const f = fieldOf(name);
-    f.classList.toggle('invalid', !!msg);
-    const e = f.querySelector('.err'); if (e) e.textContent = msg || '';
-  };
-
-  $('[data-bind="order-packs"]').addEventListener('change', (e) => pickPack(e.target.value));
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const d = Object.fromEntries(new FormData(form).entries());
-    let ok = true;
-    if (!d.name || d.name.trim().length < 3) { setErr('name', 'Entrez votre nom complet'); ok = false; } else setErr('name');
-    if (!validPhone(d.phone)) { setErr('phone', 'Numéro marocain invalide (ex: 0612345678)'); ok = false; } else setErr('phone');
-    if (!d.city) { setErr('city', 'Choisissez votre ville'); ok = false; } else setErr('city');
-    if (!d.pack) { setErr('pack', 'Choisissez une offre'); ok = false; } else setErr('pack');
-    if (!d.address || d.address.trim().length < 5) { setErr('address', 'Entrez votre adresse'); ok = false; } else setErr('address');
-    if (!ok) { form.querySelector('.field.invalid')?.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
-
-    const pack = C.offers.packs.find(p => p.id === d.pack) || selectedPack;
-    const order = {
-      produit: C.product.name, offre: pack.label, quantite: pack.qty, total: pack.price,
-      nom: d.name.trim(), tel: normPhone(d.phone), ville: d.city,
-      adresse: d.address.trim(), remarque: d.note || '', date: new Date().toISOString(),
-    };
-
-    // (a) Enregistrer dans Google Sheet / API si configuré
-    if (C.order.sheetEndpoint) {
-      fetch(C.order.sheetEndpoint, {
-        method: 'POST', mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(order),
-      }).catch(() => {});
-    }
-
-    // (b) Envoyer la commande au marchand via WhatsApp
-    const msg =
-      `🛒 *Nouvelle commande ${C.brand.name}*\n` +
-      `Produit : ${order.produit}\n` +
-      `Offre : ${order.offre} (${order.quantite} u.)\n` +
-      `Total : ${money(order.total)}\n` +
-      `————————\n` +
-      `👤 ${order.nom}\n📞 ${order.tel}\n📍 ${order.ville} — ${order.adresse}\n` +
-      (order.remarque ? `📝 ${order.remarque}\n` : '');
-    window.open(`https://wa.me/${C.order.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
-
-    // (c) Confirmation sur la page
-    $('[data-bind="order-success"]').classList.add('show');
-    $('[data-bind="order-success"]').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    form.querySelector('button[type="submit"]').textContent = '✅ Commande envoyée';
-  });
+// ─── 5) Commande → redirection vers Shopify checkout ──────────
+//  Le bouton "Commander" est un lien (<a>) vers le checkout Shopify.
+//  pickPack() met son href à jour selon l'offre choisie. Pas de
+//  validation ici : Shopify collecte nom / ville / adresse + le
+//  paiement à la livraison sur sa page sécurisée.
+function setupOrder() {
+  const sel = $('[data-bind="order-pack-select"]');
+  if (sel) sel.addEventListener('change', (e) => pickPack(e.target.value));
 }
 
 // ─── 6) Galerie ───────────────────────────────────────────────
@@ -276,7 +223,7 @@ function setupScroll() {
 applyTheme();
 render();
 pickPack((C.offers.packs.find(p => p.popular) || C.offers.packs[0]).id);
-setupForm();
+setupOrder();
 setupGallery();
 setupPacks();
 setupFaq();
