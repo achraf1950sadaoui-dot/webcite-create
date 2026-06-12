@@ -1,24 +1,24 @@
 // ════════════════════════════════════════════════════════════════
-//  TAWAKULL — SKINCARE LANDING PAGE (Page de vente COD · Maroc)
+//  TAWAKULL — BOUTIQUE COD (Maroc) · Catalogue multi-produits
 //  ────────────────────────────────────────────────────────────────
-//  Bach tbidel ay haja f site, bidel GHIR f had l-file.
-//  Wa7ed file kaytre7em 3la kolchi (texte, asmane, couleurs, produit).
+//  Bach tbidel ay haja f site, bidel GHIR f had l-file (config.js).
 //
-//  ⚠️  CHECKLIST QBEL MA T-LANCE  (bidel kol "[…]" / placeholder):
+//  ⚠️  CHECKLIST QBEL MA T-LANCE:
+//    [ ] shopify.domain                    → store dyalek f Shopify
+//    [ ] kol produit: variantId            → = produit f Shopify (déjà mrebbet ✓)
+//    [ ] kol produit: price / compareAt    → = nefs taman f Shopify
+//    [ ] kol produit: img                  → 7ot teswir 7a9i9i d produit (sinon kayban emoji)
+//    [ ] brand.phone / instagram
+//    [ ] reviews.items                     → avis 7A9I9IYIN (3omrek matkdeb!)
 //  ────────────────────────────────────────────────────────────────
-//    [ ] shopify.domain / variantId           → store + produit dyalek f Shopify
-//    [ ] product.name / subtitle / images     → produit dyalek l-7a9i9i (teswir!)
-//    [ ] product.price / compareAt / offers    → asmane (= nefs taman f Shopify!)
-//    [ ] reviews.items                         → avis 7A9I9IYIN (3omrek matkdeb avis!)
-//    [ ] brand.phone / instagram / domain
-//  ────────────────────────────────────────────────────────────────
-//  📦 COMMANDES: kaymchiw DIRECT l-checkout d Shopify (paiement à la
-//     livraison). Khass f Shopify: (1) COD mfa3el, (2) produit publié
-//     f "Online Store", (3) stock kaysmer l-bi3 (ou inventory OFF).
-//  ════════════════════════════════════════════════════════════════
+//  📦 COMMANDES: kol bouton "Commander" kayreddi l-client DIRECT
+//     l-checkout d Shopify (paiement à la livraison), produit déjà
+//     f panier. Khass GHIR: COD mfa3el f Shopify (Réglages > Paiements).
+// ════════════════════════════════════════════════════════════════
 
-// Images Unsplash (placeholder). Bidel l-IDs wla 7ot teswir d produit dyalek.
-const IMG = (id, w = 1400) =>
+// Teswir Unsplash (placeholder). Bidel l-ID wla 7ot URL d teswir dyalek.
+// Ila teswir ma tla3ch, kayban emoji + gradient (ma kayb9ach 5awi).
+const IMG = (id, w = 900) =>
   `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=85`;
 
 export const CONFIG = {
@@ -27,123 +27,115 @@ export const CONFIG = {
   brand: {
     name: 'TAWAKULL',
     tagline: 'Soins de la peau',
-    phone: '[+212 6XX-XXXXXX]',        // ⚠️ ra9m dyalek
-    instagram: '[@tawakull.ma]',        // ⚠️ instagram dyalek
+    phone: '[+212 6XX-XXXXXX]',      // ⚠️ ra9m dyalek
+    instagram: '[@tawakull.ma]',      // ⚠️ instagram dyalek
     domain: 'tawakull.ma',
   },
 
   // ─── Couleurs (palette beauté naturelle) ──────────────────────
   theme: {
-    bg:          '#faf6f2',  // crème
-    bgAlt:       '#ffffff',  // blanc
-    ink:         '#2b2420',  // texte foncé
-    inkDim:      '#7a6f67',  // texte secondaire
-    primary:     '#2e7d5b',  // vert botanique
+    bg:          '#faf6f2',
+    bgAlt:       '#ffffff',
+    ink:         '#2b2420',
+    inkDim:      '#7a6f67',
+    primary:     '#2e7d5b',
     primaryDark: '#1f5a41',
-    accent:      '#c9a86a',  // or doux
-    blush:       '#ecc9c3',  // rose poudré
-    star:        '#f5a623',  // étoiles avis
+    accent:      '#c9a86a',
+    blush:       '#ecc9c3',
+    star:        '#f5a623',
   },
 
-  // ─── Barre d'annonce (urgence) ────────────────────────────────
-  announce: "🔥 Offre limitée — LIVRAISON GRATUITE aujourd'hui · Paiement à la livraison",
+  // ─── Barre d'annonce ──────────────────────────────────────────
+  announce: "🔥 LIVRAISON GRATUITE aujourd'hui · Paiement à la livraison partout au Maroc",
 
   // ─── Shopify (checkout direct · COD) ──────────────────────────
-  //  L-bouton "Commander" kayreddi l-client DIRECT l-checkout d Shopify
-  //  b l-produit déjà f panier. ⚠️ ila bdelti l-produit, bdel variantId.
   shopify: {
     domain: 'xpt7tm-ue.myshopify.com',   // ⚠️ store dyalek
-    variantId: '43837137190978',          // ⚠️ Sérum Éclat à la Vitamine C 30ml
   },
 
-  // ─── PRODUIT  ⚠️ khass ykoun nefs l-produit f Shopify ─────────
-  product: {
-    name: 'Sérum Éclat à la Vitamine C',
-    subtitle: 'Sérum 30ml · Anti-taches · Éclat · Anti-âge — tous types de peau',
-    rating: 4.8,
-    reviewsCount: 213,
-    // ⚠️ 7ot teswir 7a9i9i d produit dyalek (l-luwla = principale)
-    images: [
-      IMG('1620916566398-39f1143ab7be'),
-      IMG('1612817288484-6f916006741a'),
-      IMG('1608248543803-ba4f8c70ae0b'),
-    ],
-    price: 149,        // ✅ prix réel (= nefs taman f Shopify)
-    compareAt: 249,    // ⚠️ prix barré (marketing) — 7ot l-prix régulier wla 0 bach yt7iyyed
-    currency: 'MAD',
-    badges: ['100% Naturel', 'Résultats en 2 semaines', 'Sans parabènes'],
+  // ─── HERO (accueil boutique) ──────────────────────────────────
+  hero: {
+    eyebrow: 'Soins naturels · Maroc',
+    title: "Révélez l'éclat naturel de votre peau",
+    subtitle: 'Une routine complète de soins efficaces, livrés chez vous. Paiement à la livraison, satisfait ou remboursé sous 7 jours.',
+    cta: '🛍️ Découvrir la boutique',
+    image: IMG('1620916566398-39f1143ab7be', 1200),
   },
 
-  // ─── Le problème (accroche émotionnelle) ──────────────────────
-  problem: {
-    eyebrow: 'Ce problème vous parle ?',
-    title: 'Taches, teint terne, peau fatiguée ?',
-    points: [
-      'Des taches brunes qui ne partent pas malgré les crèmes.',
-      'Un teint terne et sans éclat, surtout le matin.',
-      'Une peau qui marque vite la fatigue et le stress.',
-      'Vous avez tout essayé… sans résultat durable.',
-    ],
-    solution: "Le Sérum Éclat Vitamine C agit en profondeur pour unifier, illuminer et raffermir votre peau — visible dès 2 semaines.",
+  // ─── CATALOGUE (titre de section) ─────────────────────────────
+  catalog: {
+    title: 'Notre boutique',
+    subtitle: '9 soins essentiels pour une peau éclatante — paiement à la livraison',
   },
 
-  // ─── Bénéfices ────────────────────────────────────────────────
+  // ─── PRODUITS (9) ⚠️ kol wa7ed mrebbet m3a variantId f Shopify ─
+  products: [
+    { id: 'serum-vitc', name: 'Sérum Éclat Vitamine C', subtitle: 'Anti-taches · Éclat · 30ml',
+      price: 149, compareAt: 249, variantId: '43837137190978',
+      img: IMG('1620916566398-39f1143ab7be'), emoji: '🍊', grad: 'linear-gradient(135deg,#f9d976,#f39f86)',
+      badge: 'Bestseller', rating: 4.8, reviews: 213 },
+
+    { id: 'creme-hydra', name: 'Crème Hydratante Acide Hyaluronique', subtitle: 'Hydratation 24h · 50ml',
+      price: 139, compareAt: 219, variantId: '43848406794306',
+      img: IMG('1556228578-8c89e6adf883'), emoji: '💧', grad: 'linear-gradient(135deg,#a1c4fd,#c2e9fb)',
+      badge: 'Coup de cœur', rating: 4.7, reviews: 156 },
+
+    { id: 'nettoyant', name: 'Nettoyant Visage Mousse Douce', subtitle: 'Nettoie en douceur · 150ml',
+      price: 89, compareAt: 149, variantId: '43848406827074',
+      img: IMG('1612817288484-6f916006741a'), emoji: '🫧', grad: 'linear-gradient(135deg,#a8edea,#bdf0d6)',
+      badge: 'Essentiel', rating: 4.6, reviews: 98 },
+
+    { id: 'masque', name: 'Masque Purifiant Argile & Charbon', subtitle: 'Pores nets · 100ml',
+      price: 99, compareAt: 169, variantId: '43848406859842',
+      img: IMG('1608248543803-ba4f8c70ae0b'), emoji: '🌑', grad: 'linear-gradient(135deg,#4b4b4b,#7d7d7d)',
+      badge: 'Nouveau', rating: 4.7, reviews: 74 },
+
+    { id: 'contour-yeux', name: 'Contour des Yeux Anti-Cernes', subtitle: 'Anti-cernes & poches · 15ml',
+      price: 119, compareAt: 199, variantId: '43848406892610',
+      img: IMG('1570172619644-dfd03ed5d881'), emoji: '👁️', grad: 'linear-gradient(135deg,#cda7ef,#e6d3f8)',
+      badge: '', rating: 4.6, reviews: 61 },
+
+    { id: 'solaire', name: 'Crème Solaire SPF50', subtitle: 'Haute protection · 50ml',
+      price: 109, compareAt: 179, variantId: '43848406925378',
+      img: IMG('1556228720-195a672e8a03'), emoji: '☀️', grad: 'linear-gradient(135deg,#fbd07c,#f8b64c)',
+      badge: 'Indispensable', rating: 4.8, reviews: 132 },
+
+    { id: 'retinol', name: 'Sérum Rétinol Anti-Âge Nuit', subtitle: 'Anti-rides nuit · 30ml',
+      price: 159, compareAt: 269, variantId: '43848406958146',
+      img: IMG('1571875257727-256c39da42af'), emoji: '🌙', grad: 'linear-gradient(135deg,#6a7fdb,#9aa7e8)',
+      badge: 'Anti-âge', rating: 4.9, reviews: 187 },
+
+    { id: 'micellaire', name: 'Eau Micellaire Démaquillante', subtitle: 'Démaquille 3-en-1 · 400ml',
+      price: 79, compareAt: 129, variantId: '43848406990914',
+      img: IMG('1598440947619-2c35fc9aa908'), emoji: '💦', grad: 'linear-gradient(135deg,#89f7fe,#b3ecf5)',
+      badge: 'Format XL', rating: 4.6, reviews: 89 },
+
+    { id: 'gommage', name: 'Gommage Exfoliant AHA/BHA', subtitle: 'Peau lisse & douce · 50ml',
+      price: 99, compareAt: 169, variantId: '43848407023682',
+      img: IMG('1596755389378-c31d21fd1273'), emoji: '✨', grad: 'linear-gradient(135deg,#f6a6c1,#f9cdda)',
+      badge: 'Nouveau', rating: 4.7, reviews: 53 },
+  ],
+
+  // ─── Pourquoi nous (valeur de marque) ─────────────────────────
   benefits: {
-    eyebrow: 'Pourquoi vous allez l’adorer',
-    title: 'Des résultats qui se voient',
+    eyebrow: 'Pourquoi TAWAKULL',
+    title: 'Des soins en qui vous pouvez avoir confiance',
     items: [
-      { icon: '✨', title: 'Éclat immédiat',  text: 'Ravive les peaux ternes dès la première semaine.' },
-      { icon: '🌑', title: 'Anti-taches',     text: 'Atténue les taches brunes et unifie le teint.' },
-      { icon: '🛡️', title: 'Protection',      text: 'Antioxydant : protège de la pollution et des UV.' },
-      { icon: '💧', title: 'Hydratation',     text: 'Peau repulpée, douce et lisse au quotidien.' },
+      { icon: '✨', title: 'Formules efficaces',      text: 'Des actifs concentrés, des résultats visibles.' },
+      { icon: '🌿', title: 'Ingrédients naturels',     text: 'Doux pour la peau, sans parabènes.' },
+      { icon: '🧪', title: 'Testés dermatologiquement', text: 'Convient à tous les types de peau.' },
+      { icon: '🇲🇦', title: 'Pensés pour le Maroc',     text: 'Adaptés à votre peau et votre climat.' },
     ],
   },
 
-  // ─── Avant / Après ────────────────────────────────────────────
-  results: {
-    title: 'Avant · Après',
-    note: '⚠️ Remplace par une VRAIE photo de résultat (jamais truquée).',
-    image: IMG('1556228578-8c89e6adf883'),
-    caption: 'Résultat moyen constaté après 4 semaines d’utilisation quotidienne.',
-    stats: [
-      { value: '93%', label: 'peau plus lumineuse*' },
-      { value: '87%', label: 'taches atténuées*' },
-      { value: '2 sem', label: 'premiers résultats' },
-    ],
-    disclaimer: '*Auto-évaluation. Remplace par tes vrais chiffres ou supprime.',
-  },
-
-  // ─── Mode d'emploi ────────────────────────────────────────────
-  howto: {
-    title: 'Simple, en 3 étapes',
-    steps: [
-      { n: '1', title: 'Nettoyez', text: 'Sur peau propre et sèche, matin et/ou soir.' },
-      { n: '2', title: 'Appliquez', text: '3 à 4 gouttes, massez délicatement le visage.' },
-      { n: '3', title: 'Hydratez', text: 'Suivez de votre crème + protection solaire le matin.' },
-    ],
-  },
-
-  // ─── Avis clients  ⚠️ REMPLACE par de VRAIS avis ──────────────
+  // ─── Avis clients ⚠️ REMPLACE par de VRAIS avis ───────────────
   reviews: {
     title: 'Elles ont testé, elles adorent',
-    note: '⚠️ Ce sont des EXEMPLES. Mets de vrais avis de tes clientes — ne jamais inventer.',
+    note: '⚠️ EXEMPLES. Mets de vrais avis de tes clientes — ne jamais inventer.',
     items: [
-      { name: 'Salma', city: 'Casablanca', stars: 5, text: 'Après 3 semaines mes taches se sont vraiment atténuées. Teint plus lumineux 😍', verified: true },
-      { name: 'Imane', city: 'Rabat',      stars: 5, text: 'Texture légère, ça pénètre vite et ça ne graisse pas. Je recommande !', verified: true },
-      { name: 'Hajar', city: 'Marrakech',  stars: 4, text: 'Bon produit, livraison rapide et paiement à la livraison. Merci !', verified: true },
-    ],
-  },
-
-  // ─── Offres / Packs (zid l-panier moyen) ──────────────────────
-  offers: {
-    title: 'Choisissez votre offre',
-    subtitle: 'Plus vous prenez, plus vous économisez',
-    //  ⚠️ price = qty × prix unitaire Shopify (149) bach ytwafe9 m3a checkout.
-    //  Bach tzid remise réelle 3la packs, dir discount f Shopify w 7ot code hna.
-    packs: [
-      { id: '1u', label: '1 Unité',  qty: 1, price: 149, compareAt: 249, badge: '' },
-      { id: '2u', label: 'Pack 2',   qty: 2, price: 298, compareAt: 498, badge: 'Économisez 200 DH' },
-      { id: '3u', label: 'Pack 3',   qty: 3, price: 447, compareAt: 747, badge: 'Le + populaire', popular: true },
+      { name: 'Salma', city: 'Casablanca', stars: 5, text: 'Le sérum Vitamine C a vraiment atténué mes taches. Teint plus lumineux 😍', verified: true },
+      { name: 'Imane', city: 'Rabat',      stars: 5, text: 'J\'ai pris la routine complète, textures agréables et livraison rapide !', verified: true },
+      { name: 'Hajar', city: 'Marrakech',  stars: 4, text: 'Bons produits, paiement à la livraison, très pratique. Merci !', verified: true },
     ],
   },
 
@@ -163,17 +155,9 @@ export const CONFIG = {
     items: [
       { q: 'Comment se passe le paiement ?', a: 'Paiement à la livraison (cash). Vous payez le livreur à la réception de votre commande.' },
       { q: 'En combien de temps je reçois ?', a: 'Entre 24h et 48h selon votre ville, partout au Maroc.' },
-      { q: 'Convient à quel type de peau ?', a: 'À tous les types de peau, y compris les peaux sensibles.' },
-      { q: 'Quand vais-je voir des résultats ?', a: 'Les premiers résultats sont généralement visibles dès 2 semaines.' },
+      { q: 'Puis-je commander plusieurs produits ?', a: 'Oui ! Ajoutez chaque produit à votre commande, vous payez le tout à la livraison.' },
+      { q: 'Les produits conviennent à quel type de peau ?', a: 'À tous les types de peau, y compris les peaux sensibles.' },
     ],
-  },
-
-  // ─── Commande (→ Shopify checkout · COD) ──────────────────────
-  order: {
-    title: 'Commandez maintenant',
-    subtitle: 'Choisissez votre offre — paiement à la livraison',
-    ctaLabel: '🛒 Commander',   // texte du bouton (le total s'ajoute automatiquement)
-    note: 'Vous allez être redirigé vers notre page de commande sécurisée. Paiement à la livraison.',
   },
 
   // ─── Footer ───────────────────────────────────────────────────
@@ -184,7 +168,6 @@ export const CONFIG = {
 
   // ─── Réglages ─────────────────────────────────────────────────
   settings: {
-    countdownMinutes: 15,   // minuterie d'urgence (0 = désactivé)
     showAnnounce: true,
   },
 };

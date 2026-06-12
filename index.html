@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-bind="meta-title">TAWAKULL — Soins de la peau</title>
-  <meta name="description" data-bind="meta-desc" content="Sérum éclat & soins de la peau. Paiement à la livraison partout au Maroc." />
+  <meta name="description" data-bind="meta-desc" content="Boutique de soins de la peau. Paiement à la livraison partout au Maroc." />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,109 +22,48 @@
       <span data-bind="brand-name"></span>
       <small data-bind="brand-tagline"></small>
     </a>
-    <a href="#commander" class="btn-primary sm magnetic">Commander</a>
+    <a href="#boutique" class="btn-primary sm magnetic">Boutique</a>
   </header>
 
   <main id="top">
 
     <!-- HERO -->
-    <section class="hero">
-      <div class="hero-gallery">
-        <div class="hero-main"><img data-bind="hero-img" alt="" /></div>
-        <div class="hero-thumbs" data-bind="hero-thumbs"></div>
-      </div>
+    <section class="hero hero-boutique">
       <div class="hero-info">
-        <div class="stars-row">
-          <span class="stars" data-bind="hero-stars"></span>
-          <span class="muted" data-bind="hero-reviews"></span>
-        </div>
-        <h1 class="display" data-bind="product-name"></h1>
-        <p class="lede" data-bind="product-subtitle"></p>
-        <ul class="badge-list" data-bind="product-badges"></ul>
-        <div class="price-row">
-          <span class="price" data-bind="product-price"></span>
-          <span class="price-old" data-bind="product-compare"></span>
-          <span class="price-save" data-bind="product-save"></span>
-        </div>
-        <a href="#commander" class="btn-primary full magnetic">🛒 Commander maintenant</a>
+        <p class="eyebrow" data-bind="hero-eyebrow"></p>
+        <h1 class="display" data-bind="hero-title"></h1>
+        <p class="lede" data-bind="hero-subtitle"></p>
+        <a href="#boutique" class="btn-primary big magnetic"><span data-bind="hero-cta">Découvrir</span></a>
         <div class="reassure-mini" data-bind="reassure-mini"></div>
-        <div class="countdown" data-bind="countdown" hidden>
-          <span>⏳ Offre se termine dans</span> <b data-bind="countdown-time"></b>
-        </div>
+      </div>
+      <div class="hero-media">
+        <img data-bind="hero-img" alt="" />
       </div>
     </section>
 
     <!-- Bandeau garanties -->
     <section class="trust-strip" data-bind="trust-strip"></section>
 
-    <!-- PROBLÈME -->
-    <section class="section problem">
-      <p class="eyebrow" data-bind="problem-eyebrow"></p>
-      <h2 class="display sm" data-bind="problem-title"></h2>
-      <ul class="problem-list" data-bind="problem-points"></ul>
-      <p class="solution" data-bind="problem-solution"></p>
-    </section>
-
-    <!-- BÉNÉFICES -->
-    <section class="section benefits">
-      <p class="eyebrow" data-bind="benefits-eyebrow"></p>
-      <h2 class="display sm" data-bind="benefits-title"></h2>
-      <div class="benefit-grid" data-bind="benefit-grid"></div>
-    </section>
-
-    <!-- AVANT / APRÈS -->
-    <section class="section results">
-      <h2 class="display sm" data-bind="results-title"></h2>
-      <div class="results-wrap">
-        <div class="results-img"><img data-bind="results-img" alt="Avant après" /></div>
-        <div class="results-side">
-          <div class="result-stats" data-bind="result-stats"></div>
-          <p class="caption" data-bind="results-caption"></p>
-          <p class="micro" data-bind="results-disclaimer"></p>
-        </div>
+    <!-- CATALOGUE -->
+    <section class="section catalog" id="boutique">
+      <div class="catalog-head">
+        <h2 class="display sm" data-bind="catalog-title"></h2>
+        <p class="muted" data-bind="catalog-subtitle"></p>
       </div>
+      <div class="product-grid" data-bind="product-grid"></div>
     </section>
 
-    <!-- MODE D'EMPLOI -->
-    <section class="section howto">
-      <h2 class="display sm" data-bind="howto-title"></h2>
-      <div class="steps" data-bind="howto-steps"></div>
+    <!-- POURQUOI NOUS -->
+    <section class="section benefits">
+      <p class="eyebrow center" data-bind="benefits-eyebrow"></p>
+      <h2 class="display sm center" data-bind="benefits-title"></h2>
+      <div class="benefit-grid" data-bind="benefit-grid"></div>
     </section>
 
     <!-- AVIS -->
     <section class="section reviews">
       <h2 class="display sm" data-bind="reviews-title"></h2>
       <div class="review-grid" data-bind="review-grid"></div>
-    </section>
-
-    <!-- OFFRES / PACKS -->
-    <section class="section offers" id="offres">
-      <h2 class="display sm" data-bind="offers-title"></h2>
-      <p class="muted center" data-bind="offers-subtitle"></p>
-      <div class="pack-grid" data-bind="pack-grid"></div>
-    </section>
-
-    <!-- COMMANDER (→ Shopify checkout · paiement à la livraison) -->
-    <section class="section order" id="commander">
-      <div class="order-card">
-        <h2 class="display sm" data-bind="order-title"></h2>
-        <p class="muted" data-bind="order-subtitle"></p>
-
-        <div class="order-summary" data-bind="order-summary"></div>
-
-        <div class="field" style="margin-top:.4rem">
-          <label>Choisissez votre offre</label>
-          <select data-bind="order-pack-select"></select>
-        </div>
-
-        <div class="order-total" data-bind="order-total"></div>
-
-        <a class="btn-primary full big magnetic" data-bind="checkout-btn" href="#" rel="nofollow">
-          <span data-bind="checkout-label">Commander</span>
-        </a>
-        <p class="form-reassure" data-bind="form-reassure"></p>
-        <p class="micro center" data-bind="checkout-note"></p>
-      </div>
     </section>
 
     <!-- FAQ -->
@@ -146,10 +85,10 @@
   <!-- CTA collant (mobile) -->
   <div class="sticky-cta">
     <div class="sticky-price">
-      <span data-bind="sticky-price"></span>
-      <small data-bind="sticky-old"></small>
+      <span data-bind="sticky-main">Livraison gratuite 🚚</span>
+      <small data-bind="sticky-sub">Paiement à la livraison</small>
     </div>
-    <a href="#commander" class="btn-primary magnetic">Commander 🛒</a>
+    <a href="#boutique" class="btn-primary magnetic">Voir la boutique 🛒</a>
   </div>
 
   <script type="module" src="script.js"></script>

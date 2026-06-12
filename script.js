@@ -1,6 +1,6 @@
 // ════════════════════════════════════════════════════════════════
-//  TAWAKULL — Landing page logic
-//  Kayre7em config.js 3la l-page + kaysayer commande COD (WhatsApp)
+//  TAWAKULL — Boutique logic
+//  Kayre7em config.js 3la l-page. Kol produit → checkout Shopify (COD).
 // ════════════════════════════════════════════════════════════════
 import { CONFIG } from './config.js';
 
@@ -13,11 +13,10 @@ const setAttr = (k, a, v) => $$(`[data-bind="${k}"]`).forEach(el => el.setAttrib
 const stars = (n) => '★'.repeat(Math.round(n)) + '☆'.repeat(5 - Math.round(n));
 
 const C = CONFIG;
-let selectedPack = null;
 
-// Lien vers le checkout Shopify (cart permalink) — produit pré-ajouté au panier
-const checkoutUrl = (qty = 1) =>
-  `https://${C.shopify.domain}/cart/${C.shopify.variantId}:${qty}`;
+// Lien checkout Shopify (cart permalink) — produit pré-ajouté au panier
+const checkoutUrl = (variantId, qty = 1) =>
+  `https://${C.shopify.domain}/cart/${variantId}:${qty}`;
 
 // ─── 1) Couleurs ──────────────────────────────────────────────
 function applyTheme() {
@@ -29,12 +28,37 @@ function applyTheme() {
   r.setProperty('--star', t.star);
 }
 
-// ─── 2) Contenu ───────────────────────────────────────────────
+// ─── 2) Carte produit ─────────────────────────────────────────
+function productCard(p) {
+  const save = p.compareAt > p.price
+    ? Math.round((1 - p.price / p.compareAt) * 100) : 0;
+  return `
+    <article class="pcard reveal">
+      <div class="pc-media" style="background:${p.grad || 'var(--bg-alt)'}">
+        <span class="pc-emoji">${p.emoji || '🧴'}</span>
+        ${p.img ? `<img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'">` : ''}
+        ${p.badge ? `<span class="pc-badge">${p.badge}</span>` : ''}
+        ${save ? `<span class="pc-save">−${save}%</span>` : ''}
+      </div>
+      <div class="pc-body">
+        <div class="pc-stars">${stars(p.rating || 5)} <small>(${p.reviews || 0})</small></div>
+        <h3 class="pc-name">${p.name}</h3>
+        <p class="pc-sub">${p.subtitle || ''}</p>
+        <div class="pc-price">
+          <span class="pc-now">${money(p.price)}</span>
+          ${p.compareAt > p.price ? `<span class="pc-old">${money(p.compareAt)}</span>` : ''}
+        </div>
+        <a class="btn-primary full magnetic" href="${checkoutUrl(p.variantId)}" rel="nofollow">🛒 Commander</a>
+      </div>
+    </article>`;
+}
+
+// ─── 3) Contenu ───────────────────────────────────────────────
 function render() {
   // Meta + marque
-  document.title = `${C.product.name} | ${C.brand.name}`;
+  document.title = `${C.brand.name} — ${C.brand.tagline}`;
   setText('meta-title', document.title);
-  setAttr('meta-desc', 'content', `${C.product.subtitle} — Paiement à la livraison au Maroc.`);
+  setAttr('meta-desc', 'content', `${C.catalog.subtitle} — Paiement à la livraison au Maroc.`);
   setText('brand-name', C.brand.name);
   setText('brand-tagline', C.brand.tagline);
 
@@ -44,20 +68,11 @@ function render() {
   else if (ann) ann.style.display = 'none';
 
   // Hero
-  setAttr('hero-img', 'src', C.product.images[0]);
-  setHTML('hero-thumbs', C.product.images.map((src, i) =>
-    `<img src="${src}" data-i="${i}" class="${i === 0 ? 'active' : ''}" alt="vue ${i + 1}">`).join(''));
-  setText('hero-stars', stars(C.product.rating));
-  setText('hero-reviews', `${C.product.rating} · ${C.product.reviewsCount} avis`);
-  setText('product-name', C.product.name);
-  setText('product-subtitle', C.product.subtitle);
-  setHTML('product-badges', C.product.badges.map(b => `<li>${b}</li>`).join(''));
-  setText('product-price', money(C.product.price));
-  if (C.product.compareAt > C.product.price) {
-    setText('product-compare', money(C.product.compareAt));
-    const off = Math.round((1 - C.product.price / C.product.compareAt) * 100);
-    setText('product-save', `−${off}%`);
-  }
+  setText('hero-eyebrow', C.hero.eyebrow);
+  setText('hero-title', C.hero.title);
+  setText('hero-subtitle', C.hero.subtitle);
+  setText('hero-cta', C.hero.cta);
+  setAttr('hero-img', 'src', C.hero.image);
   setHTML('reassure-mini', C.guarantees.items.slice(0, 3)
     .map(g => `<span>${g.icon} ${g.title}</span>`).join(''));
 
@@ -65,30 +80,16 @@ function render() {
   setHTML('trust-strip', C.guarantees.items.map(g =>
     `<div class="trust-item"><span class="ti-ic">${g.icon}</span><div><b>${g.title}</b><small>${g.text}</small></div></div>`).join(''));
 
-  // Problème
-  setText('problem-eyebrow', C.problem.eyebrow);
-  setText('problem-title', C.problem.title);
-  setHTML('problem-points', C.problem.points.map(p => `<li>${p}</li>`).join(''));
-  setText('problem-solution', C.problem.solution);
+  // Catalogue
+  setText('catalog-title', C.catalog.title);
+  setText('catalog-subtitle', C.catalog.subtitle);
+  setHTML('product-grid', C.products.map(productCard).join(''));
 
-  // Bénéfices
+  // Pourquoi nous
   setText('benefits-eyebrow', C.benefits.eyebrow);
   setText('benefits-title', C.benefits.title);
   setHTML('benefit-grid', C.benefits.items.map(b =>
     `<div class="benefit"><div class="b-ic">${b.icon}</div><b>${b.title}</b><p>${b.text}</p></div>`).join(''));
-
-  // Résultats
-  setText('results-title', C.results.title);
-  setAttr('results-img', 'src', C.results.image);
-  setHTML('result-stats', C.results.stats.map(s =>
-    `<div class="result-stat"><b>${s.value}</b><small>${s.label}</small></div>`).join(''));
-  setText('results-caption', C.results.caption);
-  setText('results-disclaimer', C.results.disclaimer);
-
-  // Mode d'emploi
-  setText('howto-title', C.howto.title);
-  setHTML('howto-steps', C.howto.steps.map(s =>
-    `<div class="step"><span class="s-n">${s.n}</span><div><b>${s.title}</b><p>${s.text}</p></div></div>`).join(''));
 
   // Avis
   setText('reviews-title', C.reviews.title);
@@ -96,26 +97,6 @@ function render() {
     `<div class="review"><div class="review-top"><div class="who">${r.name}<small>${r.city}</small></div>
      <div class="r-stars">${stars(r.stars)}</div></div><p>“${r.text}”</p>
      ${r.verified ? '<span class="verified">Achat vérifié</span>' : ''}</div>`).join(''));
-
-  // Offres / packs
-  setText('offers-title', C.offers.title);
-  setText('offers-subtitle', C.offers.subtitle);
-  setHTML('pack-grid', C.offers.packs.map(p =>
-    `<div class="pack ${p.popular ? 'popular' : ''}" data-pack="${p.id}">
-       ${p.badge ? `<span class="pack-badge">${p.badge}</span>` : ''}
-       <div><div class="p-label">${p.label}</div><div class="p-sub">${money(Math.round(p.price / p.qty))} / unité</div></div>
-       <div class="p-right"><div class="p-price">${money(p.price)}</div>
-       ${p.compareAt > p.price ? `<div class="p-old">${money(p.compareAt)}</div>` : ''}
-       <div class="p-cta">Choisir →</div></div>
-     </div>`).join(''));
-
-  // Commander (→ Shopify checkout)
-  setText('order-title', C.order.title);
-  setText('order-subtitle', C.order.subtitle);
-  setText('form-reassure', '🔒 Sans paiement en ligne · Vous payez à la livraison');
-  setText('checkout-note', C.order.note || '');
-  $('[data-bind="order-pack-select"]').innerHTML =
-    C.offers.packs.map(p => `<option value="${p.id}" ${p.popular ? 'selected' : ''}>${p.label} — ${money(p.price)}</option>`).join('');
 
   // FAQ
   setText('faq-title', C.faq.title);
@@ -129,57 +110,9 @@ function render() {
   setHTML('foot-contact',
     `<a href="tel:${C.brand.phone.replace(/[^\d+]/g, '')}">📞 ${C.brand.phone}</a>
      <a href="https://instagram.com/${C.brand.instagram.replace(/[@\[\]]/g, '')}" target="_blank" rel="noopener">📷 ${C.brand.instagram}</a>`);
-
-  // Sticky
-  setText('sticky-price', money(C.product.price));
-  if (C.product.compareAt > C.product.price) setText('sticky-old', money(C.product.compareAt));
 }
 
-// ─── 3) Pack sélectionné → résumé + total ─────────────────────
-function pickPack(id) {
-  selectedPack = C.offers.packs.find(p => p.id === id) || C.offers.packs[0];
-  const p = selectedPack;
-  setHTML('order-summary',
-    `<img src="${C.product.images[0]}" alt=""><div><div class="os-name">${C.product.name}</div>
-     <small class="muted">${p.label} · ${p.qty} unité${p.qty > 1 ? 's' : ''}</small></div>
-     <span class="os-price">${money(p.price)}</span>`);
-  setHTML('order-total', `<span>Total à payer</span><span class="ot-val">${money(p.price)}</span>`);
-  setText('checkout-label', `${C.order.ctaLabel} · ${money(p.price)}`);
-  setAttr('checkout-btn', 'href', checkoutUrl(p.qty));
-  const sel = $('[data-bind="order-pack-select"]');
-  if (sel && sel.value !== id) sel.value = id;
-  $$('.pack').forEach(el => el.classList.toggle('popular', el.dataset.pack === id));
-}
-
-// ─── 5) Commande → redirection vers Shopify checkout ──────────
-//  Le bouton "Commander" est un lien (<a>) vers le checkout Shopify.
-//  pickPack() met son href à jour selon l'offre choisie. Pas de
-//  validation ici : Shopify collecte nom / ville / adresse + le
-//  paiement à la livraison sur sa page sécurisée.
-function setupOrder() {
-  const sel = $('[data-bind="order-pack-select"]');
-  if (sel) sel.addEventListener('change', (e) => pickPack(e.target.value));
-}
-
-// ─── 6) Galerie ───────────────────────────────────────────────
-function setupGallery() {
-  $('[data-bind="hero-thumbs"]').addEventListener('click', (e) => {
-    const t = e.target.closest('img'); if (!t) return;
-    $('[data-bind="hero-img"]').src = C.product.images[+t.dataset.i];
-    $$('.hero-thumbs img').forEach(i => i.classList.toggle('active', i === t));
-  });
-}
-
-// ─── 7) Packs cliquables ──────────────────────────────────────
-function setupPacks() {
-  $('[data-bind="pack-grid"]').addEventListener('click', (e) => {
-    const card = e.target.closest('.pack'); if (!card) return;
-    pickPack(card.dataset.pack);
-    $('#commander').scrollIntoView({ behavior: 'smooth' });
-  });
-}
-
-// ─── 8) FAQ accordéon ─────────────────────────────────────────
+// ─── 4) FAQ accordéon ─────────────────────────────────────────
 function setupFaq() {
   $('[data-bind="faq-list"]').addEventListener('click', (e) => {
     const q = e.target.closest('.faq-q'); if (!q) return;
@@ -190,42 +123,20 @@ function setupFaq() {
   });
 }
 
-// ─── 9) Countdown (urgence) ───────────────────────────────────
-function setupCountdown() {
-  const box = $('[data-bind="countdown"]');
-  const mins = C.settings.countdownMinutes;
-  if (!box || !mins) return;
-  box.hidden = false;
-  const end = Date.now() + mins * 60000;
-  const tick = () => {
-    const s = Math.max(0, Math.floor((end - Date.now()) / 1000));
-    const m = String(Math.floor(s / 60)).padStart(2, '0');
-    const ss = String(s % 60).padStart(2, '0');
-    setText('countdown-time', `${m}:${ss}`);
-    if (s <= 0) clearInterval(iv);
-  };
-  tick(); const iv = setInterval(tick, 1000);
-}
-
-// ─── 10) Sticky CTA + reveal ──────────────────────────────────
+// ─── 5) Sticky CTA + reveal au scroll ─────────────────────────
 function setupScroll() {
   const sticky = $('.sticky-cta');
-  const onScroll = () => sticky.classList.toggle('show', window.scrollY > 620);
+  const onScroll = () => sticky.classList.toggle('show', window.scrollY > 500);
   window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
   const io = new IntersectionObserver((entries) => {
     entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
   }, { threshold: 0.12 });
-  $$('.section, .hero-info, .hero-gallery, .trust-strip').forEach(el => { el.classList.add('reveal'); io.observe(el); });
+  $$('.section, .hero-info, .hero-media, .trust-strip, .pcard').forEach(el => { el.classList.add('reveal'); io.observe(el); });
 }
 
 // ─── Init ─────────────────────────────────────────────────────
 applyTheme();
 render();
-pickPack((C.offers.packs.find(p => p.popular) || C.offers.packs[0]).id);
-setupOrder();
-setupGallery();
-setupPacks();
 setupFaq();
-setupCountdown();
 setupScroll();
