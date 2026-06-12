@@ -36,7 +36,7 @@ function productCard(p) {
     <article class="pcard reveal">
       <div class="pc-media" style="background:${p.grad || 'var(--bg-alt)'}">
         <span class="pc-emoji">${p.emoji || '🧴'}</span>
-        ${p.img ? `<img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'">` : ''}
+        ${p.img ? `<img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;this.src='img/${p.id}.svg'">` : ''}
         ${p.badge ? `<span class="pc-badge">${p.badge}</span>` : ''}
         ${save ? `<span class="pc-save">−${save}%</span>` : ''}
       </div>
@@ -73,6 +73,7 @@ function render() {
   setText('hero-subtitle', C.hero.subtitle);
   setText('hero-cta', C.hero.cta);
   setAttr('hero-img', 'src', C.hero.image);
+  setAttr('hero-img', 'onerror', "this.onerror=null;this.src='img/hero.svg'");
   setHTML('reassure-mini', C.guarantees.items.slice(0, 3)
     .map(g => `<span>${g.icon} ${g.title}</span>`).join(''));
 
