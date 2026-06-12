@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="TAWAKULL — Soins de la peau">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#f7efe6"/><stop offset="1" stop-color="#e7f1ea"/></linearGradient>
+  <linearGradient id="body" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f5c579"/><stop offset="0.55" stop-color="#f0a93a"/><stop offset="1" stop-color="#d39533"/></linearGradient>
+  <filter id="blur" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="9"/></filter>
+</defs>
+<rect width="600" height="600" fill="url(#bg)"/>
+<circle cx="300" cy="312" r="216" fill="#ffffff" opacity="0.32"/>
+<g fill="#2e7d5b" opacity="0.16">
+  <path d="M96 150 q34 6 40 42 q-36 -2 -40 -42 z"/>
+  <path d="M512 150 q-34 6 -40 42 q36 -2 40 -42 z"/>
+  <path d="M120 470 q30 -10 50 14 q-30 12 -50 -14 z"/>
+  <path d="M486 470 q-30 -10 -50 14 q30 12 50 -14 z"/>
+</g>
+<text x="300" y="96" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="40" letter-spacing="9" fill="#2b2420">TAWAKULL</text>
+<rect x="246" y="112" width="108" height="3" rx="1.5" fill="#c9a86a"/>
+<ellipse cx="300" cy="478" rx="96" ry="17" fill="#000" opacity="0.10" filter="url(#blur)"/>
+    <rect x="276" y="150" width="48" height="16" rx="6" fill="#a36220"/>
+    <rect x="284" y="150" width="32" height="48" rx="8" fill="#b96f24"/>
+    <rect x="292" y="118" width="16" height="40" rx="8" fill="#c1803e"/>
+    <ellipse cx="300" cy="116" rx="14" ry="11" fill="#b96f24"/>
+    <rect x="282" y="196" width="36" height="20" fill="#bb842d"/>
+    <rect x="238" y="212" width="124" height="232" rx="28" fill="url(#body)"/>
+    <rect x="250" y="224" width="16" height="208" rx="8" fill="#ffffff" opacity="0.20"/>
+    <rect x="246" y="283" width="108" height="94" rx="11" fill="#ffffff" opacity="0.96"/>
+  <text x="300" y="323" text-anchor="middle" font-family="Georgia,serif" font-size="14" letter-spacing="1" fill="#2b2420">SÉRUM C</text>
+  <rect x="284" y="331" width="32" height="2" rx="1" fill="#c9892f"/>
+  <text x="300" y="350" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="11" letter-spacing="0.5" fill="#7a6f67">30 ml</text>
+<text x="300" y="556" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="18" letter-spacing="2.5" fill="#5a5047">SOINS DE LA PEAU · MAROC</text>
+</svg>

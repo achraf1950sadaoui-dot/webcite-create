@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="SPF 50 TAWAKULL">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" stop-color="#fff6d6"/><stop offset="1" stop-color="#ffecb2"/></linearGradient>
+  <linearGradient id="body" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f9d87c"/><stop offset="0.55" stop-color="#f6c63f"/><stop offset="1" stop-color="#d8ae37"/></linearGradient>
+  <filter id="blur" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="9"/></filter>
+</defs>
+<rect width="600" height="600" fill="url(#bg)"/>
+<circle cx="300" cy="300" r="206" fill="#ffffff" opacity="0.26"/>
+<circle cx="300" cy="300" r="206" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.55"/>
+<text x="300" y="92" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="30" letter-spacing="7" fill="#4a4036">TAWAKULL</text>
+  <rect x="256" y="105" width="88" height="3" rx="1.5" fill="#e0a72c"/>
+<ellipse cx="300" cy="476" rx="80" ry="15" fill="#000" opacity="0.10" filter="url(#blur)"/>
+    <rect x="272" y="148" width="56" height="42" rx="9" fill="#e0a72c"/>
+    <path d="M264 196 Q300 178 336 196 L330 248 L270 248 Z" fill="#c09a31"/>
+    <path d="M270 232 Q300 216 330 232 L330 430 Q330 446 314 446 L286 446 Q270 446 270 430 Z" fill="url(#body)"/>
+    <rect x="285" y="436" width="30" height="10" rx="3" fill="#c09a31"/>
+    <rect x="282" y="246" width="13" height="180" rx="6" fill="#ffffff" opacity="0.18"/>
+    <rect x="252" y="283" width="96" height="98" rx="11" fill="#ffffff" opacity="0.96"/>
+  <text x="300" y="325" text-anchor="middle" font-family="Georgia,serif" font-size="14" letter-spacing="1" fill="#2b2420">SPF 50</text>
+  <rect x="284" y="333" width="32" height="2" rx="1" fill="#e0a72c"/>
+  <text x="300" y="352" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="11" letter-spacing="0.5" fill="#7a6f67">50 ml</text>
+</svg>
