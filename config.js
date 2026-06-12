@@ -59,7 +59,7 @@ export const CONFIG = {
     title: "Révélez l'éclat naturel de votre peau",
     subtitle: 'Une routine complète de soins efficaces, livrés chez vous. Paiement à la livraison, satisfait ou remboursé sous 7 jours.',
     cta: '🛍️ Découvrir la boutique',
-    image: IMG('1620916566398-39f1143ab7be', 1200),
+    image: 'img/hero.svg',
   },
 
   // ─── CATALOGUE (titre de section) ─────────────────────────────
@@ -72,47 +72,47 @@ export const CONFIG = {
   products: [
     { id: 'serum-vitc', name: 'Sérum Éclat Vitamine C', subtitle: 'Anti-taches · Éclat · 30ml',
       price: 149, compareAt: 249, variantId: '43837137190978',
-      img: IMG('1620916566398-39f1143ab7be'), emoji: '🍊', grad: 'linear-gradient(135deg,#f9d976,#f39f86)',
+      img: 'img/serum-vitc.svg', emoji: '🍊', grad: 'linear-gradient(135deg,#f9d976,#f39f86)',
       badge: 'Bestseller', rating: 4.8, reviews: 213 },
 
     { id: 'creme-hydra', name: 'Crème Hydratante Acide Hyaluronique', subtitle: 'Hydratation 24h · 50ml',
       price: 139, compareAt: 219, variantId: '43848406794306',
-      img: IMG('1556228578-8c89e6adf883'), emoji: '💧', grad: 'linear-gradient(135deg,#a1c4fd,#c2e9fb)',
+      img: 'img/creme-hydra.svg', emoji: '💧', grad: 'linear-gradient(135deg,#a1c4fd,#c2e9fb)',
       badge: 'Coup de cœur', rating: 4.7, reviews: 156 },
 
     { id: 'nettoyant', name: 'Nettoyant Visage Mousse Douce', subtitle: 'Nettoie en douceur · 150ml',
       price: 89, compareAt: 149, variantId: '43848406827074',
-      img: IMG('1612817288484-6f916006741a'), emoji: '🫧', grad: 'linear-gradient(135deg,#a8edea,#bdf0d6)',
+      img: 'img/nettoyant.svg', emoji: '🫧', grad: 'linear-gradient(135deg,#a8edea,#bdf0d6)',
       badge: 'Essentiel', rating: 4.6, reviews: 98 },
 
     { id: 'masque', name: 'Masque Purifiant Argile & Charbon', subtitle: 'Pores nets · 100ml',
       price: 99, compareAt: 169, variantId: '43848406859842',
-      img: IMG('1608248543803-ba4f8c70ae0b'), emoji: '🌑', grad: 'linear-gradient(135deg,#4b4b4b,#7d7d7d)',
+      img: 'img/masque.svg', emoji: '🌑', grad: 'linear-gradient(135deg,#4b4b4b,#7d7d7d)',
       badge: 'Nouveau', rating: 4.7, reviews: 74 },
 
     { id: 'contour-yeux', name: 'Contour des Yeux Anti-Cernes', subtitle: 'Anti-cernes & poches · 15ml',
       price: 119, compareAt: 199, variantId: '43848406892610',
-      img: IMG('1570172619644-dfd03ed5d881'), emoji: '👁️', grad: 'linear-gradient(135deg,#cda7ef,#e6d3f8)',
+      img: 'img/contour-yeux.svg', emoji: '👁️', grad: 'linear-gradient(135deg,#cda7ef,#e6d3f8)',
       badge: '', rating: 4.6, reviews: 61 },
 
     { id: 'solaire', name: 'Crème Solaire SPF50', subtitle: 'Haute protection · 50ml',
       price: 109, compareAt: 179, variantId: '43848406925378',
-      img: IMG('1556228720-195a672e8a03'), emoji: '☀️', grad: 'linear-gradient(135deg,#fbd07c,#f8b64c)',
+      img: 'img/solaire.svg', emoji: '☀️', grad: 'linear-gradient(135deg,#fbd07c,#f8b64c)',
       badge: 'Indispensable', rating: 4.8, reviews: 132 },
 
     { id: 'retinol', name: 'Sérum Rétinol Anti-Âge Nuit', subtitle: 'Anti-rides nuit · 30ml',
       price: 159, compareAt: 269, variantId: '43848406958146',
-      img: IMG('1571875257727-256c39da42af'), emoji: '🌙', grad: 'linear-gradient(135deg,#6a7fdb,#9aa7e8)',
+      img: 'img/retinol.svg', emoji: '🌙', grad: 'linear-gradient(135deg,#6a7fdb,#9aa7e8)',
       badge: 'Anti-âge', rating: 4.9, reviews: 187 },
 
     { id: 'micellaire', name: 'Eau Micellaire Démaquillante', subtitle: 'Démaquille 3-en-1 · 400ml',
       price: 79, compareAt: 129, variantId: '43848406990914',
-      img: IMG('1598440947619-2c35fc9aa908'), emoji: '💦', grad: 'linear-gradient(135deg,#89f7fe,#b3ecf5)',
+      img: 'img/micellaire.svg', emoji: '💦', grad: 'linear-gradient(135deg,#89f7fe,#b3ecf5)',
       badge: 'Format XL', rating: 4.6, reviews: 89 },
 
     { id: 'gommage', name: 'Gommage Exfoliant AHA/BHA', subtitle: 'Peau lisse & douce · 50ml',
       price: 99, compareAt: 169, variantId: '43848407023682',
-      img: IMG('1596755389378-c31d21fd1273'), emoji: '✨', grad: 'linear-gradient(135deg,#f6a6c1,#f9cdda)',
+      img: 'img/gommage.svg', emoji: '✨', grad: 'linear-gradient(135deg,#f6a6c1,#f9cdda)',
       badge: 'Nouveau', rating: 4.7, reviews: 53 },
   ],
 

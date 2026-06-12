@@ -2,7 +2,7 @@
 //  TAWAKULL — Boutique logic
 //  Kayre7em config.js 3la l-page. Kol produit → checkout Shopify (COD).
 // ════════════════════════════════════════════════════════════════
-import { CONFIG } from './config.js';
+import { CONFIG } from './config.js?v=2';
 
 const $  = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
