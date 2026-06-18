@@ -1,0 +1,55 @@
+* { box-sizing: border-box; margin: 0; font-family: sans-serif; }
+
+body {
+  background: #0d0f1a;
+  color: #e8eaf6;
+  text-align: center;
+  padding: 40px 16px;
+}
+
+/* --- Les écrans : un seul visible à la fois (remplace system("clear")) --- */
+.screen { display: none; }
+.screen.active { display: block; }
+
+h1 { font-size: 2.4rem; margin-bottom: 8px; }
+h1 span { color: #6c63ff; }
+h2 { margin: 24px 0; line-height: 1.5; }
+
+/* --- Boutons --- */
+button {
+  font-size: 1rem;
+  padding: 14px 22px;
+  margin: 6px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #1e2238;
+  color: #e8eaf6;
+  transition: 0.2s;
+}
+button:hover { background: #2a2f4a; }
+#btn-start, #btn-restart { background: #6c63ff; color: #fff; font-weight: bold; }
+
+/* --- Barre du haut (compteur + score) --- */
+.bar {
+  display: flex;
+  justify-content: space-between;
+  max-width: 520px;
+  margin: 0 auto;
+  color: #7b83b0;
+  font-size: 0.9rem;
+}
+
+/* --- Grille des 4 réponses --- */
+#options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.option { text-align: left; min-height: 60px; }
+
+/* --- Couleurs des réponses (remplace les couleurs ANSI du C) --- */
+.option.correct   { background: #22d3a0; color: #fff; }
+.option.incorrect { background: #ff4d6d; color: #fff; }
