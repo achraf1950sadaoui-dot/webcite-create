@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ISMAGI Quiz Game</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Space+Mono:wght@400;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --bg:#0d0f1a; --bg-card:#151828; --bg-hover:#1e2238;
+  --accent:#6c63ff; --accent-2:#a78bfa; --glow:rgba(108,99,255,0.35);
+  --green:#22d3a0; --red:#ff4d6d; --yellow:#fbbf24;
+  --text:#e8eaf6; --muted:#7b83b0; --border:rgba(255,255,255,0.07);
+  --radius:16px; --radius-sm:10px;
+  --font:'Outfit',sans-serif; --mono:'Space Mono',monospace;
+  --transition:0.22s ease;
+}
+body.lang-ar { --font:'Cairo',sans-serif; }
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;overflow:hidden;}
+
+.screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity 0.35s ease,transform 0.35s ease;
+  transform:translateY(12px);overflow-y:auto;}
+.screen.active{opacity:1;pointer-events:all;transform:translateY(0);}
+
+.bg-orbs{position:fixed;inset:0;pointer-events:none;z-index:0;}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:0.18;animation:drift 8s ease-in-out infinite alternate;}
+.orb-1{width:380px;height:380px;background:var(--accent);top:-80px;right:-80px;}
+.orb-2{width:300px;height:300px;background:#ec4899;bottom:-60px;left:-60px;animation-delay:2s;}
+.orb-3{width:200px;height:200px;background:var(--green);bottom:30%;right:10%;animation-delay:4s;}
+@keyframes drift{to{transform:translate(30px,20px) scale(1.08);}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 28px;
+  border-radius:var(--radius-sm);font-family:var(--font);font-size:1rem;font-weight:700;
+  cursor:pointer;border:none;transition:var(--transition);white-space:nowrap;}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 0 24px var(--glow);}
+.btn-primary:hover{background:var(--accent-2);transform:translateY(-2px);box-shadow:0 0 36px var(--glow);}
+.btn-secondary{background:var(--bg-hover);color:var(--text);border:1px solid var(--border);}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+.btn-ghost{background:transparent;color:var(--muted);font-size:0.9rem;font-weight:600;}
+.btn-ghost:hover{color:var(--text);}
+.btn-icon{background:var(--bg-hover);border:1px solid var(--border);color:var(--muted);
+  padding:8px 14px;border-radius:8px;font-family:var(--font);font-size:0.85rem;font-weight:600;
+  cursor:pointer;transition:var(--transition);}
+.btn-icon:hover{color:var(--red);border-color:var(--red);}
+
+.game-header{position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;padding:14px 24px;
+  background:rgba(13,15,26,0.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);}
+.user-badge,.score-badge{display:flex;align-items:center;gap:7px;
+  background:var(--bg-card);border:1px solid var(--border);padding:7px 14px;
+  border-radius:100px;font-size:0.9rem;font-weight:600;}
+.level-tag{background:var(--accent);color:#fff;padding:6px 16px;border-radius:100px;
+  font-size:0.85rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;}
+
+/* ── LANGUAGE SCREEN ── */
+.lang-card{position:relative;z-index:10;background:var(--bg-card);border:1px solid var(--border);
+  border-radius:24px;padding:48px 40px;max-width:420px;width:90%;text-align:center;
+  box-shadow:0 30px 80px rgba(0,0,0,0.5);animation:cardIn 0.6s cubic-bezier(0.22,1,0.36,1) both;}
+@keyframes cardIn{from{opacity:0;transform:scale(0.92) translateY(20px);}}
+.logo-badge{width:72px;height:72px;background:linear-gradient(135deg,var(--accent),#ec4899);
+  border-radius:20px;font-size:2rem;display:flex;align-items:center;justify-content:center;
+  margin:0 auto 22px;box-shadow:0 8px 32px var(--glow);}
+.game-title{font-size:2.4rem;font-weight:800;letter-spacing:-0.02em;line-height:1;}
+.game-title span{color:var(--accent);}
+.lang-subtitle{color:var(--muted);font-size:0.95rem;margin:10px 0 30px;}
+.lang-grid{display:flex;flex-direction:column;gap:12px;}
+.lang-btn{display:flex;align-items:center;gap:16px;
+  background:var(--bg);border:2px solid var(--border);border-radius:var(--radius-sm);
+  padding:16px 20px;cursor:pointer;transition:var(--transition);font-family:var(--font);}
+.lang-btn:hover{border-color:var(--accent);background:var(--bg-hover);transform:translateX(4px);}
+.lang-flag{font-size:2rem;}
+.lang-info{text-align:left;flex:1;}
+.lang-info strong{display:block;font-size:1rem;font-weight:700;color:var(--text);}
+.lang-info span{font-size:0.82rem;color:var(--muted);}
+.lang-arrow{color:var(--accent);font-size:1.2rem;}
+
+/* ── LOGIN ── */
+.login-card{position:relative;z-index:10;background:var(--bg-card);border:1px solid var(--border);
+  border-radius:24px;padding:52px 44px;max-width:400px;width:90%;text-align:center;
+  box-shadow:0 30px 80px rgba(0,0,0,0.5);animation:cardIn 0.6s cubic-bezier(0.22,1,0.36,1) both;}
+.subtitle{color:var(--muted);font-size:0.95rem;margin:10px 0 30px;}
+.input-group{margin-bottom:18px;}
+.input-group input{width:100%;background:var(--bg);border:2px solid var(--border);
+  border-radius:var(--radius-sm);padding:14px 18px;font-family:var(--font);font-size:1rem;
+  color:var(--text);outline:none;transition:border-color var(--transition);text-align:inherit;}
+.input-group input:focus{border-color:var(--accent);}
+.input-group input::placeholder{color:var(--muted);}
+.login-card .btn-primary{width:100%;}
+.back-lang{margin-top:14px;background:transparent;border:none;color:var(--muted);
+  font-family:var(--font);font-size:0.85rem;cursor:pointer;transition:var(--transition);}
+.back-lang:hover{color:var(--text);}
+
+/* ── LEVELS ── */
+.levels-container{position:relative;z-index:10;width:min(520px,92vw);margin-top:72px;padding:20px 0 40px;}
+.section-title{text-align:center;font-size:1.6rem;font-weight:800;margin-bottom:28px;letter-spacing:-0.02em;}
+.levels-grid{display:flex;flex-direction:column;gap:14px;}
+.level-card{display:flex;align-items:center;gap:18px;background:var(--bg-card);
+  border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;
+  cursor:pointer;transition:var(--transition);position:relative;overflow:hidden;}
+.level-card::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,var(--accent) 0%,transparent 100%);opacity:0;transition:opacity var(--transition);}
+.level-card:not(.locked):hover{border-color:var(--accent);transform:translateX(4px);}
+.level-card:not(.locked):hover::before{opacity:0.05;}
+.level-card.locked{opacity:0.5;cursor:not-allowed;}
+.level-card.completed{border-color:var(--green);}
+.level-card.completed::before{background:linear-gradient(90deg,var(--green) 0%,transparent 100%);opacity:0.05;}
+.level-icon{font-size:2.2rem;flex-shrink:0;}
+.level-info{flex:1;}
+.level-info h3{font-size:1.15rem;font-weight:700;margin-bottom:3px;}
+.level-info p{font-size:0.82rem;color:var(--muted);}
+.level-status{margin-left:auto;}
+.lang-ar .level-status{margin-left:0;margin-right:auto;}
+.lock-icon{font-size:1.2rem;}
+.lock-icon.unlocked{color:var(--accent);font-size:1.4rem;}
+.progress-track{margin-top:32px;}
+.progress-label{font-size:0.78rem;color:var(--muted);text-transform:uppercase;
+  letter-spacing:0.08em;margin-bottom:14px;text-align:center;}
+.progress-steps{display:flex;align-items:center;justify-content:center;}
+.step{width:72px;height:32px;display:flex;align-items:center;justify-content:center;
+  border-radius:100px;font-size:0.78rem;font-weight:700;
+  background:var(--bg-card);border:1px solid var(--border);color:var(--muted);transition:var(--transition);}
+.step.active{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 0 16px var(--glow);}
+.step.done{background:var(--green);color:#fff;border-color:var(--green);}
+.step-line{flex:1;height:2px;background:var(--border);max-width:60px;transition:background var(--transition);}
+.step-line.done{background:var(--green);}
+
+/* ── QUIZ ── */
+.quiz-container{position:relative;z-index:10;width:min(580px,94vw);margin-top:72px;padding:24px 0 40px;}
+.quiz-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+#question-counter{font-size:0.88rem;color:var(--muted);font-family:var(--mono);}
+.timer-ring{position:relative;width:48px;height:48px;}
+.timer-ring svg{width:100%;height:100%;transform:rotate(-90deg);}
+.ring-bg{fill:none;stroke:var(--bg-hover);stroke-width:4;}
+.ring-fill{fill:none;stroke:var(--accent);stroke-width:4;stroke-dasharray:125.66;stroke-dashoffset:0;
+  stroke-linecap:round;transition:stroke-dashoffset 1s linear,stroke 0.3s;}
+.ring-fill.warning{stroke:var(--yellow);}
+.ring-fill.danger{stroke:var(--red);}
+#timer-display{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:0.85rem;font-weight:700;color:var(--text);}
+.progress-bar-wrap{height:5px;background:var(--bg-hover);border-radius:99px;overflow:hidden;margin-bottom:24px;}
+.progress-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  border-radius:99px;transition:width 0.5s ease;}
+.question-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:28px;margin-bottom:20px;min-height:110px;display:flex;align-items:center;
+  animation:fadeSlide 0.3s ease both;}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(10px);}}
+#question-text{font-size:1.15rem;font-weight:600;line-height:1.6;}
+.options-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.option-btn{background:var(--bg-card);border:2px solid var(--border);border-radius:var(--radius-sm);
+  padding:16px 14px;font-family:var(--font);font-size:0.95rem;font-weight:600;color:var(--text);
+  text-align:left;cursor:pointer;transition:var(--transition);min-height:68px;line-height:1.5;
+  animation:fadeSlide 0.3s ease both;position:relative;overflow:hidden;}
+.lang-ar .option-btn{text-align:right;}
+.option-btn:nth-child(1){animation-delay:0.05s;}
+.option-btn:nth-child(2){animation-delay:0.10s;}
+.option-btn:nth-child(3){animation-delay:0.15s;}
+.option-btn:nth-child(4){animation-delay:0.20s;}
+.option-btn:hover:not(:disabled){border-color:var(--accent);background:var(--bg-hover);transform:translateY(-2px);}
+.option-btn:disabled{cursor:default;}
+.option-btn.correct{border-color:var(--green)!important;background:rgba(34,211,160,0.12)!important;color:var(--green)!important;}
+.option-btn.incorrect{border-color:var(--red)!important;background:rgba(255,77,109,0.12)!important;color:var(--red)!important;}
+.option-btn .letter{display:inline-flex;align-items:center;justify-content:center;
+  width:24px;height:24px;border-radius:6px;background:var(--bg-hover);font-size:0.75rem;font-weight:700;
+  margin-right:8px;flex-shrink:0;font-family:var(--mono);vertical-align:middle;}
+.lang-ar .option-btn .letter{margin-right:0;margin-left:8px;}
+
+/* ── RESULT ── */
+.result-card{position:relative;z-index:10;background:var(--bg-card);border:1px solid var(--border);
+  border-radius:24px;padding:48px 40px;max-width:420px;width:92%;text-align:center;
+  box-shadow:0 30px 80px rgba(0,0,0,0.5);animation:cardIn 0.5s cubic-bezier(0.22,1,0.36,1) both;}
+.result-emoji{font-size:4rem;margin-bottom:14px;display:block;}
+.result-card h2{font-size:2rem;font-weight:800;margin-bottom:8px;}
+.result-card p{color:var(--muted);font-size:0.98rem;margin-bottom:24px;}
+.result-score-display{display:inline-flex;align-items:baseline;gap:6px;margin-bottom:18px;}
+#result-score{font-size:4.5rem;font-weight:800;font-family:var(--mono);color:var(--accent);line-height:1;}
+.result-total{font-size:1.8rem;color:var(--muted);font-family:var(--mono);}
+.result-stars{font-size:1.8rem;letter-spacing:6px;margin-bottom:28px;}
+.result-actions{display:flex;gap:12px;margin-bottom:14px;}
+.result-actions .btn{flex:1;}
+
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.animate-pulse{animation:pulse 0.4s ease;}
+.animate-shake{animation:shake 0.4s ease;}
+
+@media(max-width:500px){
+  .options-grid{grid-template-columns:1fr;}
+  .login-card,.lang-card{padding:38px 24px;}
+  .result-card{padding:36px 22px;}
+  .result-actions{flex-direction:column;}
+  .game-title{font-size:2rem;}
+  #question-text{font-size:1rem;}
+  .quiz-container,.levels-container{padding-bottom:60px;}
+}
+  </style>
+</head>
+<body>
+
+<!-- LANGUAGE SELECTION -->
+<div id="screen-lang" class="screen active">
+  <div class="lang-card">
+    <div class="logo-badge">🎓</div>
+    <h1 class="game-title">ISMAGI<span>QUIZ</span></h1>
+    <p class="lang-subtitle">Choose your language · اختر لغتك · Choisissez votre langue</p>
+    <div class="lang-grid">
+      <button class="lang-btn" onclick="setLang('en')">
+        <span class="lang-flag">🇬🇧</span>
+        <div class="lang-info"><strong>English</strong><span>Play in English</span></div>
+        <span class="lang-arrow">›</span>
+      </button>
+      <button class="lang-btn" onclick="setLang('fr')">
+        <span class="lang-flag">🇫🇷</span>
+        <div class="lang-info"><strong>Français</strong><span>Jouer en français</span></div>
+        <span class="lang-arrow">›</span>
+      </button>
+      <button class="lang-btn" onclick="setLang('ar')">
+        <span class="lang-flag">🇲🇦</span>
+        <div class="lang-info"><strong>العربية</strong><span>العب بالعربية</span></div>
+        <span class="lang-arrow">›</span>
+      </button>
+    </div>
+  </div>
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div id="screen-login" class="screen">
+  <div class="login-card">
+    <div class="logo-badge">🎓</div>
+    <h1 class="game-title">ISMAGI<span>QUIZ</span></h1>
+    <p class="subtitle" id="login-subtitle">Enter your username to begin</p>
+    <div class="input-group">
+      <input type="text" id="username-input" placeholder="Username…" maxlength="20" autocomplete="off" />
+    </div>
+    <button class="btn btn-primary" id="btn-login" style="width:100%">
+      <span id="btn-login-text">Start Game</span> →
+    </button>
+    <button class="back-lang" onclick="showScreen('lang')">← Change language</button>
+  </div>
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+  </div>
+</div>
+
+<!-- LEVELS -->
+<div id="screen-levels" class="screen">
+  <header class="game-header">
+    <div class="user-badge"><span>👤</span><span id="header-username"></span></div>
+    <div class="score-badge"><span>⭐</span><span id="header-score">0</span></div>
+  </header>
+  <div class="levels-container">
+    <h2 class="section-title" id="lbl-choose">Choose Your Level</h2>
+    <div class="levels-grid">
+      <div class="level-card" id="level-easy">
+        <div class="level-icon">🌱</div>
+        <div class="level-info"><h3 id="lbl-easy">Easy</h3><p id="lbl-easy-sub">3 Questions · 10s each</p></div>
+        <div class="level-status" id="status-easy"><span class="lock-icon unlocked">▶</span></div>
+      </div>
+      <div class="level-card locked" id="level-medium">
+        <div class="level-icon">🔥</div>
+        <div class="level-info"><h3 id="lbl-medium">Medium</h3><p id="lbl-medium-sub">3 Questions · 10s each</p></div>
+        <div class="level-status" id="status-medium"><span class="lock-icon">🔒</span></div>
+      </div>
+      <div class="level-card locked" id="level-hard">
+        <div class="level-icon">💎</div>
+        <div class="level-info"><h3 id="lbl-hard">Hard</h3><p id="lbl-hard-sub">3 Questions · 10s each</p></div>
+        <div class="level-status" id="status-hard"><span class="lock-icon">🔒</span></div>
+      </div>
+    </div>
+    <div class="progress-track">
+      <div class="progress-label" id="lbl-progress">Level Progress</div>
+      <div class="progress-steps">
+        <div class="step active" id="step-easy">—</div>
+        <div class="step-line" id="line-1"></div>
+        <div class="step" id="step-medium">—</div>
+        <div class="step-line" id="line-2"></div>
+        <div class="step" id="step-hard">—</div>
+      </div>
+    </div>
+  </div>
+  <div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+</div>
+
+<!-- QUIZ -->
+<div id="screen-quiz" class="screen">
+  <header class="game-header">
+    <button class="btn-icon" id="btn-quit">✕</button>
+    <div class="level-tag" id="quiz-level-tag">Easy</div>
+    <div class="score-badge"><span>⭐</span><span id="quiz-score">0</span></div>
+  </header>
+  <div class="quiz-container">
+    <div class="quiz-meta">
+      <span id="question-counter">1 / 3</span>
+      <div class="timer-ring">
+        <svg viewBox="0 0 48 48">
+          <circle cx="24" cy="24" r="20" class="ring-bg"/>
+          <circle cx="24" cy="24" r="20" class="ring-fill" id="timer-ring-fill"/>
+        </svg>
+        <span id="timer-display">10</span>
+      </div>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="quiz-progress-bar"></div></div>
+    <div class="question-card" id="question-card">
+      <p id="question-text">…</p>
+    </div>
+    <div class="options-grid">
+      <button class="option-btn" data-index="0"></button>
+      <button class="option-btn" data-index="1"></button>
+      <button class="option-btn" data-index="2"></button>
+      <button class="option-btn" data-index="3"></button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div id="screen-result" class="screen">
+  <div class="result-card">
+    <div class="result-emoji" id="result-emoji">🔥</div>
+    <h2 id="result-title">Excellent!</h2>
+    <p id="result-msg"></p>
+    <div class="result-score-display">
+      <span id="result-score">0</span>
+      <span class="result-total" id="result-total">/ 3</span>
+    </div>
+    <div class="result-stars" id="result-stars"></div>
+    <div class="result-actions">
+      <button class="btn btn-secondary" id="btn-retry">↩</button>
+      <button class="btn btn-primary" id="btn-next-level">→</button>
+    </div>
+    <button class="btn btn-ghost" id="btn-levels">⬅</button>
+  </div>
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════
+   TRANSLATIONS
+══════════════════════════════════════════ */
+const T = {
+  en: {
+    dir:'ltr', langClass:'lang-en',
+    loginSubtitle:'Enter your username to begin',
+    loginBtn:'Start Game',
+    backLang:'← Change language',
+    chooseLevel:'Choose Your Level',
+    easy:'Easy', medium:'Medium', hard:'Hard',
+    qSub:'3 Questions · 10s each',
+    progress:'Level Progress',
+    qCounter:(c,t)=>`Question ${c} / ${t}`,
+    retry:'↩ Retry', nextLevel:'Next Level →', backLevels:'Back to Levels',
+    quit:'✕ Quit',
+    results:{
+      bad:{emoji:'💪', title:'Keep Going!',   msg:'Practice makes perfect. Try again!'},
+      ok: {emoji:'👍', title:'Good Job!',     msg:"Nice work — you're getting there!"},
+      great:{emoji:'🔥',title:'Excellent!',   msg:'Outstanding knowledge of ISMAGI!'}
+    },
+    allDone:'🏆 All Done!',
+    placeholder:'Username…'
+  },
+  fr: {
+    dir:'ltr', langClass:'lang-fr',
+    loginSubtitle:'Entrez votre pseudo pour commencer',
+    loginBtn:'Commencer',
+    backLang:'← Changer de langue',
+    chooseLevel:'Choisissez votre niveau',
+    easy:'Facile', medium:'Moyen', hard:'Difficile',
+    qSub:'3 Questions · 10s chacune',
+    progress:'Progression',
+    qCounter:(c,t)=>`Question ${c} / ${t}`,
+    retry:'↩ Réessayer', nextLevel:'Niveau suivant →', backLevels:'Retour aux niveaux',
+    quit:'✕ Quitter',
+    results:{
+      bad:{emoji:'💪', title:'Courage !',     msg:'Entraîne-toi encore, tu vas y arriver !'},
+      ok: {emoji:'👍', title:'Bien joué !',   msg:'Tu progresses, continue comme ça !'},
+      great:{emoji:'🔥',title:'Excellent !',  msg:'Tu connais ISMAGI sur le bout des doigts !'}
+    },
+    allDone:'🏆 Terminé !',
+    placeholder:'Pseudo…'
+  },
+  ar: {
+    dir:'rtl', langClass:'lang-ar',
+    loginSubtitle:'أدخل اسمك للبدء',
+    loginBtn:'ابدأ اللعبة',
+    backLang:'تغيير اللغة →',
+    chooseLevel:'اختر مستواك',
+    easy:'سهل', medium:'متوسط', hard:'صعب',
+    qSub:'3 أسئلة · 10 ثوانٍ لكل سؤال',
+    progress:'تقدم المستويات',
+    qCounter:(c,t)=>`سؤال ${c} / ${t}`,
+    retry:'↩ إعادة المحاولة', nextLevel:'المستوى التالي ←', backLevels:'العودة للمستويات',
+    quit:'✕ خروج',
+    results:{
+      bad:{emoji:'💪', title:'استمر !',       msg:'التدريب يصنع الإتقان، حاول مجدداً !'},
+      ok: {emoji:'👍', title:'عمل جيد !',     msg:'أحسنت، واصل التقدم !'},
+      great:{emoji:'🔥',title:'ممتاز !',      msg:'معرفتك بـ ISMAGI رائعة !'}
+    },
+    allDone:'🏆 أنهيت جميع المستويات!',
+    placeholder:'اسم المستخدم…'
+  }
+};
+
+/* ══════════════════════════════════════════
+   QUESTIONS (3 languages)
+══════════════════════════════════════════ */
+const QUESTIONS = {
+  en:{
+    easy:[
+      {q:"What does ISMAGI stand for?",options:["Institute of Science Mathematics and Applied Computer Science","International School of Management and AI","Institute of Sport and Gaming","Information System Modern Academy"],correct:0},
+      {q:"ISMAGI is located in which country?",options:["France","Morocco","Spain","Algeria"],correct:1},
+      {q:"ISMAGI is mainly focused on:",options:["Medicine","Engineering and Computer Science","Art","Agriculture"],correct:1}
+    ],
+    medium:[
+      {q:"Which field is strongly taught at ISMAGI?",options:["Computer Science","Literature","Law","Music"],correct:0},
+      {q:"ISMAGI prepares students mainly for:",options:["Sports careers","IT and engineering careers","Farming jobs","Fashion design"],correct:1},
+      {q:"What level of studies is ISMAGI associated with?",options:["Primary school","Higher education","Kindergarten","Middle school"],correct:1}
+    ],
+    hard:[
+      {q:"ISMAGI is part of which type of institution?",options:["Private higher education institution","Primary school","High school","Training center only"],correct:0},
+      {q:"ISMAGI is related to:",options:["Digital sciences and engineering","Cooking","Tourism only","Driving school"],correct:0},
+      {q:"Students at ISMAGI usually study:",options:["Programming and networks","Painting only","Agriculture only","Sports only"],correct:0}
+    ]
+  },
+  fr:{
+    easy:[
+      {q:"Que signifie ISMAGI ?",options:["Institut des Sciences Mathématiques et Informatique Appliquée","École Internationale de Management et d'IA","Institut du Sport et du Gaming","Système d'Information Académique Moderne"],correct:0},
+      {q:"Dans quel pays se trouve ISMAGI ?",options:["France","Maroc","Espagne","Algérie"],correct:1},
+      {q:"ISMAGI est principalement axé sur :",options:["La médecine","L'ingénierie et l'informatique","Les arts","L'agriculture"],correct:1}
+    ],
+    medium:[
+      {q:"Quel domaine est fortement enseigné à ISMAGI ?",options:["L'informatique","La littérature","Le droit","La musique"],correct:0},
+      {q:"ISMAGI prépare les étudiants principalement pour :",options:["Des carrières sportives","Des carrières en IT et ingénierie","Des emplois agricoles","La mode"],correct:1},
+      {q:"À quel niveau d'études ISMAGI est-il associé ?",options:["École primaire","Enseignement supérieur","Maternelle","Collège"],correct:1}
+    ],
+    hard:[
+      {q:"ISMAGI fait partie de quel type d'établissement ?",options:["Établissement privé d'enseignement supérieur","École primaire","Lycée","Centre de formation uniquement"],correct:0},
+      {q:"ISMAGI est lié à :",options:["Les sciences numériques et l'ingénierie","La cuisine","Le tourisme uniquement","L'auto-école"],correct:0},
+      {q:"Les étudiants d'ISMAGI étudient généralement :",options:["La programmation et les réseaux","La peinture uniquement","L'agriculture uniquement","Le sport uniquement"],correct:0}
+    ]
+  },
+  ar:{
+    easy:[
+      {q:"ماذا يعني اختصار ISMAGI؟",options:["معهد العلوم والرياضيات وعلوم الحاسوب التطبيقية","المدرسة الدولية للإدارة والذكاء الاصطناعي","معهد الرياضة والألعاب","نظام المعلومات الأكاديمية الحديثة"],correct:0},
+      {q:"في أي دولة يقع ISMAGI؟",options:["فرنسا","المغرب","إسبانيا","الجزائر"],correct:1},
+      {q:"يركز ISMAGI بشكل رئيسي على:",options:["الطب","الهندسة وعلوم الحاسوب","الفنون","الزراعة"],correct:1}
+    ],
+    medium:[
+      {q:"أي مجال يُدرَّس بشكل قوي في ISMAGI؟",options:["علوم الحاسوب","الأدب","القانون","الموسيقى"],correct:0},
+      {q:"يُعِدّ ISMAGI الطلاب بشكل رئيسي لـ:",options:["مسيرات رياضية","مسيرات في تكنولوجيا المعلومات والهندسة","وظائف زراعية","تصميم الأزياء"],correct:1},
+      {q:"بأي مستوى دراسي يرتبط ISMAGI؟",options:["المدرسة الابتدائية","التعليم العالي","رياض الأطفال","المدرسة الإعدادية"],correct:1}
+    ],
+    hard:[
+      {q:"ISMAGI جزء من أي نوع من المؤسسات؟",options:["مؤسسة تعليم عالٍ خاصة","مدرسة ابتدائية","ثانوية","مركز تدريب فقط"],correct:0},
+      {q:"يرتبط ISMAGI بـ:",options:["العلوم الرقمية والهندسة","الطهي","السياحة فقط","مدرسة تعليم قيادة"],correct:0},
+      {q:"يدرس طلاب ISMAGI عادةً:",options:["البرمجة والشبكات","الرسم فقط","الزراعة فقط","الرياضة فقط"],correct:0}
+    ]
+  }
+};
+
+const LETTERS = ["A","B","C","D"];
+const TIME_PER_Q = 10;
+
+let lang = 'en';
+let state = {
+  username:"", totalScore:0, currentLevel:"easy",
+  currentQ:0, score:0, timer:null, timeLeft:TIME_PER_Q,
+  answered:false,
+  unlocked:{easy:true,medium:false,hard:false},
+  completed:{easy:false,medium:false,hard:false}
+};
+
+/* ══ AUDIO ══ */
+let audioCtx;
+function getCtx(){ if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)(); return audioCtx; }
+function tone(freq,type,dur,vol,delay){
+  vol=vol||0.3; delay=delay||0;
+  try{
+    const c=getCtx(),o=c.createOscillator(),g=c.createGain();
+    o.connect(g);g.connect(c.destination);
+    o.type=type;o.frequency.value=freq;
+    g.gain.setValueAtTime(vol,c.currentTime+delay);
+    g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+delay+dur);
+    o.start(c.currentTime+delay);o.stop(c.currentTime+delay+dur);
+  }catch(e){}
+}
+const sfx={
+  click:function(){tone(900,'sine',0.07,0.2);},
+  correct:function(){tone(523,'sine',0.12,0.3);tone(659,'sine',0.12,0.3,0.13);tone(784,'sine',0.18,0.3,0.26);},
+  wrong:function(){tone(250,'sawtooth',0.18,0.25);tone(180,'sawtooth',0.2,0.25,0.18);},
+  start:function(){[261,329,392,523].forEach(function(f,i){tone(f,'sine',0.2,0.25,i*0.15);});},
+  levelup:function(){[523,659,784,1046].forEach(function(f,i){tone(f,'sine',0.22,0.3,i*0.12);});}
+};
+
+/* ══ SCREEN ══ */
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  var el=document.getElementById('screen-'+id);
+  requestAnimationFrame(function(){requestAnimationFrame(function(){if(el)el.classList.add('active');});});
+}
+
+/* ══ SET LANGUAGE ══ */
+function setLang(l){
+  sfx.click();
+  lang = l;
+  var t = T[l];
+  // direction & font
+  document.documentElement.setAttribute('lang', l);
+  document.documentElement.setAttribute('dir', t.dir);
+  document.body.className = t.langClass;
+
+  // login screen text
+  document.getElementById('login-subtitle').textContent = t.loginSubtitle;
+  document.getElementById('btn-login-text').textContent = t.loginBtn;
+  document.getElementById('username-input').placeholder = t.placeholder;
+  document.querySelector('.back-lang').textContent = t.backLang;
+
+  // level labels
+  document.getElementById('lbl-choose').textContent = t.chooseLevel;
+  document.getElementById('lbl-easy').textContent = t.easy;
+  document.getElementById('lbl-medium').textContent = t.medium;
+  document.getElementById('lbl-hard').textContent = t.hard;
+  document.getElementById('lbl-easy-sub').textContent = t.qSub;
+  document.getElementById('lbl-medium-sub').textContent = t.qSub;
+  document.getElementById('lbl-hard-sub').textContent = t.qSub;
+  document.getElementById('lbl-progress').textContent = t.progress;
+  document.getElementById('step-easy').textContent = t.easy;
+  document.getElementById('step-medium').textContent = t.medium;
+  document.getElementById('step-hard').textContent = t.hard;
+
+  // buttons
+  document.getElementById('btn-quit').textContent = t.quit;
+  document.getElementById('btn-retry').textContent = t.retry;
+  document.getElementById('btn-levels').textContent = t.backLevels;
+
+  showScreen('login');
+}
+
+/* ══ LOGIN ══ */
+document.getElementById('btn-login').addEventListener('click', function(){
+  sfx.click();
+  var val = document.getElementById('username-input').value.trim();
+  if(!val){
+    var inp = document.getElementById('username-input');
+    inp.style.borderColor='var(--red)';
+    setTimeout(function(){inp.style.borderColor='';},1000);
+    return;
+  }
+  state.username = val;
+  localStorage.setItem('iq_user', val);
+  var saved = localStorage.getItem('iq_prog');
+  if(saved){
+    try{
+      var p=JSON.parse(saved);
+      state.unlocked=p.unlocked||state.unlocked;
+      state.completed=p.completed||state.completed;
+      state.totalScore=p.totalScore||0;
+    }catch(e){}
+  }
+  sfx.start();
+  document.getElementById('header-username').textContent = state.username;
+  document.getElementById('header-score').textContent = state.totalScore;
+  renderLevels();
+  showScreen('levels');
+});
+
+document.getElementById('username-input').addEventListener('keydown',function(e){
+  if(e.key==='Enter') document.getElementById('btn-login').click();
+});
+
+window.addEventListener('load',function(){
+  var u=localStorage.getItem('iq_user');
+  if(u) document.getElementById('username-input').value=u;
+});
+
+/* ══ LEVELS ══ */
+function renderLevels(){
+  var t = T[lang];
+  ['easy','medium','hard'].forEach(function(lvl){
+    var card=document.getElementById('level-'+lvl);
+    var status=document.getElementById('status-'+lvl);
+    var step=document.getElementById('step-'+lvl);
+    card.classList.remove('locked','completed');
+    step.classList.remove('active','done');
+    if(!state.unlocked[lvl]){
+      card.classList.add('locked');
+      status.innerHTML='<span class="lock-icon">🔒</span>';
+    } else if(state.completed[lvl]){
+      card.classList.add('completed');
+      status.innerHTML='<span class="lock-icon">✅</span>';
+      step.classList.add('done');
+    } else {
+      status.innerHTML='<span class="lock-icon unlocked">▶</span>';
+      step.classList.add('active');
+    }
+  });
+  document.getElementById('line-1').classList.toggle('done',state.completed.easy);
+  document.getElementById('line-2').classList.toggle('done',state.completed.medium);
+  document.getElementById('header-score').textContent=state.totalScore;
+}
+
+['easy','medium','hard'].forEach(function(lvl){
+  document.getElementById('level-'+lvl).addEventListener('click',function(){
+    if(!state.unlocked[lvl]) return;
+    sfx.click();
+    startLevel(lvl);
+  });
+});
+
+/* ══ QUIZ ══ */
+function startLevel(level){
+  state.currentLevel=level;
+  state.currentQ=0;
+  state.score=0;
+  state.answered=false;
+  var t=T[lang];
+  var labels={easy:t.easy,medium:t.medium,hard:t.hard};
+  document.getElementById('quiz-level-tag').textContent=labels[level];
+  document.getElementById('quiz-score').textContent=state.totalScore;
+  showScreen('quiz');
+  setTimeout(loadQuestion,300);
+}
+
+function loadQuestion(){
+  var qs=QUESTIONS[lang][state.currentLevel];
+  var q=qs[state.currentQ];
+  var total=qs.length;
+  state.answered=false;
+  state.timeLeft=TIME_PER_Q;
+
+  document.getElementById('question-counter').textContent=T[lang].qCounter(state.currentQ+1,total);
+  document.getElementById('quiz-progress-bar').style.width=((state.currentQ/total)*100)+'%';
+
+  var qCard=document.getElementById('question-card');
+  qCard.style.animation='none'; void qCard.offsetHeight; qCard.style.animation='';
+  document.getElementById('question-text').textContent=q.q;
+
+  document.querySelectorAll('.option-btn').forEach(function(btn,i){
+    btn.className='option-btn';
+    btn.disabled=false;
+    btn.style.animation='none'; void btn.offsetHeight; btn.style.animation='';
+    btn.innerHTML='<span class="letter">'+LETTERS[i]+'</span>'+q.options[i];
+    btn.onclick=function(){ selectAnswer(i); };
+  });
+
+  startTimer();
+}
+
+function startTimer(){
+  clearInterval(state.timer);
+  var C=2*Math.PI*20;
+  var ring=document.getElementById('timer-ring-fill');
+  var disp=document.getElementById('timer-display');
+  state.timeLeft=TIME_PER_Q;
+  ring.classList.remove('warning','danger');
+  ring.style.strokeDashoffset=0;
+  disp.textContent=TIME_PER_Q;
+  state.timer=setInterval(function(){
+    state.timeLeft--;
+    disp.textContent=state.timeLeft;
+    ring.style.strokeDashoffset=C*(1-state.timeLeft/TIME_PER_Q);
+    if(state.timeLeft<=5&&state.timeLeft>2) ring.classList.add('warning');
+    if(state.timeLeft<=2){ring.classList.remove('warning');ring.classList.add('danger');}
+    if(state.timeLeft<=0){clearInterval(state.timer);timeUp();}
+  },1000);
+}
+
+function timeUp(){
+  if(state.answered) return;
+  state.answered=true;
+  sfx.wrong();
+  var q=QUESTIONS[lang][state.currentLevel][state.currentQ];
+  var btns=document.querySelectorAll('.option-btn');
+  btns.forEach(function(b){b.disabled=true;});
+  btns[q.correct].classList.add('correct');
+  var qCard=document.getElementById('question-card');
+  qCard.classList.add('animate-shake');
+  setTimeout(function(){qCard.classList.remove('animate-shake');nextQ();},1200);
+}
+
+function selectAnswer(index){
+  if(state.answered) return;
+  state.answered=true;
+  clearInterval(state.timer);
+  sfx.click();
+  var q=QUESTIONS[lang][state.currentLevel][state.currentQ];
+  var btns=document.querySelectorAll('.option-btn');
+  btns.forEach(function(b){b.disabled=true;});
+  if(index===q.correct){
+    btns[index].classList.add('correct','animate-pulse');
+    state.score++;state.totalScore++;
+    document.getElementById('quiz-score').textContent=state.totalScore;
+    sfx.correct();
+  } else {
+    btns[index].classList.add('incorrect');
+    btns[q.correct].classList.add('correct');
+    sfx.wrong();
+    var qCard=document.getElementById('question-card');
+    qCard.classList.add('animate-shake');
+    setTimeout(function(){qCard.classList.remove('animate-shake');},400);
+  }
+  setTimeout(nextQ,1100);
+}
+
+function nextQ(){
+  state.currentQ++;
+  if(state.currentQ>=QUESTIONS[lang][state.currentLevel].length) endLevel();
+  else loadQuestion();
+}
+
+function endLevel(){
+  var total=QUESTIONS[lang][state.currentLevel].length;
+  var score=state.score;
+  var level=state.currentLevel;
+  document.getElementById('quiz-progress-bar').style.width='100%';
+  var passed=score>=2;
+  if(passed){
+    state.completed[level]=true;
+    if(level==='easy')   state.unlocked.medium=true;
+    if(level==='medium') state.unlocked.hard=true;
+  }
+  saveProgress();
+
+  var t=T[lang];
+  var pct=score/total;
+  var r;
+  if(pct<=0.4) r=t.results.bad;
+  else if(pct<=0.7) r=t.results.ok;
+  else r=t.results.great;
+
+  document.getElementById('result-emoji').textContent=r.emoji;
+  document.getElementById('result-title').textContent=r.title;
+  document.getElementById('result-msg').textContent=r.msg;
+  document.getElementById('result-score').textContent=score;
+  document.getElementById('result-total').textContent='/ '+total;
+
+  var stars=Math.round((score/total)*3);
+  document.getElementById('result-stars').textContent='⭐'.repeat(stars)+'☆'.repeat(3-stars);
+
+  var btnNext=document.getElementById('btn-next-level');
+  var nextMap={easy:'medium',medium:'hard',hard:null};
+  var nextLvl=nextMap[level];
+
+  if(nextLvl&&state.unlocked[nextLvl]){
+    btnNext.style.display='';
+    btnNext.textContent=t.nextLevel;
+    btnNext.onclick=function(){sfx.click();startLevel(nextLvl);};
+    sfx.levelup();
+  } else if(!nextLvl){
+    btnNext.style.display='';
+    btnNext.textContent=t.allDone;
+    btnNext.onclick=function(){sfx.click();renderLevels();showScreen('levels');};
+    sfx.levelup();
+  } else {
+    btnNext.style.display='none';
+    sfx.wrong();
+  }
+  showScreen('result');
+}
+
+document.getElementById('btn-retry').addEventListener('click',function(){sfx.click();startLevel(state.currentLevel);});
+document.getElementById('btn-levels').addEventListener('click',function(){sfx.click();renderLevels();showScreen('levels');});
+document.getElementById('btn-quit').addEventListener('click',function(){sfx.click();clearInterval(state.timer);renderLevels();showScreen('levels');});
+
+function saveProgress(){
+  localStorage.setItem('iq_prog',JSON.stringify({
+    unlocked:state.unlocked,completed:state.completed,totalScore:state.totalScore
+  }));
+}
+</script>
+</body>
+</html>
