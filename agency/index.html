@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NovaReply — AI Agents that turn DMs into orders</title>
+<style>
+  :root{--brand:#6d28d9;--brand2:#9333ea;--ink:#1a1726;--muted:#6b6880;--bg:#fbfaff}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Arial,sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.6}
+  .wrap{max-width:960px;margin:0 auto;padding:0 22px}
+  a{color:inherit}
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
+  .logo{font-weight:800;font-size:22px;color:var(--brand)}
+  .btn{display:inline-block;background:linear-gradient(135deg,var(--brand),var(--brand2));
+    color:#fff;text-decoration:none;padding:13px 26px;border-radius:999px;font-weight:700;
+    box-shadow:0 10px 26px rgba(109,40,217,.28)}
+  .btn.ghost{background:#fff;color:var(--brand);border:2px solid var(--brand);box-shadow:none}
+  /* hero */
+  .hero{text-align:center;padding:60px 0 50px;background:
+    radial-gradient(900px 360px at 50% -20%,#efe7ff,transparent)}
+  .hero h1{font-size:clamp(30px,5.5vw,52px);line-height:1.08;letter-spacing:-.5px}
+  .hero h1 span{background:linear-gradient(135deg,var(--brand),var(--brand2));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{font-size:19px;color:var(--muted);max-width:620px;margin:18px auto 28px}
+  .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .micro{margin-top:14px;font-size:13px;color:var(--muted)}
+  /* sections */
+  section{padding:46px 0}
+  h2{font-size:30px;text-align:center;margin-bottom:8px;letter-spacing:-.4px}
+  .sub{text-align:center;color:var(--muted);margin-bottom:34px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{background:#fff;border:1px solid #eee;border-radius:18px;padding:24px;
+    box-shadow:0 8px 26px rgba(20,16,40,.05)}
+  .card .ic{font-size:28px;margin-bottom:10px}
+  .card h3{font-size:17px;margin-bottom:6px}
+  .card p{font-size:14.5px;color:var(--muted)}
+  /* problem */
+  .band{background:#150f28;color:#fff;border-radius:22px;padding:40px 30px;text-align:center}
+  .band h2{color:#fff}.band p{color:#c8c2e0;max-width:640px;margin:0 auto 6px}
+  .stat{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+  .stat b{display:block;font-size:30px;color:#c4b5fd}
+  .stat small{color:#a9a2c9}
+  /* steps */
+  .steps{counter-reset:s}
+  .step{display:flex;gap:16px;align-items:flex-start;margin-bottom:18px}
+  .step .n{flex:none;width:38px;height:38px;border-radius:50%;background:var(--brand);color:#fff;
+    display:grid;place-items:center;font-weight:800}
+  /* pricing */
+  .price{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:680px;margin:0 auto}
+  .plan{background:#fff;border:1px solid #eee;border-radius:18px;padding:28px;text-align:center}
+  .plan.feat{border:2px solid var(--brand);position:relative}
+  .plan.feat::after{content:"Popular";position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+    background:var(--brand);color:#fff;font-size:12px;font-weight:700;padding:4px 12px;border-radius:999px}
+  .plan .amt{font-size:34px;font-weight:800;margin:8px 0}
+  .plan ul{list-style:none;text-align:left;margin:16px 0;font-size:14.5px;color:#444}
+  .plan li{padding:6px 0;padding-left:24px;position:relative}
+  .plan li::before{content:"✓";position:absolute;left:0;color:var(--brand);font-weight:800}
+  /* final */
+  .final{text-align:center;background:linear-gradient(135deg,var(--brand),var(--brand2));
+    color:#fff;border-radius:22px;padding:48px 30px}
+  .final h2{color:#fff}.final p{color:#ede9ff;margin-bottom:22px}
+  .final .btn{background:#fff;color:var(--brand)}
+  footer{text-align:center;color:var(--muted);font-size:13px;padding:30px 0}
+  @media(max-width:720px){.grid,.price{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="nav">
+    <div class="logo">⚡ NovaReply</div>
+    <a class="btn ghost" href="#contact">Book a free demo</a>
+  </nav>
+
+  <header class="hero">
+    <h1>Your store gets DMs 24/7.<br><span>Now they get answered 24/7.</span></h1>
+    <p>We build AI agents that instantly reply to your customers in Arabic, French &
+       English — answer questions, handle objections, and turn DMs into orders.</p>
+    <div class="cta-row">
+      <a class="btn" href="#contact">Book a free demo</a>
+      <a class="btn ghost" href="../ai-sales-agent/index.html">See it live →</a>
+    </div>
+    <div class="micro">Built for e-commerce & COD brands running ads.</div>
+  </header>
+
+  <section>
+    <div class="band">
+      <h2>Every unanswered message is a lost sale.</h2>
+      <p>You run ads. Customers flood your DMs and comments with “price?”, “available?”,
+         “how do I order?” — but you can’t reply fast enough. So they buy elsewhere.</p>
+      <div class="stat">
+        <div><b>78%</b><small>of buyers pick who replies first</small></div>
+        <div><b>24/7</b><small>your agent never sleeps</small></div>
+        <div><b>4 langs</b><small>Darija · Arabic · French · English</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What your AI agent does</h2>
+    <p class="sub">Trained on your products, prices and policies.</p>
+    <div class="grid">
+      <div class="card"><div class="ic">💬</div><h3>Instant replies</h3>
+        <p>Answers product, price, shipping & COD questions in seconds, any language.</p></div>
+      <div class="card"><div class="ic">🛒</div><h3>Drives the order</h3>
+        <p>Handles objections and pushes the customer to complete the purchase.</p></div>
+      <div class="card"><div class="ic">🌙</div><h3>Works 24/7</h3>
+        <p>Never misses a lead — nights, weekends, during your ad spikes.</p></div>
+      <div class="card"><div class="ic">🧩</div><h3>On your channels</h3>
+        <p>Website chat, Instagram & WhatsApp — where your customers already are.</p></div>
+      <div class="card"><div class="ic">📈</div><h3>More conversions</h3>
+        <p>Speed-to-lead is the #1 driver of sales. We make you the fastest.</p></div>
+      <div class="card"><div class="ic">⚙️</div><h3>Fully managed</h3>
+        <p>We set it up, train it, and maintain it. You just watch the orders.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>How it works</h2>
+    <p class="sub">Live in days, not months.</p>
+    <div class="steps wrap" style="max-width:640px">
+      <div class="step"><div class="n">1</div><div><b>Free demo call.</b> We show you the agent working on a store like yours.</div></div>
+      <div class="step"><div class="n">2</div><div><b>We build it for you.</b> Trained on your products, prices & policies.</div></div>
+      <div class="step"><div class="n">3</div><div><b>Go live.</b> On your site / Instagram / WhatsApp.</div></div>
+      <div class="step"><div class="n">4</div><div><b>We maintain it.</b> Updates, improvements, support — handled.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Simple pricing</h2>
+    <p class="sub">Setup once + monthly management. Cancel anytime.</p>
+    <div class="price">
+      <div class="plan"><h3>Starter</h3><div class="amt">$300<small style="font-size:14px;color:#888"> setup</small></div>
+        <ul><li>AI agent on website chat</li><li>Trained on your catalog</li><li>4 languages</li><li>$100/mo management</li></ul>
+        <a class="btn ghost" href="#contact" style="width:100%">Choose Starter</a></div>
+      <div class="plan feat"><h3>Growth</h3><div class="amt">$700<small style="font-size:14px;color:#888"> setup</small></div>
+        <ul><li>Everything in Starter</li><li>Instagram + WhatsApp</li><li>Order capture & follow-up</li><li>$250/mo management</li></ul>
+        <a class="btn" href="#contact" style="width:100%">Choose Growth</a></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="final">
+      <h2>Stop losing customers to slow replies.</h2>
+      <p>Book a free demo — see your AI agent in action, no commitment.</p>
+      <a class="btn" href="mailto:YOUR-EMAIL@gmail.com?subject=AI%20Agent%20Demo">📩 Book a free demo</a>
+      <div style="margin-top:14px;font-size:14px;color:#ede9ff">or WhatsApp: <b>+212 6XX-XXXXXX</b></div>
+    </div>
+  </section>
+
+  <footer>© 2026 NovaReply — AI agents for e-commerce. · <a href="../ai-sales-agent/index.html">Live demo</a></footer>
+
+</div>
+</body>
+</html>
