@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ISMAGI Quiz Game</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Space+Mono:wght@400;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- LANGUAGE SELECTION -->
+<div id="screen-lang" class="screen active">
+  <div class="lang-card">
+    <div class="logo-badge">🎓</div>
+    <h1 class="game-title">ISMAGI<span>QUIZ</span></h1>
+    <p class="lang-subtitle">Choose your language · اختر لغتك · Choisissez votre langue</p>
+    <div class="lang-grid">
+      <button class="lang-btn" onclick="setLang('en')">
+        <span class="lang-flag">🇬🇧</span>
+        <div class="lang-info"><strong>English</strong><span>Play in English</span></div>
+        <span class="lang-arrow">›</span>
+      </button>
+      <button class="lang-btn" onclick="setLang('fr')">
+        <span class="lang-flag">🇫🇷</span>
+        <div class="lang-info"><strong>Français</strong><span>Jouer en français</span></div>
+        <span class="lang-arrow">›</span>
+      </button>
+      <button class="lang-btn" onclick="setLang('ar')">
+        <span class="lang-flag">🇲🇦</span>
+        <div class="lang-info"><strong>العربية</strong><span>العب بالعربية</span></div>
+        <span class="lang-arrow">›</span>
+      </button>
+    </div>
+  </div>
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div id="screen-login" class="screen">
+  <div class="login-card">
+    <div class="logo-badge">🎓</div>
+    <h1 class="game-title">ISMAGI<span>QUIZ</span></h1>
+    <p class="subtitle" id="login-subtitle">Enter your username to begin</p>
+    <div class="input-group">
+      <input type="text" id="username-input" placeholder="Username…" maxlength="20" autocomplete="off" />
+    </div>
+    <button class="btn btn-primary" id="btn-login" style="width:100%">
+      <span id="btn-login-text">Start Game</span> →
+    </button>
+    <button class="back-lang" onclick="showScreen('lang')">← Change language</button>
+  </div>
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+  </div>
+</div>
+
+<!-- LEVELS -->
+<div id="screen-levels" class="screen">
+  <header class="game-header">
+    <div class="user-badge"><span>👤</span><span id="header-username"></span></div>
+    <div class="score-badge"><span>⭐</span><span id="header-score">0</span></div>
+  </header>
+  <div class="levels-container">
+    <h2 class="section-title" id="lbl-choose">Choose Your Level</h2>
+    <div class="levels-grid">
+      <div class="level-card" id="level-easy">
+        <div class="level-icon">🌱</div>
+        <div class="level-info"><h3 id="lbl-easy">Easy</h3><p id="lbl-easy-sub">3 Questions · 10s each</p></div>
+        <div class="level-status" id="status-easy"><span class="lock-icon unlocked">▶</span></div>
+      </div>
+      <div class="level-card locked" id="level-medium">
+        <div class="level-icon">🔥</div>
+        <div class="level-info"><h3 id="lbl-medium">Medium</h3><p id="lbl-medium-sub">3 Questions · 10s each</p></div>
+        <div class="level-status" id="status-medium"><span class="lock-icon">🔒</span></div>
+      </div>
+      <div class="level-card locked" id="level-hard">
+        <div class="level-icon">💎</div>
+        <div class="level-info"><h3 id="lbl-hard">Hard</h3><p id="lbl-hard-sub">3 Questions · 10s each</p></div>
+        <div class="level-status" id="status-hard"><span class="lock-icon">🔒</span></div>
+      </div>
+    </div>
+    <div class="progress-track">
+      <div class="progress-label" id="lbl-progress">Level Progress</div>
+      <div class="progress-steps">
+        <div class="step active" id="step-easy">—</div>
+        <div class="step-line" id="line-1"></div>
+        <div class="step" id="step-medium">—</div>
+        <div class="step-line" id="line-2"></div>
+        <div class="step" id="step-hard">—</div>
+      </div>
+    </div>
+  </div>
+  <div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+</div>
+
+<!-- QUIZ -->
+<div id="screen-quiz" class="screen">
+  <header class="game-header">
+    <button class="btn-icon" id="btn-quit">✕</button>
+    <div class="level-tag" id="quiz-level-tag">Easy</div>
+    <div class="score-badge"><span>⭐</span><span id="quiz-score">0</span></div>
+  </header>
+  <div class="quiz-container">
+    <div class="quiz-meta">
+      <span id="question-counter">1 / 3</span>
+      <div class="timer-ring">
+        <svg viewBox="0 0 48 48">
+          <circle cx="24" cy="24" r="20" class="ring-bg"/>
+          <circle cx="24" cy="24" r="20" class="ring-fill" id="timer-ring-fill"/>
+        </svg>
+        <span id="timer-display">10</span>
+      </div>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="quiz-progress-bar"></div></div>
+    <div class="question-card" id="question-card">
+      <p id="question-text">…</p>
+    </div>
+    <div class="options-grid">
+      <button class="option-btn" data-index="0"></button>
+      <button class="option-btn" data-index="1"></button>
+      <button class="option-btn" data-index="2"></button>
+      <button class="option-btn" data-index="3"></button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div id="screen-result" class="screen">
+  <div class="result-card">
+    <div class="result-emoji" id="result-emoji">🔥</div>
+    <h2 id="result-title">Excellent!</h2>
+    <p id="result-msg"></p>
+    <div class="result-score-display">
+      <span id="result-score">0</span>
+      <span class="result-total" id="result-total">/ 3</span>
+    </div>
+    <div class="result-stars" id="result-stars"></div>
+    <div class="result-actions">
+      <button class="btn btn-secondary" id="btn-retry">↩</button>
+      <button class="btn btn-primary" id="btn-next-level">→</button>
+    </div>
+    <button class="btn btn-ghost" id="btn-levels">⬅</button>
+  </div>
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
