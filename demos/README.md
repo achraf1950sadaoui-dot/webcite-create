@@ -4,11 +4,22 @@
 واحد مستقل** (bla build, bla dépendances) — tقدر تـouvri ay wahed f navigateur
 directement, wla tـdéployih.
 
-| Fichier | Cabinet | Quartier | Thème |
-|---|---|---|---|
-| `centre-dentaire-souissi.html` | Centre Dentaire Souissi | Souissi | Turquoise / médical |
-| `cabinet-dr-driss-bhija.html`  | Dr Driss Bhija | Av. Abdelkrim Al Khattabi | Navy / gold (premium) |
-| `centre-dentaire-agdal.html`   | Centre Dentaire Agdal | Agdal | Vert menthe (esthétique) |
+| # | Fichier | Cabinet | Téléphone | Thème |
+|---|---|---|---|---|
+| 1 | `centre-dentaire-souissi.html` | Centre Dentaire Souissi | 05 37 75 74 74 | Turquoise |
+| 2 | `cabinet-dr-driss-bhija.html` | Dr Driss Bhija | 05 37 73 66 71 | Navy / gold |
+| – | `centre-dentaire-agdal.html` | Centre Dentaire Agdal | (Facebook) | Vert menthe |
+| 3 | `centre-dentaire-zrarqi.html` | Centre Dentaire Zrarqi | 05 37 70 98 36 | Bleu |
+| 4 | `abdedine-dental-clinic.html` | Abdedine Dental Clinic | 05 37 67 46 16 | Cyan |
+| 5 | `dr-mrani-alaoui-aziz.html` | Dr Mrani Alaoui Aziz (ortho) | 05 37 67 03 98 | Violet |
+| 6 | `dr-mahmoud-abdelhamid.html` | Dr Mahmoud Abdelhamid | 05 37 72 44 11 | Émeraude |
+| 7 | `dr-cherkaoui-deqaqi-idriss.html` | Dr Cherkaoui Deqaqi Idriss | 05 37 73 13 83 | Indigo |
+| 8 | `dr-lboukili-laila.html` | Dr Lboukili Laïla (paro/implanto) | 05 37 67 33 90 | Rose |
+| 9 | `dr-abdelkader-bennani.html` | Dr Abdelkader Bennani | 05 37 69 06 32 | Sarcelle |
+| 10 | `dr-alaoui-youssef.html` | Dr Alaoui Youssef | 05 37 20 48 94 | Bleu roi |
+
+> 🛠️ **Générateur :** les démos #3→#10 sont produites par `_generator.js`.
+> Bach tzid cabinet jdid : zid wahed f l-array `CABINETS` w lance `node demos/_generator.js`.
 
 ---
 
