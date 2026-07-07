@@ -178,7 +178,7 @@ static const Question QUESTIONS[NUM_LANGS][NUM_LEVELS][Q_PER_LEVEL] = {
   {
     { /* easy */
       {"What does ISMAGI stand for?",
-        {"Institute of Science Mathematics and Applied Computer Science",
+        {"Institut Supérieur de Management, d'Administration et de Génie Informatique",
          "International School of Management and AI",
          "Institute of Sport and Gaming",
          "Information System Modern Academy"}, 0},
@@ -208,7 +208,7 @@ static const Question QUESTIONS[NUM_LANGS][NUM_LEVELS][Q_PER_LEVEL] = {
   {
     { /* easy */
       {"Que signifie ISMAGI ?",
-        {"Institut des Sciences Mathematiques et Informatique Appliquee",
+        {"Institut Supérieur de Management, d'Administration et de Génie Informatique",
          "Ecole Internationale de Management et d'IA",
          "Institut du Sport et du Gaming",
          "Systeme d'Information Academique Moderne"}, 0},
@@ -238,7 +238,7 @@ static const Question QUESTIONS[NUM_LANGS][NUM_LEVELS][Q_PER_LEVEL] = {
   {
     { /* easy */
       {"ماذا يعني اختصار ISMAGI؟",
-        {"معهد العلوم والرياضيات وعلوم الحاسوب التطبيقية",
+        {"Institut Supérieur de Management, d'Administration et de Génie Informatique",
          "المدرسة الدولية للإدارة والذكاء الاصطناعي",
          "معهد الرياضة والألعاب",
          "نظام المعلومات الأكاديمية الحديثة"}, 0},

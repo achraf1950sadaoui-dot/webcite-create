@@ -70,7 +70,7 @@ const T = {
 const QUESTIONS = {
   en:{
     easy:[
-      {q:"What does ISMAGI stand for?",options:["Institute of Science Mathematics and Applied Computer Science","International School of Management and AI","Institute of Sport and Gaming","Information System Modern Academy"],correct:0},
+      {q:"What does ISMAGI stand for?",options:["Institut Supérieur de Management, d'Administration et de Génie Informatique","International School of Management and AI","Institute of Sport and Gaming","Information System Modern Academy"],correct:0},
       {q:"ISMAGI is located in which country?",options:["France","Morocco","Spain","Algeria"],correct:1},
       {q:"ISMAGI is mainly focused on:",options:["Medicine","Engineering and Computer Science","Art","Agriculture"],correct:1}
     ],
@@ -87,7 +87,7 @@ const QUESTIONS = {
   },
   fr:{
     easy:[
-      {q:"Que signifie ISMAGI ?",options:["Institut des Sciences Mathématiques et Informatique Appliquée","École Internationale de Management et d'IA","Institut du Sport et du Gaming","Système d'Information Académique Moderne"],correct:0},
+      {q:"Que signifie ISMAGI ?",options:["Institut Supérieur de Management, d'Administration et de Génie Informatique","École Internationale de Management et d'IA","Institut du Sport et du Gaming","Système d'Information Académique Moderne"],correct:0},
       {q:"Dans quel pays se trouve ISMAGI ?",options:["France","Maroc","Espagne","Algérie"],correct:1},
       {q:"ISMAGI est principalement axé sur :",options:["La médecine","L'ingénierie et l'informatique","Les arts","L'agriculture"],correct:1}
     ],
@@ -104,7 +104,7 @@ const QUESTIONS = {
   },
   ar:{
     easy:[
-      {q:"ماذا يعني اختصار ISMAGI؟",options:["معهد العلوم والرياضيات وعلوم الحاسوب التطبيقية","المدرسة الدولية للإدارة والذكاء الاصطناعي","معهد الرياضة والألعاب","نظام المعلومات الأكاديمية الحديثة"],correct:0},
+      {q:"ماذا يعني اختصار ISMAGI؟",options:["Institut Supérieur de Management, d'Administration et de Génie Informatique","المدرسة الدولية للإدارة والذكاء الاصطناعي","معهد الرياضة والألعاب","نظام المعلومات الأكاديمية الحديثة"],correct:0},
       {q:"في أي دولة يقع ISMAGI؟",options:["فرنسا","المغرب","إسبانيا","الجزائر"],correct:1},
       {q:"يركز ISMAGI بشكل رئيسي على:",options:["الطب","الهندسة وعلوم الحاسوب","الفنون","الزراعة"],correct:1}
     ],

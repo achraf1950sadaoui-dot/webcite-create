@@ -6,7 +6,7 @@
 ============================================================ */
 const QUESTIONS = [
   { q: "What does ISMAGI stand for?",
-    options: ["Institute of Science Mathematics and Applied Computer Science",
+    options: ["Institut Supérieur de Management, d'Administration et de Génie Informatique",
               "International School of Management and AI",
               "Institute of Sport and Gaming",
               "Information System Modern Academy"],
