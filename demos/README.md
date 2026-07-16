@@ -17,6 +17,16 @@ directement, wla tـdéployih.
 | 8 | `dr-lboukili-laila.html` | Dr Lboukili Laïla (paro/implanto) | 05 37 67 33 90 | Rose |
 | 9 | `dr-abdelkader-bennani.html` | Dr Abdelkader Bennani | 05 37 69 06 32 | Sarcelle |
 | 10 | `dr-alaoui-youssef.html` | Dr Alaoui Youssef | 05 37 20 48 94 | Bleu roi |
+| 11 | `dr-elouadghiri-elidrissi.html` | Dr ElOuadghiri ElIdrissi | 05 37 77 70 42 | Bleu ciel |
+| 12 | `centre-dentaire-agdal-smile.html` | Centre Dentaire Agdal Smile | 05 37 68 39 39 | Magenta |
+| 13 | `dr-adil-walali-loudiyi.html` | Dr Adil Walali Loudiyi (ortho) | 05 37 67 12 16 | Violet |
+| 14 | `dr-mohammed-himmiche.html` | Dr Mohammed Himmiche | 05 37 67 28 55 | Vert |
+| 15 | `dr-hind-lahrizi.html` | Dr Hind Lahrizi | 05 37 20 40 15 | Cyan foncé |
+| 16 | `cabinet-dentaire-al-massira.html` | Cabinet Dentaire Al Massira | 05 37 29 44 44 | Indigo |
+| 17 | `cabinet-dentaire-ibn-sina.html` | Cabinet Dentaire Ibn Sina | 05 37 73 65 48 | Sarcelle |
+| 18 | `cabinet-dentaire-ghandi.html` | Cabinet Dentaire Ghandi (paro) | 05 37 26 30 26 | Bordeaux |
+| 19 | `cabinet-parodontologie-agdal.html` | Cabinet Parodontologie Agdal | 05 37 77 51 87 | Vert forêt |
+| 20 | `cabinet-dentaire-pediatrique.html` | Cabinet Dentaire Pédiatrique | 05 37 70 50 40 | Bleu enfant |
 
 > 🛠️ **Générateur :** les démos #3→#10 sont produites par `_generator.js`.
 > Bach tzid cabinet jdid : zid wahed f l-array `CABINETS` w lance `node demos/_generator.js`.

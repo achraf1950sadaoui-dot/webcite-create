@@ -61,8 +61,16 @@ const SERVICES = {
     ['sparkle','Esthétique du sourire','Blanchiment et harmonie du sourire.'],
     ['tooth','Soins & Prévention','Détartrage et suivi de votre santé bucco-dentaire.'],
   ],
+  pedo:[
+    ['child','Première visite','Un accueil doux pour la première visite de votre enfant.'],
+    ['tooth','Soins des dents de lait','Traitement des caries et soins adaptés aux enfants.'],
+    ['shield','Scellement des sillons','Protection des dents des enfants contre les caries.'],
+    ['sparkle','Application de fluor','Renforcement de l\'émail pour des dents solides.'],
+    ['braces','Orthodontie précoce','Dépistage et suivi de la croissance des dents.'],
+    ['heart','Prévention & éducation','Apprendre les bons gestes en s\'amusant.'],
+  ],
 };
-const STATLABEL = { general:'PATIENTS SOIGNÉS', ortho:'SOURIRES ALIGNÉS', paro:'IMPLANTS POSÉS' };
+const STATLABEL = { general:'PATIENTS SOIGNÉS', ortho:'SOURIRES ALIGNÉS', paro:'IMPLANTS POSÉS', pedo:'ENFANTS SOIGNÉS' };
 
 /* ─── Avis (exemples — à remplacer par de vrais avis) ────────── */
 const REVIEWS = [
@@ -406,6 +414,86 @@ const CABINETS = [
     address:'14 rue Mekka, Hassan', phone:'05 37 20 48 94', mapQuery:'14 rue Mekka, Hassan, Rabat',
     years:17, patients:'6 500+', footerNote:'Votre dentiste de confiance au quartier Hassan, Rabat.',
     theme:{p:'#1d4ed8',pd:'#1e40af',pl:'#e7eefc',a:'#f59e0b',ink:'#14213d',muted:'#586a8c',bg:'#f6f9fe',line:'#e3ebfa'} },
+
+  { slug:'dr-elouadghiri-elidrissi.html', name:'Dr ElOuadghiri ElIdrissi', brandSmall:'Chirurgien-Dentiste · Agdal',
+    type:'general', pill:'Cabinet dentaire · Agdal, Rabat', h1a:'Votre santé dentaire ', h1b:'en confiance', h1c:', à Agdal',
+    sub:'Soins, implants et esthétique du sourire à Agdal, Rabat. Prenez rendez-vous en ligne, 24h/24.',
+    svcTitle:'Tous vos soins dentaires en un seul lieu', metaDesc:'soins, implants, orthodontie et esthétique dentaire.',
+    address:'66 av. Al Amir Fal Ould Oumeir, Agdal', phone:'05 37 77 70 42', mapQuery:'66 avenue Al Amir Fal Ould Oumeir, Agdal, Rabat',
+    years:19, patients:'6 500+', footerNote:'Des soins dentaires de qualité, en toute confiance, à Agdal.',
+    theme:{p:'#0284c7',pd:'#0369a1',pl:'#e2f2fd',a:'#f59e0b',ink:'#0c2b3d',muted:'#4f6b80',bg:'#f5fafe',line:'#dcecf9'} },
+
+  { slug:'centre-dentaire-agdal-smile.html', name:'Centre Dentaire Agdal Smile', brandSmall:'Centre Dentaire · Agdal',
+    type:'general', pill:'Esthétique du sourire · Agdal', h1a:'Un sourire ', h1b:'éclatant', h1c:', à Agdal',
+    sub:'Esthétique du sourire, blanchiment et soins dans un cabinet moderne à Agdal. Réservez en ligne.',
+    svcTitle:'Le sourire dont vous rêvez', metaDesc:'esthétique, blanchiment, implants et soins dentaires.',
+    address:'59 av. Al Amir Fal Ould Oumeir, Agdal', phone:'05 37 68 39 39', mapQuery:'59 avenue Al Amir Fal Ould Oumeir, Agdal, Rabat',
+    years:11, patients:'4 500+', footerNote:'Esthétique du sourire et soins modernes au cœur d\'Agdal.',
+    theme:{p:'#db2777',pd:'#be185d',pl:'#fce7f1',a:'#0ea5a4',ink:'#3d1226',muted:'#8a5670',bg:'#fef6fa',line:'#fadbe9'} },
+
+  { slug:'dr-adil-walali-loudiyi.html', name:'Dr Adil Walali Loudiyi', brandSmall:'Orthodontiste · Agdal',
+    type:'ortho', pill:'Orthodontie · Agdal, Rabat', h1a:'Des dents ', h1b:'bien alignées', h1c:', à tout âge',
+    sub:'Appareils, Invisalign et orthopédie dento-faciale à Agdal, Rabat. Prenez rendez-vous en ligne.',
+    svcTitle:'L\'orthodontie pour tous les âges', metaDesc:'orthodontie, Invisalign et orthopédie dento-faciale.',
+    address:'30 av. Michlifen, Agdal', phone:'05 37 67 12 16', mapQuery:'30 avenue Michlifen, Agdal, Rabat',
+    years:16, patients:'3 800+', footerNote:'Spécialiste de l\'orthodontie et de l\'alignement dentaire à Agdal.',
+    theme:{p:'#9333ea',pd:'#7e22ce',pl:'#f3e8fd',a:'#f59e0b',ink:'#2a153d',muted:'#6b5686',bg:'#faf7fe',line:'#eddcfb'} },
+
+  { slug:'dr-mohammed-himmiche.html', name:'Dr Mohammed Himmiche', brandSmall:'Chirurgien-Dentiste · Agdal',
+    type:'general', pill:'Cabinet dentaire · Agdal, Rabat', h1a:'Votre dentiste ', h1b:'de confiance', h1c:', à Agdal',
+    sub:'Soins, implants et esthétique dentaire à Agdal, Rabat. Réservez votre rendez-vous en ligne.',
+    svcTitle:'Tous vos soins dentaires en un seul lieu', metaDesc:'soins, implants, orthodontie et esthétique dentaire.',
+    address:'45 av. Ibn Sina, Résidence Warda, Agdal', phone:'05 37 67 28 55', mapQuery:'45 avenue Ibn Sina, Agdal, Rabat',
+    years:21, patients:'7 500+', footerNote:'Votre dentiste de confiance à Agdal, Rabat.',
+    theme:{p:'#15803d',pd:'#166534',pl:'#e4f5e7',a:'#f59e0b',ink:'#0e2e17',muted:'#4f7359',bg:'#f5fcf6',line:'#dcefdf'} },
+
+  { slug:'dr-hind-lahrizi.html', name:'Dr Hind Lahrizi', brandSmall:'Chirurgien-Dentiste · Rabat',
+    type:'general', pill:'Cabinet dentaire · Rabat', h1a:'Des soins dentaires ', h1b:'tout en douceur', h1c:'',
+    sub:'Une prise en charge complète et attentive à Rabat. Prenez rendez-vous en ligne en quelques clics.',
+    svcTitle:'Une prise en charge dentaire complète', metaDesc:'soins, implants, orthodontie et esthétique dentaire.',
+    address:'328 av. Hassan II', phone:'05 37 20 40 15', mapQuery:'328 avenue Hassan II, Rabat',
+    years:14, patients:'5 000+', footerNote:'Des soins dentaires tout en douceur à Rabat.',
+    theme:{p:'#0e7490',pd:'#155e63',pl:'#e0f4f7',a:'#f59e0b',ink:'#0c2e33',muted:'#4f757c',bg:'#f4fbfc',line:'#daedf1'} },
+
+  { slug:'cabinet-dentaire-al-massira.html', name:'Cabinet Dentaire Al Massira', brandSmall:'Cabinet dentaire · Rabat',
+    type:'general', pill:'Cabinet dentaire · Al Massira', h1a:'Votre sourire ', h1b:'en de bonnes mains', h1c:', à Al Massira',
+    sub:'Tous vos soins dentaires au quartier Al Massira, Rabat. Réservez en ligne, 24h/24.',
+    svcTitle:'Tous vos soins dentaires en un seul lieu', metaDesc:'soins, implants, orthodontie et esthétique dentaire.',
+    address:'767 av. Al Massira, Amal 1', phone:'05 37 29 44 44', mapQuery:'767 avenue Al Massira, Rabat',
+    years:13, patients:'4 800+', footerNote:'Vos soins dentaires au quartier Al Massira, Rabat.',
+    theme:{p:'#6366f1',pd:'#4f46e5',pl:'#eaeafd',a:'#f59e0b',ink:'#1e1b40',muted:'#5f5a8a',bg:'#f7f7fe',line:'#e6e5fb'} },
+
+  { slug:'cabinet-dentaire-ibn-sina.html', name:'Cabinet Dentaire Ibn Sina', brandSmall:'Cabinet dentaire · Rabat',
+    type:'general', pill:'Cabinet dentaire · Rabat', h1a:'Votre cabinet dentaire ', h1b:'de confiance', h1c:' à Rabat',
+    sub:'Soins, implants et esthétique du sourire à Rabat. Prenez rendez-vous en ligne facilement.',
+    svcTitle:'Tous vos soins dentaires en un seul lieu', metaDesc:'soins, implants, orthodontie et esthétique dentaire.',
+    address:'Av. Ibn Sina, Complexe Mly', phone:'05 37 73 65 48', mapQuery:'avenue Ibn Sina, Rabat',
+    years:18, patients:'6 000+', footerNote:'Des soins dentaires de qualité à Rabat.',
+    theme:{p:'#0d9488',pd:'#0f766e',pl:'#e1f6f3',a:'#f59e0b',ink:'#0c302c',muted:'#4f7771',bg:'#f4fcfa',line:'#dcefec'} },
+
+  { slug:'cabinet-dentaire-ghandi.html', name:'Cabinet Dentaire Ghandi', brandSmall:'Parodontologie · Rabat',
+    type:'paro', pill:'Parodontologie · Rabat', h1a:'Des gencives ', h1b:'saines', h1c:', un sourire durable',
+    sub:'Traitement des gencives et implantologie à Rabat. Parodontologie et soins spécialisés. RDV en ligne.',
+    svcTitle:'L\'expertise des gencives et des implants', metaDesc:'parodontologie, implantologie et soins des gencives.',
+    address:'6 rue Ghandi', phone:'05 37 26 30 26', mapQuery:'6 rue Ghandi, Rabat',
+    years:15, patients:'2 800+', footerNote:'Spécialiste des gencives et de l\'implantologie à Rabat.',
+    theme:{p:'#9f1239',pd:'#881337',pl:'#fce7ec',a:'#0ea5a4',ink:'#3d1320',muted:'#8a5764',bg:'#fef6f7',line:'#fadce2'} },
+
+  { slug:'cabinet-parodontologie-agdal.html', name:'Cabinet Parodontologie Agdal', brandSmall:'Paro · Implanto · Agdal',
+    type:'paro', pill:'Parodontologie · Implantologie · Agdal', h1a:'Parodontologie & ', h1b:'implants', h1c:', à Agdal',
+    sub:'Parodontologie, greffes et implants à Agdal, Rabat. Une expertise dédiée à vos gencives. RDV en ligne.',
+    svcTitle:'L\'expertise des gencives et des implants', metaDesc:'parodontologie, implantologie et greffe gingivale.',
+    address:'49 av. Fal Ould Oumeir, Agdal', phone:'05 37 77 51 87', mapQuery:'49 avenue Fal Ould Oumeir, Agdal, Rabat',
+    years:17, patients:'3 200+', footerNote:'Parodontologie et implantologie à Agdal, Rabat.',
+    theme:{p:'#047857',pd:'#065f46',pl:'#e2f5ee',a:'#f59e0b',ink:'#0c3027',muted:'#50776c',bg:'#f4fcf9',line:'#dcf0e7'} },
+
+  { slug:'cabinet-dentaire-pediatrique.html', name:'Cabinet Dentaire Pédiatrique', brandSmall:'Dentiste pour enfants · Rabat',
+    type:'pedo', pill:'Dentiste pour enfants · Rabat', h1a:'Le sourire de vos ', h1b:'enfants', h1c:', en confiance',
+    sub:'Cabinet dentaire pour enfants à Rabat : des soins doux et rassurants. Prenez rendez-vous en ligne.',
+    svcTitle:'Des soins dentaires adaptés aux enfants', metaDesc:'soins dentaires pour enfants, prévention et première visite.',
+    address:'Rabat', phone:'05 37 70 50 40', mapQuery:'Rabat',
+    years:12, patients:'4 000+', footerNote:'Le sourire de vos enfants entre de bonnes mains, à Rabat.',
+    theme:{p:'#0ea5e9',pd:'#0284c7',pl:'#e2f4fd',a:'#fb923c',ink:'#0c2b3d',muted:'#4f6b80',bg:'#f5fafe',line:'#dcecf9'} },
 ];
 
 CABINETS.forEach((c, i) => {
