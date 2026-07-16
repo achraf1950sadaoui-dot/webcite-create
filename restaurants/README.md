@@ -16,6 +16,12 @@ WhatsApp + Google Maps + galerie), prêt à envoyer.
 | 8 | `la-cerveceria-agdal.html` | La Cervecería | Agdal | 05 37 67 56 77 | Tapas |
 | 9 | `turkit-agdal.html` | Turkit | Agdal | 05 37 77 61 88 | Turc |
 | 10 | `coq-magic-agdal.html` | Coq Magic | Agdal | 05 37 77 77 78 | Grill |
+| 11 | `la-terrazza-hay-riad.html` | La Terrazza | Hay Riad | 06 66 89 56 35 | Méditerranéen |
+| 12 | `boqueria-fina-agdal.html` | Boquería Fina | Agdal | 06 61 69 05 97 | Tapas |
+| 13 | `boho-cafe-hassan.html` | Boho Café | Hassan | 06 90 03 61 70 | Café / Brunch |
+| 14 | `la-scene-hassan.html` | La Scène | Hassan | 06 66 55 79 21 | Restaurant |
+| 15 | `sushi-youzar-hay-riad.html` | Sushi Youzar | Hay Riad | à compléter | Sushi |
+| 16 | `il-giardino-agdal.html` | Il Giardino | Agdal | à compléter | Italien |
 
 ## ⚡ 1 seul truc bach ykhdem : ra9m WhatsApp
 F kol fichier, f `<script>`, bidel : `const WHATSAPP = "212XXXXXXXXX";` (212 + ra9m bla 0).
@@ -31,7 +37,7 @@ Upload l-fichier f [tiiny.site](https://tiiny.site) → khod le lien → sift-o 
 
 > 🛠️ **Générateur :** toutes les démos sont produites par `_generator.js`.
 > Bach tzid resto jdid : zid wahed f l-array `RESTOS` (choisis `cuisine`:
-> moroccan / italian / sushi / grill / tapas / turkish / gastro) w lance
+> moroccan / italian / sushi / grill / tapas / turkish / gastro / cafe) w lance
 > `node restaurants/_generator.js`.
 
 ## 📌 Note

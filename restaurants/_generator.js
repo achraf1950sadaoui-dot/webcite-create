@@ -41,6 +41,7 @@ const SPECS = {
   tapas:[["cutlery","Tapas variées","Un voyage de saveurs à partager."],["wine","Vins & cocktails","Une belle carte de boissons."],["chef","Ambiance conviviale","Le lieu idéal pour se retrouver."]],
   turkish:[["fire","Kebabs & grillades","Adana, Iskender et brochettes."],["chef","Recettes authentiques","Les vraies saveurs de Turquie."],["cup","Pâtisseries turques","Baklava, künefe et thé."]],
   gastro:[["chef","Cuisine raffinée","Des plats travaillés avec passion."],["leaf","Produits de saison","Le meilleur du marché, chaque jour."],["wine","Cadre élégant","Une expérience gastronomique complète."]],
+  cafe:[["cup","Café de spécialité","Torréfaction soignée et latte art."],["leaf","Brunch & healthy","Produits frais et options veggie."],["chef","Pâtisseries maison","Des douceurs préparées sur place."]],
 };
 /* ─── Menus par cuisine ───────────────────────────────────────── */
 const MENUS = {
@@ -78,6 +79,11 @@ const MENUS = {
     ["Entrées",[["Velouté de saison","Crémeux & parfumé","55 DH"],["Foie gras maison","Chutney de fruits","120 DH"],["Salade gourmande","Fraîcheur & saveurs","65 DH"]]],
     ["Plats signature",[["Filet de bœuf","Sauce & garniture","160 DH"],["Poisson du marché","Selon arrivage","150 DH"],["Suprême de volaille","Crémeux aux morilles","120 DH"]]],
     ["Desserts",[["Fondant au chocolat","Cœur coulant","55 DH"],["Assiette gourmande","Sélection du chef","60 DH"]]],
+  ],
+  cafe:[
+    ["Brunch & Petit-déj",[["Brunch complet","Œufs, pancakes, jus frais","95 DH"],["Œufs Benedict","Sur muffin toasté","65 DH"],["Avocado toast","Pain complet & graines","55 DH"]]],
+    ["Salades & Plats",[["Salade César","Poulet grillé & parmesan","65 DH"],["Buddha bowl","Healthy & coloré","70 DH"],["Croque-monsieur","Jambon & fromage","50 DH"]]],
+    ["Douceurs & Boissons",[["Pâtisseries maison","Sélection du jour","35 DH"],["Cappuccino","Grains torréfiés","28 DH"],["Jus détox","Pressé minute","35 DH"]]],
   ],
 };
 
@@ -392,6 +398,54 @@ const RESTOS = [
     metaDesc:"grillades & rôtisserie", address:"Angle av. Fal Ould Oumeir & av. Oqba Ibn Naafi, Agdal", phone:"05 37 77 77 78", mapQuery:"Coq Magic Agdal, Rabat",
     footerNote:"Grillades & rôtisserie généreuses à Agdal, Rabat.",
     theme:{p:"#ea580c",pd:"#c2410c",pl:"#fdeee2",a:"#166534",ink:"#3a1f0e",muted:"#8a6a52",bg:"#fdf9f4",line:"#f4e6d8"} },
+
+  { slug:"la-terrazza-hay-riad.html", name:"La Terrazza", brandSmall:"Méditerranéen · Hay Riad", cuisine:"gastro",
+    pill:"Cuisine méditerranéenne · Hay Riad", h1a:"Une ", h1b:"terrasse", h1c:" aux saveurs de la Méditerranée",
+    sub:"Cuisine méditerranéenne et marocaine dans un cadre élégant à Hay Riad. Ouvert midi & soir. Réservez votre table en ligne.",
+    specTitle:"L'esprit méditerranéen", specSub:"Des saveurs fraîches et ensoleillées à Hay Riad.", stripCuisine:"Méditerranéen",
+    metaDesc:"restaurant méditerranéen", address:"Espace Les Laurier, av. Annakhil, Hay Riad", phone:"06 66 89 56 35", mapQuery:"La Terrazza, Avenue Annakhil, Hay Riad, Rabat",
+    footerNote:"Cuisine méditerranéenne dans un cadre élégant à Hay Riad, Rabat.",
+    theme:{p:"#0e7490",pd:"#155e63",pl:"#e0f4f7",a:"#e0a92e",ink:"#0c2e33",muted:"#4f757c",bg:"#f4fbfc",line:"#daedf1"} },
+
+  { slug:"boqueria-fina-agdal.html", name:"Boquería Fina", brandSmall:"Tapas & Espagnol · Agdal", cuisine:"tapas",
+    pill:"Tapas & Cuisine espagnole · Agdal", h1a:"L'Espagne ", h1b:"à partager", h1c:", à Agdal",
+    sub:"Un bar-restaurant animé au cœur d'Agdal : tapas, saveurs espagnoles et méditerranéennes, vins et cocktails. Réservez en ligne.",
+    specTitle:"L'art de partager", specSub:"Tapas et saveurs espagnoles dans une ambiance animée.", stripCuisine:"Tapas & Espagnol",
+    metaDesc:"bar à tapas espagnol", address:"Agdal", phone:"06 61 69 05 97", mapQuery:"Boqueria Fina, Agdal, Rabat",
+    footerNote:"Bar à tapas et cuisine espagnole au cœur d'Agdal, Rabat.",
+    theme:{p:"#b91c1c",pd:"#991b1b",pl:"#fbe8e8",a:"#eab308",ink:"#3a1414",muted:"#8a5757",bg:"#fdf6f6",line:"#f5dcdc"} },
+
+  { slug:"boho-cafe-hassan.html", name:"Boho Café", brandSmall:"Café & Brunch · Hassan", cuisine:"cafe",
+    pill:"Café & Brunch · Hassan", h1a:"Le ", h1b:"brunch", h1c:" dans un esprit bohème",
+    sub:"Un café-restaurant cosy à Hassan : brunch, café de spécialité et pâtisseries maison dans une ambiance bohème. Réservez votre table en ligne.",
+    specTitle:"L'esprit boho", specSub:"Un lieu cosy pour le café, le brunch et les douceurs.", stripCuisine:"Café & Brunch",
+    metaDesc:"café & brunch", address:"10 rue El Yamama, Hassan", phone:"06 90 03 61 70", mapQuery:"Boho Cafe, rue El Yamama, Rabat",
+    footerNote:"Café, brunch et pâtisseries dans un esprit bohème à Hassan, Rabat.",
+    theme:{p:"#c2410c",pd:"#9a3412",pl:"#fdeee6",a:"#4f7359",ink:"#3d2415",muted:"#8a6b57",bg:"#fdf9f4",line:"#f2e5d8"} },
+
+  { slug:"la-scene-hassan.html", name:"La Scène", brandSmall:"Restaurant · Hassan", cuisine:"gastro",
+    pill:"Restaurant · Hassan", h1a:"Entrez ", h1b:"en scène", h1c:", à Hassan",
+    sub:"Une cuisine soignée dans un cadre élégant et animé à Hassan, Rabat. Idéal pour un dîner entre amis ou en famille. Réservez en ligne.",
+    specTitle:"Le goût du spectacle", specSub:"Une cuisine raffinée dans une ambiance vivante à Hassan.", stripCuisine:"Restaurant",
+    metaDesc:"restaurant", address:"12 rue Halab, Hassan", phone:"06 66 55 79 21", mapQuery:"La Scene restaurant, rue Halab, Rabat",
+    footerNote:"Cuisine soignée et ambiance élégante à Hassan, Rabat.",
+    theme:{p:"#1f2937",pd:"#111827",pl:"#eceef1",a:"#c9a227",ink:"#1f2937",muted:"#5f6674",bg:"#f7f8f9",line:"#e4e7ec"} },
+
+  { slug:"sushi-youzar-hay-riad.html", name:"Sushi Youzar", brandSmall:"Sushi & Japonais · Hay Riad", cuisine:"sushi",
+    pill:"Sushi & Cuisine japonaise · Hay Riad", h1a:"Le ", h1b:"sushi", h1c:" comme vous l'aimez",
+    sub:"Sushis, makis et spécialités japonaises préparés avec du poisson frais, à Hay Riad. Livraison & sur place. Commandez ou réservez en ligne.",
+    specTitle:"Fraîcheur & précision", specSub:"Une cuisine japonaise soignée à Hay Riad.", stripCuisine:"Cuisine japonaise",
+    metaDesc:"restaurant japonais & sushi", address:"Av. Abderrahim Bouabid, Hay Riad", phone:"À compléter", mapQuery:"Sushi Youzar, Avenue Abderrahim Bouabid, Rabat",
+    footerNote:"Sushis & cuisine japonaise à Hay Riad, Rabat.",
+    theme:{p:"#0f172a",pd:"#020617",pl:"#e8eaef",a:"#dc2626",ink:"#0f172a",muted:"#5a6172",bg:"#f7f8fa",line:"#e3e6ec"} },
+
+  { slug:"il-giardino-agdal.html", name:"Il Giardino", brandSmall:"Restaurant italien · Agdal", cuisine:"italian",
+    pill:"Cuisine italienne · Agdal", h1a:"Un ", h1b:"jardin", h1c:" de saveurs italiennes",
+    sub:"Pizzas, pâtes et spécialités italiennes avec de bons produits, dans un cadre agréable avec terrasse à Agdal. Réservez votre table en ligne.",
+    specTitle:"La dolce vita", specSub:"Des recettes italiennes généreuses à Agdal.", stripCuisine:"Cuisine italienne",
+    metaDesc:"restaurant italien", address:"Agdal", phone:"À compléter", mapQuery:"Il Giardino restaurant Agdal, Rabat",
+    footerNote:"Cuisine italienne généreuse dans un cadre agréable à Agdal, Rabat.",
+    theme:{p:"#4d7c0f",pd:"#3f6212",pl:"#eef6e0",a:"#dc2626",ink:"#20280e",muted:"#5f7345",bg:"#f9fcf3",line:"#e6efd5"} },
 ];
 
 RESTOS.forEach((c,i)=>{ fs.writeFileSync(__dirname+'/'+c.slug, render(c,i)); console.log('✓ généré:', c.slug); });
