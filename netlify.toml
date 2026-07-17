@@ -1,0 +1,5 @@
+# Déploiement Netlify — site statique (HTML/CSS/JS, bla build)
+# Publie tout le dépôt tel quel. Les démos sont accessibles sous :
+#   /restaurants/<nom>.html   et   /demos/<nom>.html
+[build]
+  publish = "."
