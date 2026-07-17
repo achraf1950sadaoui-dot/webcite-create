@@ -104,7 +104,7 @@ function render(c, idx){
   return `<!doctype html>
 <!--
   DÉMO · ${c.name} (Rabat)
-  ⚠️ BACH TBIDEL: 1) [212XXXXXXXXX] = ra9m WhatsApp (212 + ra9m bla 0)
+  ⚠️ BACH TBIDEL: 1) [212661370031] = ra9m WhatsApp (212 + ra9m bla 0)
      2) Menu / Téléphone / Adresse / Horaires   3) Google Maps (iframe q=...)
 -->
 <html lang="fr">
@@ -303,7 +303,7 @@ footer{background:var(--ink);color:#fff;padding:54px 0 26px}.foot-grid{display:g
 <a class="wa-float" id="waFloat" href="#" target="_blank" aria-label="WhatsApp">${ic('wa',32)}</a>
 <script>
 /* ⚠️ BIDEL HAD RA9M b ra9m WhatsApp (212 + ra9m bla 0) */
-const WHATSAPP = "212XXXXXXXXX";
+const WHATSAPP = "212661370031";
 function resa(e){e.preventDefault();var f=e.target;
   var t="Bonjour ${c.name.replace(/"/g,'')}, je souhaite réserver une table.\\n\\n👤 Nom : "+f.nom.value.trim()+"\\n📞 Téléphone : "+f.tel.value.trim()+"\\n👥 Personnes : "+f.pers.value+"\\n📅 Date : "+(f.date.value||"à convenir")+"\\n🕐 Heure : "+(f.heure.value||"à convenir");
   if(f.note.value.trim())t+="\\n📝 Message : "+f.note.value.trim();
