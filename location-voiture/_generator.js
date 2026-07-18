@@ -280,19 +280,19 @@ const AGENCES = [
     footerNote:"Location de voitures à prix malin à Rabat. Fiable et sans surprise.",
     theme:{p:"#1d4ed8",pd:"#1e3a8a",pl:"#e7eefc",a:"#f59e0b",ink:"#14213d",muted:"#586a8c",bg:"#f6f9fe",line:"#e3ebfa"} },
 
-  { slug:"rabat-rent-car.html", name:"Rabat Rent Car", brandSmall:"Location de voitures · Rabat",
-    pill:"Location de voitures · Rabat", h1a:"Votre agence de ", h1b:"location", h1c:" à Rabat",
-    sub:"Location courte, moyenne et longue durée à Rabat. Une flotte variée, des prix compétitifs et un service réactif. Réservez votre voiture en ligne.",
-    metaDesc:"location courte, moyenne et longue durée", address:"Rabat", phone:"07 71 76 75 66", mapQuery:"Rabat",
-    footerNote:"Location de voitures courte, moyenne &amp; longue durée à Rabat.",
-    theme:{p:"#0369a1",pd:"#075985",pl:"#e2f2fd",a:"#ea580c",ink:"#0c2b3d",muted:"#4f6b80",bg:"#f5fafe",line:"#dcecf9"} },
-
-  { slug:"seven-points-rent-car.html", name:"Seven Points Rent Car", brandSmall:"Location de voitures · Rabat",
-    pill:"Location de voitures · Rabat", h1a:"Le bon prix, ", h1b:"la bonne voiture", h1c:"",
-    sub:"Location de voitures et 4×4 à Rabat, Salé et aéroport, au meilleur prix garanti. Réservez votre véhicule en ligne, simple et rapide.",
-    metaDesc:"voitures et 4×4 au meilleur prix", address:"Rabat", phone:"à compléter", mapQuery:"Rabat",
-    footerNote:"Location de voitures &amp; 4×4 à Rabat, Salé et aéroport, au meilleur prix.",
+  { slug:"irak-car.html", name:"Irak Car", brandSmall:"Location de voitures · Agdal",
+    pill:"Location de voitures · Agdal", h1a:"Votre voiture à ", h1b:"prix juste", h1c:", à Agdal",
+    sub:"Location de voitures à Agdal, Rabat : véhicules récents, tarifs clairs et service de qualité. Livraison aéroport et assurance incluse. Réservez en ligne.",
+    metaDesc:"citadines, berlines et SUV à prix juste", address:"46 av. Oqba Bnou Nafiaa, appt 4, Agdal", phone:"06 61 43 87 87", mapQuery:"46 avenue Oqba, Agdal, Rabat",
+    footerNote:"Location de voitures à prix juste à Agdal, Rabat.",
     theme:{p:"#0f766e",pd:"#115e59",pl:"#e0f4f2",a:"#f59e0b",ink:"#0c2e2b",muted:"#4f7772",bg:"#f4fbfa",line:"#daedeb"} },
+
+  { slug:"ks-location-voiture.html", name:"KS Location Voiture", brandSmall:"Location · Aéroport Rabat-Salé",
+    pill:"Location de voitures · Aéroport Rabat-Salé", h1a:"Louez, ", h1b:"roulez", h1c:", partout au Maroc",
+    sub:"Location de voitures à Rabat et à l'aéroport Rabat-Salé, 7j/7. Avec ou sans chauffeur, livraison et assurance incluses. Réservez votre voiture en ligne.",
+    metaDesc:"location avec ou sans chauffeur, livraison aéroport", address:"Aéroport Rabat-Salé", phone:"06 67 69 66 14", mapQuery:"Aeroport Rabat Sale",
+    footerNote:"Location de voitures à Rabat et à l'aéroport Rabat-Salé, 7j/7.",
+    theme:{p:"#0369a1",pd:"#075985",pl:"#e2f2fd",a:"#ea580c",ink:"#0c2b3d",muted:"#4f6b80",bg:"#f5fafe",line:"#dcecf9"} },
 ];
 
 AGENCES.forEach((c,i)=>{ fs.writeFileSync(__dirname+'/'+c.slug, render(c,i)); console.log('✓ généré:', c.slug); });

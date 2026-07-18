@@ -10,8 +10,8 @@ WhatsApp** (lieu, départ, retour, catégorie), avis, Google Maps.
 | 2 | `too-much-cars.html` | Too Much Cars | Nahda | 06 61 79 59 40 |
 | 3 | `drive-for-luxury.html` | Drive for Luxury (premium) | Rabat | 07 07 19 10 99 |
 | 4 | `amstel-car.html` | Amstel Car | Rabat | 06 64 77 13 71 |
-| 5 | `rabat-rent-car.html` | Rabat Rent Car | Rabat | 07 71 76 75 66 |
-| 6 | `seven-points-rent-car.html` | Seven Points Rent Car | Rabat | à compléter |
+| 5 | `irak-car.html` | Irak Car | Agdal | 06 61 43 87 87 |
+| 6 | `ks-location-voiture.html` | KS Location Voiture | Aéroport Rabat-Salé | 06 67 69 66 14 |
 
 ## ⚡ Bach ykhdem
 Le numéro WhatsApp (`212661370031`) est déjà activé. Pour changer : `const WHATSAPP` en haut du `<script>`, ou dans `_generator.js`.
