@@ -293,6 +293,20 @@ const AGENCES = [
     metaDesc:"location avec ou sans chauffeur, livraison aéroport", address:"Aéroport Rabat-Salé", phone:"06 67 69 66 14", mapQuery:"Aeroport Rabat Sale",
     footerNote:"Location de voitures à Rabat et à l'aéroport Rabat-Salé, 7j/7.",
     theme:{p:"#0369a1",pd:"#075985",pl:"#e2f2fd",a:"#ea580c",ink:"#0c2b3d",muted:"#4f6b80",bg:"#f5fafe",line:"#dcecf9"} },
+
+  { slug:"croisiere-car.html", name:"Croisière Car", brandSmall:"Location de voitures · Agdal",
+    pill:"Location de voitures · Agdal", h1a:"Prenez le ", h1b:"large", h1c:", en toute liberté",
+    sub:"Location de voitures à Agdal, Rabat : une flotte variée, des tarifs clairs et un service souple. Livraison aéroport et assurance incluse. Réservez en ligne.",
+    metaDesc:"citadines, berlines, SUV et utilitaires", address:"Av. Hassan II, résid. Ahssan Dar, imm. B, mag. 16, Agdal", phone:"05 37 69 70 69", mapQuery:"Avenue Hassan II, Agdal, Rabat",
+    footerNote:"Location de voitures à Agdal, Rabat. Liberté et sérénité au volant.",
+    theme:{p:"#0891b2",pd:"#0e7490",pl:"#e2f5fa",a:"#f59e0b",ink:"#0c2e36",muted:"#4f7884",bg:"#f4fbfc",line:"#ddeff3"} },
+
+  { slug:"rayino-car.html", name:"Rayino Car", brandSmall:"Location de voitures · Rabat",
+    pill:"Location de voitures · Rabat", h1a:"Roulez avec ", h1b:"Rayino", h1c:", partout à Rabat",
+    sub:"Location de voitures à Rabat et à l'aéroport : véhicules récents, prix malins et service rapide. Livraison et assurance incluses. Réservez votre voiture en ligne.",
+    metaDesc:"citadines, berlines et SUV à prix malin", address:"Rabat", phone:"à compléter", mapQuery:"Rabat",
+    footerNote:"Location de voitures à Rabat, à prix malin. Rapide et fiable.",
+    theme:{p:"#7c3aed",pd:"#6927d4",pl:"#f0e9fd",a:"#f59e0b",ink:"#241a3d",muted:"#6b5e86",bg:"#faf8fe",line:"#ece4fb"} },
 ];
 
 AGENCES.forEach((c,i)=>{ fs.writeFileSync(__dirname+'/'+c.slug, render(c,i)); console.log('✓ généré:', c.slug); });

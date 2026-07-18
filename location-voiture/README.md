@@ -12,6 +12,8 @@ WhatsApp** (lieu, départ, retour, catégorie), avis, Google Maps.
 | 4 | `amstel-car.html` | Amstel Car | Rabat | 06 64 77 13 71 |
 | 5 | `irak-car.html` | Irak Car | Agdal | 06 61 43 87 87 |
 | 6 | `ks-location-voiture.html` | KS Location Voiture | Aéroport Rabat-Salé | 06 67 69 66 14 |
+| 7 | `croisiere-car.html` | Croisière Car | Agdal | 05 37 69 70 69 |
+| 8 | `rayino-car.html` | Rayino Car | Rabat | à compléter (Insta) |
 
 ## ⚡ Bach ykhdem
 Le numéro WhatsApp (`212661370031`) est déjà activé. Pour changer : `const WHATSAPP` en haut du `<script>`, ou dans `_generator.js`.
