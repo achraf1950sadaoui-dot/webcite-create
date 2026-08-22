@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lumière Beauty Lounge — Hair · Nails · Skin · Dubai (Demo)</title>
+<meta name="description" content="Lumière Beauty Lounge — hair, nails, skin & spa in Dubai. Book your appointment on WhatsApp in seconds."/>
+<meta name="theme-color" content="#54604a"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  /* ═══════════════════════════════════════════════════════════════
+     LUMIÈRE BEAUTY LOUNGE — DEMO / REUSABLE SALON TEMPLATE
+     A generic salon & spa demo (like the restaurant demo). To turn it
+     into a real client's site, swap: name, services, prices, photos,
+     colours (--sage / --bronze), and the WHATSAPP_NUMBER at the bottom.
+     Ideal for: hair salons, nail bars, spas, beauty & lash studios.
+     ═══════════════════════════════════════════════════════════════ */
+  :root{
+    --sage:#54604a; --sage-2:#3f4a37; --sage-soft:#8a977c; --bronze:#b08d57; --bronze-soft:#d8bd93;
+    --cream:#f7f4ec; --cream-2:#eee8db; --ink:#2b2c26; --muted:#7f7d70; --line:#e3ddcd;
+    --radius:16px; --shadow:0 26px 60px -30px rgba(63,74,55,.4); --maxw:1160px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--cream);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3,.display{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;line-height:1.08}
+  img{max-width:100%;display:block}a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;font-weight:600;color:var(--bronze)}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:600;font-size:.95rem;padding:.9rem 1.6rem;border-radius:999px;cursor:pointer;border:1px solid transparent;transition:.22s}
+  .btn-bronze{background:linear-gradient(135deg,var(--bronze),var(--bronze-soft));color:#3a2e18;box-shadow:0 12px 28px -12px rgba(176,141,87,.6)}
+  .btn-bronze:hover{transform:translateY(-2px)}
+  .btn-ghost{border-color:rgba(255,255,255,.5);color:#fff}.btn-ghost:hover{background:rgba(255,255,255,.12)}
+  .btn-outline{border-color:var(--sage);color:var(--sage)}.btn-outline:hover{background:var(--sage);color:var(--cream)}
+
+  .demo-flag{background:var(--sage);color:#eef1e7;text-align:center;font-size:.8rem;padding:.55rem 1rem}
+  .demo-flag b{color:#fff}
+  .announce{background:var(--sage-2);color:var(--bronze-soft);text-align:center;font-size:.83rem;padding:.5rem;letter-spacing:.06em}
+
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(247,244,236,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand b{font-family:'Cormorant Garamond';font-size:1.6rem;color:var(--sage);letter-spacing:.04em}
+  .brand small{display:block;font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;color:var(--bronze);margin-top:1px}
+  .nav-links{display:flex;gap:1.8rem}
+  .nav-links a{color:var(--ink);font-size:.9rem;font-weight:500;opacity:.8}.nav-links a:hover{opacity:1;color:var(--bronze)}
+  .burger{display:none;background:none;border:0;flex-direction:column;gap:5px;cursor:pointer}
+  .burger span{width:24px;height:2px;background:var(--sage);display:block}
+
+  .hero{position:relative;overflow:hidden;background:
+      radial-gradient(900px 460px at 82% -8%, #dfe4d3, transparent 60%),
+      radial-gradient(720px 440px at 6% 108%, #ece6d6, transparent 56%),
+      linear-gradient(160deg,#f7f4ec,#eef1e6)}
+  .hero-in{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;padding:72px 0 82px}
+  .hero h1{font-size:clamp(2.7rem,6vw,4.8rem);margin:.8rem 0 1.1rem;color:var(--sage-2)}
+  .hero h1 em{font-style:italic;color:var(--bronze)}
+  .hero p.lede{font-size:1.12rem;max-width:40ch;color:#5f6356;font-weight:300}
+  .hero-actions{display:flex;gap:.8rem;margin-top:1.9rem;flex-wrap:wrap}
+  .hero-meta{display:flex;gap:1.9rem;margin-top:2.5rem;flex-wrap:wrap}
+  .hero-meta b{display:block;font-family:'Cormorant Garamond';font-size:1.6rem;color:var(--sage)}
+  .hero-meta span{font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+  .hero-card{position:relative;border-radius:24px;aspect-ratio:4/5;background:
+      radial-gradient(120% 90% at 70% 18%, #e4dcc6, transparent 55%),
+      linear-gradient(160deg,#c7cbb4,#9aa585);border:1px solid #cfd3bd;box-shadow:var(--shadow);
+      display:flex;align-items:flex-end;padding:22px;overflow:hidden}
+  .hero-card .art{position:absolute;inset:0;display:grid;place-items:center}
+  .hero-card svg{width:58%}
+  .hero-card .tag{position:relative;z-index:2;background:#fff;border-radius:14px;padding:.7rem 1rem;box-shadow:0 12px 24px -14px rgba(63,74,55,.5)}
+  .hero-card .tag b{font-family:'Cormorant Garamond';font-size:1.2rem;color:var(--sage)}
+  .hero-card .tag span{display:block;font-size:.74rem;color:var(--muted)}
+
+  .strip{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .strip-in{display:flex;justify-content:space-around;flex-wrap:wrap;gap:1rem;padding:16px 0;text-align:center}
+  .strip-in div{display:flex;align-items:center;gap:.5rem;font-size:.9rem;color:var(--sage-2)}
+  .strip-in svg{width:20px;height:20px;stroke:var(--bronze);fill:none;stroke-width:1.6}
+
+  section.block{padding:84px 0}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 48px}
+  .sec-head h2{font-size:clamp(2rem,4vw,3rem);margin:.5rem 0 .7rem;color:var(--sage-2)}
+  .sec-head p{color:var(--muted)}
+
+  .serv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .serv{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;transition:.2s;box-shadow:0 20px 40px -36px rgba(63,74,55,.5)}
+  .serv:hover{transform:translateY(-4px)}
+  .serv .ic{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#e7e2cf,#d5dcc2);display:grid;place-items:center;margin-bottom:14px}
+  .serv .ic svg{width:26px;height:26px;stroke:var(--sage);fill:none;stroke-width:1.6}
+  .serv h3{font-size:1.5rem;color:var(--sage);margin-bottom:.5rem}
+  .serv ul{list-style:none;display:grid;gap:.4rem}
+  .serv li{display:flex;justify-content:space-between;font-size:.9rem;color:var(--ink);border-bottom:1px dashed var(--line);padding-bottom:.35rem}
+  .serv li span:last-child{color:var(--bronze);font-weight:600;white-space:nowrap}
+
+  .book{background:linear-gradient(160deg,var(--sage),var(--sage-2));color:var(--cream)}
+  .book-in{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .book h2{font-size:clamp(2rem,4vw,2.8rem);color:#fff;margin-bottom:1rem}
+  .book p{color:#dfe4d3;margin-bottom:1.2rem}
+  .book ul{list-style:none;display:grid;gap:.6rem}
+  .book li{display:flex;gap:.6rem;align-items:center;font-size:.98rem}
+  .book li svg{width:20px;height:20px;stroke:var(--bronze-soft);fill:none;stroke-width:2;flex:none}
+  .book-card{background:#fff;color:var(--ink);border-radius:20px;padding:28px;box-shadow:0 30px 60px -26px rgba(0,0,0,.35)}
+  .book-card h3{color:var(--sage);font-size:1.5rem;margin-bottom:.3rem}
+  .book-card .sub{color:var(--muted);font-size:.88rem;margin-bottom:16px}
+  .bf{display:flex;flex-direction:column;gap:.35rem;margin-bottom:12px}
+  .bf label{font-size:.74rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:600}
+  .bf input,.bf select{font-family:inherit;font-size:.95rem;padding:.7rem .8rem;border:1px solid var(--line);border-radius:10px;background:#fdfcf8}
+  .bf input:focus,.bf select:focus{outline:none;border-color:var(--bronze)}
+  .bf-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .book-card .btn-bronze{width:100%;justify-content:center;margin-top:4px}
+
+  .gallery{background:var(--cream-2)}
+  .gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:170px;gap:14px}
+  .photo{border-radius:14px;position:relative;overflow:hidden;background:linear-gradient(150deg,#c7cbb4,#9aa585);display:flex;align-items:flex-end;padding:13px;color:#fff;border:1px solid #cfd3bd}
+  .photo::after{content:"";position:absolute;inset:0;opacity:.16;background-image:radial-gradient(circle at 30% 30%,#fff 1.5px,transparent 2px);background-size:22px 22px}
+  .photo span{position:relative;z-index:2;font-family:'Cormorant Garamond';font-size:1.05rem}
+  .photo.tall{grid-row:span 2}.photo.wide{grid-column:span 2}
+  .note{text-align:center;color:var(--muted);font-size:.82rem;margin-top:16px;font-style:italic}
+
+  .info-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px}
+  .info-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px}
+  .info-card h3{font-size:1.4rem;margin-bottom:.8rem;color:var(--sage)}
+  .info-card .row{display:flex;justify-content:space-between;font-size:.9rem;padding:.3rem 0}
+  .info-card .row span:last-child{color:var(--muted)}
+  .info-card a{color:var(--bronze);font-weight:600}
+
+  .reviews{background:#fff}
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .rev{background:var(--cream);border-radius:16px;padding:24px;border:1px solid var(--line)}
+  .stars{color:var(--bronze);letter-spacing:2px;margin-bottom:.5rem}
+  .rev p{font-style:italic;font-size:.95rem}.rev b{display:block;margin-top:.9rem;font-size:.9rem;color:var(--sage)}.rev span{color:var(--muted);font-size:.8rem}
+
+  footer{background:var(--sage-2);color:#d6dbcb;padding:54px 0 26px}
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px;margin-bottom:30px}
+  footer .brand b{color:#fff}
+  footer h4{color:var(--bronze-soft);font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.9rem}
+  footer a{display:block;font-size:.9rem;padding:.18rem 0;opacity:.85}footer a:hover{opacity:1;color:#fff}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.14);padding-top:18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.8rem}
+
+  .fab{position:fixed;right:20px;bottom:20px;z-index:60;width:56px;height:56px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 14px 30px -8px rgba(37,211,102,.6);transition:.2s}
+  .fab:hover{transform:scale(1.06)}.fab svg{width:30px;height:30px;fill:#fff}
+
+  @media(max-width:900px){
+    .hero-in{grid-template-columns:1fr;padding:50px 0 58px}.hero-card{max-width:340px;order:-1}
+    .book-in{grid-template-columns:1fr;gap:30px}.serv-grid{grid-template-columns:1fr 1fr}
+    .info-grid{grid-template-columns:1fr}.rev-grid{grid-template-columns:1fr}.gal-grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media(max-width:600px){
+    .nav-links{display:none}.burger{display:flex}
+    .nav-links.open{display:flex;position:absolute;top:74px;left:0;right:0;flex-direction:column;background:#fff;padding:16px 24px;gap:1rem;border-bottom:1px solid var(--line)}
+    .serv-grid{grid-template-columns:1fr}.bf-2{grid-template-columns:1fr}section.block{padding:56px 0}
+  }
+</style>
+</head>
+<body>
+
+  <div class="demo-flag">✦ <b>DEMO TEMPLATE</b> — reusable for any salon / spa. Swap the name, services, prices, photos &amp; colours.</div>
+  <div class="announce">🌿 Now booking — walk-ins welcome · JLT, Dubai</div>
+
+  <header class="nav">
+    <div class="wrap nav-in">
+      <a href="#top" class="brand"><span><b>LUMIÈRE</b><small>Beauty Lounge · Dubai</small></span></a>
+      <nav class="nav-links" id="navlinks">
+        <a href="#services">Services</a><a href="#book">Book</a><a href="#gallery">Gallery</a><a href="#visit">Visit</a>
+      </nav>
+      <div style="display:flex;gap:.6rem;align-items:center">
+        <a href="#book" class="btn btn-bronze">Book Now</a>
+        <button class="burger" id="burger" aria-label="menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero-in">
+        <div>
+          <p class="eyebrow">Hair · Nails · Skin · Spa</p>
+          <h1>Your moment of <em>glow.</em></h1>
+          <p class="lede">A calm beauty lounge in the heart of Dubai — expert hair, flawless nails, glowing skin. Book in seconds, straight to WhatsApp.</p>
+          <div class="hero-actions">
+            <a href="#book" class="btn btn-bronze">Book an Appointment</a>
+            <a href="#services" class="btn btn-outline">See Services</a>
+          </div>
+          <div class="hero-meta">
+            <div><b>4.9★</b><span>500+ reviews</span></div>
+            <div><b>Vegan</b><span>&amp; halal options</span></div>
+            <div><b>7 days</b><span>9 AM – 9 PM</span></div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="art">
+            <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="100" cy="86" r="40" fill="#f3ede0" opacity=".9"/>
+              <path d="M100 46c22 0 40 18 40 40 0 10-4 18-9 24-6-8-18-10-31-10s-25 2-31 10c-5-6-9-14-9-24 0-22 18-40 40-40z" fill="#8a977c"/>
+              <circle cx="88" cy="84" r="4" fill="#3f4a37"/><circle cx="112" cy="84" r="4" fill="#3f4a37"/>
+              <path d="M90 100c6 5 14 5 20 0" stroke="#b08d57" stroke-width="3" fill="none"/>
+              <path d="M60 150c26-10 54-10 80 0" stroke="#b08d57" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="tag"><b>Signature Facial</b><span>60 min · AED 250</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="strip">
+      <div class="wrap strip-in">
+        <div><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a7 7 0 1114 0c0 5.5-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/></svg> JLT, Dubai</div>
+        <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Open 9 AM – 9 PM</div>
+        <div><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg> Book on WhatsApp</div>
+        <div><svg viewBox="0 0 24 24"><path d="M12 3l2.5 5 5.5.8-4 4 1 5.5L12 21l-5-2.7 1-5.5-4-4 5.5-.8z"/></svg> Vegan &amp; halal products</div>
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <section class="block" id="services">
+      <div class="wrap">
+        <div class="sec-head"><p class="eyebrow">Our Menu</p><h2>Services &amp; Prices</h2><p>Sample services &amp; prices — your real menu drops right in.</p></div>
+        <div class="serv-grid">
+          <div class="serv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M7 4c3 4 3 8 0 12M12 4c3 4 3 8 0 12M17 4c3 4 3 8 0 12M5 20h14"/></svg></div><h3>Hair</h3><ul>
+            <li><span>Cut &amp; Style</span><span>AED 120</span></li><li><span>Colour / Balayage</span><span>from 350</span></li>
+            <li><span>Keratin Treatment</span><span>from 450</span></li><li><span>Blow-dry</span><span>AED 90</span></li></ul></div>
+          <div class="serv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M8 3v9a4 4 0 008 0V3M8 21h8"/></svg></div><h3>Nails</h3><ul>
+            <li><span>Classic Mani</span><span>AED 70</span></li><li><span>Gel Mani</span><span>AED 110</span></li>
+            <li><span>Pedicure</span><span>AED 90</span></li><li><span>Nail Extensions</span><span>from 180</span></li></ul></div>
+          <div class="serv"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M8 12h8"/></svg></div><h3>Skin &amp; Facials</h3><ul>
+            <li><span>Signature Facial</span><span>AED 250</span></li><li><span>Hydrafacial</span><span>from 450</span></li>
+            <li><span>Deep Cleanse</span><span>AED 200</span></li><li><span>Vegan Facial</span><span>AED 280</span></li></ul></div>
+          <div class="serv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.5"/></svg></div><h3>Lashes &amp; Brows</h3><ul>
+            <li><span>Lash Extensions</span><span>from 220</span></li><li><span>Lash Lift</span><span>AED 160</span></li>
+            <li><span>Brow Shaping</span><span>AED 60</span></li><li><span>Brow Lamination</span><span>AED 150</span></li></ul></div>
+          <div class="serv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg></div><h3>Waxing</h3><ul>
+            <li><span>Full Legs</span><span>AED 120</span></li><li><span>Full Arms</span><span>AED 80</span></li>
+            <li><span>Underarms</span><span>AED 40</span></li><li><span>Full Body</span><span>from 280</span></li></ul></div>
+          <div class="serv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3c3 3 3 7 0 10-3-3-3-7 0-10zM6 21c2-4 10-4 12 0"/></svg></div><h3>Massage &amp; Spa</h3><ul>
+            <li><span>Relaxing Massage</span><span>AED 250</span></li><li><span>Hot Stone</span><span>AED 320</span></li>
+            <li><span>Moroccan Bath</span><span>AED 200</span></li><li><span>Head Spa</span><span>AED 180</span></li></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOK -->
+    <section class="block book" id="book">
+      <div class="wrap book-in">
+        <div>
+          <p class="eyebrow" style="color:var(--bronze-soft)">Book in 30 seconds</p>
+          <h2>No calls, no waiting.</h2>
+          <p>Guests pick a service and time — the request lands on your WhatsApp instantly, ready to confirm. Fewer no-shows, fuller chairs.</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Every booking straight to WhatsApp</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Works 24/7, even when you're with a client</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Send reminders, cut no-shows</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Found on Google when people search you</li>
+          </ul>
+        </div>
+        <div class="book-card">
+          <h3>Book an Appointment</h3>
+          <p class="sub">Tell us what you'd like — it goes straight to us on WhatsApp.</p>
+          <form id="bookForm">
+            <div class="bf"><label>Your name</label><input name="name" required placeholder="Your name"/></div>
+            <div class="bf-2">
+              <div class="bf"><label>Phone</label><input name="phone" required placeholder="+971 5X…"/></div>
+              <div class="bf"><label>Service</label>
+                <select name="service"><option>Hair</option><option>Nails</option><option>Facial / Skin</option><option>Lashes / Brows</option><option>Waxing</option><option>Massage / Spa</option><option>Not sure — advise me</option></select></div>
+            </div>
+            <div class="bf-2">
+              <div class="bf"><label>Date</label><input name="date" type="date" required/></div>
+              <div class="bf"><label>Time</label><input name="time" type="time" required/></div>
+            </div>
+            <div class="bf"><label>Notes (optional)</label><input name="notes" placeholder="e.g. balayage + gel mani"/></div>
+            <button type="submit" class="btn btn-bronze">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="#3a2e18"><path d="M20 4a10 10 0 00-15 13l-1 4 4-1A10 10 0 1020 4zm-6 14a8 8 0 01-4-1l-3 1 1-3a8 8 0 1110-10 8 8 0 01-4 13z"/></svg>
+              Book on WhatsApp
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="block gallery" id="gallery">
+      <div class="wrap">
+        <div class="sec-head"><p class="eyebrow">The Lounge</p><h2>A Space to Feel Beautiful</h2></div>
+        <div class="gal-grid">
+          <div class="photo tall"><span>Styling Chairs</span></div>
+          <div class="photo wide"><span>Nail Bar</span></div>
+          <div class="photo"><span>Facial Room</span></div>
+          <div class="photo"><span>Lash Studio</span></div>
+          <div class="photo wide"><span>Spa Suite</span></div>
+          <div class="photo"><span>Reception</span></div>
+        </div>
+        <p class="note">↑ Placeholders — these become your real salon photos in the live site.</p>
+      </div>
+    </section>
+
+    <!-- VISIT -->
+    <section class="block" id="visit">
+      <div class="wrap">
+        <div class="sec-head"><p class="eyebrow">Find Us</p><h2>Hours &amp; Location</h2></div>
+        <div class="info-grid">
+          <div class="info-card"><h3>Opening Hours</h3>
+            <div class="row"><span>Sat – Thu</span><span>9 AM – 9 PM</span></div>
+            <div class="row"><span>Friday</span><span>10 AM – 8 PM</span></div>
+            <div class="row"><span>Walk-ins</span><span>Welcome</span></div></div>
+          <div class="info-card"><h3>Location</h3>
+            <p style="color:var(--muted);font-size:.92rem;margin-bottom:.6rem">Cluster _, JLT<br/>Dubai, United Arab Emirates</p>
+            <a href="#" style="display:inline-block">Open in Google Maps →</a></div>
+          <div class="info-card"><h3>Book &amp; Contact</h3>
+            <div class="row"><span>WhatsApp</span><a href="#book">Message us</a></div>
+            <div class="row"><span>Phone</span><span>+971 5X XXX XXXX</span></div>
+            <div class="row"><span>Instagram</span><a href="#">@lumiere.beauty</a></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section class="block reviews">
+      <div class="wrap">
+        <div class="sec-head"><p class="eyebrow">Guest Love</p><h2>What Our Guests Say</h2></div>
+        <div class="rev-grid">
+          <div class="rev"><div class="stars">★★★★★</div><p>"Best balayage in Dubai and the calmest little lounge. Booked my next 3 visits already!"</p><b>Sample review</b><span>← your real Google reviews go here</span></div>
+          <div class="rev"><div class="stars">★★★★★</div><p>"Booked on WhatsApp in a minute, no waiting. My nails have never looked better."</p><b>Sample review</b><span>← your real Google reviews go here</span></div>
+          <div class="rev"><div class="stars">★★★★★</div><p>"The vegan facial left my skin glowing. Such a warm, professional team."</p><b>Sample review</b><span>← your real Google reviews go here</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <a href="#top" class="brand"><b style="font-size:1.8rem">LUMIÈRE</b></a>
+          <p style="margin-top:.8rem;max-width:34ch;font-size:.9rem">A calm beauty lounge in Dubai — hair, nails, skin &amp; spa, with vegan &amp; halal options.</p>
+        </div>
+        <div><h4>Services</h4><a href="#services">Hair &amp; Nails</a><a href="#services">Skin &amp; Facials</a><a href="#services">Lashes &amp; Spa</a><a href="#book">Book now</a></div>
+        <div><h4>Contact</h4><a href="#visit">JLT, Dubai</a><a href="#book">+971 5X XXX XXXX</a><a href="#">@lumiere.beauty</a></div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 Lumière Beauty Lounge — demo template.</span>
+        <span>Ready to become your salon's site this week.</span>
+      </div>
+    </div>
+  </footer>
+
+  <a class="fab" id="fab" href="#book" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M20 4a10 10 0 00-15 13l-1 4 4-1A10 10 0 1020 4zm-6 14a8 8 0 01-4-1l-3 1 1-3a8 8 0 1110-10 8 8 0 01-4 13z"/></svg></a>
+
+<script>
+  const WHATSAPP_NUMBER = "9715XXXXXXXX";   // salon's WhatsApp (no +, no spaces)
+  const NAME = "Lumière Beauty Lounge";
+  const burger=document.getElementById('burger'), navlinks=document.getElementById('navlinks');
+  burger.addEventListener('click',()=>navlinks.classList.toggle('open'));
+  navlinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navlinks.classList.remove('open')));
+  document.getElementById('bookForm').addEventListener('submit',e=>{
+    e.preventDefault();const f=e.target;
+    const msg=`Hello ${NAME}! I'd like to book an appointment 🌿%0A%0A`+
+      `👤 Name: ${encodeURIComponent(f.name.value)}%0A`+
+      `📞 Phone: ${encodeURIComponent(f.phone.value)}%0A`+
+      `💇 Service: ${encodeURIComponent(f.service.value)}%0A`+
+      `📅 Date: ${encodeURIComponent(f.date.value)}%0A`+
+      `🕐 Time: ${encodeURIComponent(f.time.value)}%0A`+
+      (f.notes.value?`📝 Notes: ${encodeURIComponent(f.notes.value)}`:'');
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`,'_blank');
+  });
+  document.getElementById('fab').addEventListener('click',e=>{e.preventDefault();window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello '+NAME+'! I would like to book 🌿')}`,'_blank');});
+</script>
+</body>
+</html>
