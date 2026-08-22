@@ -147,6 +147,12 @@ Bloom Cafe | Cafe | Marina | @bloomcafe |  | hi@bloom.ae | Linktree"></textarea>
       </div>
     </div>
 
+    <!-- FOLLOW-UPS DUE -->
+    <div class="panel" id="due-panel" style="display:none">
+      <h2>⏰ Follow-ups due</h2>
+      <div id="due-list"></div>
+    </div>
+
     <!-- LIST -->
     <div class="panel">
       <div class="toolbar">
@@ -199,6 +205,7 @@ Bloom Cafe | Cafe | Marina | @bloomcafe |  | hi@bloom.ae | Linktree"></textarea>
         <div class="msg-actions">
           <button class="btn btn-gold" onclick="copyMsg()">📋 Copy</button>
           <button class="btn btn-green" id="m-open" onclick="openChannel()">Open</button>
+          <button class="btn btn-ghost" onclick="markSent()">✓ Mark sent + schedule follow-up</button>
         </div>
         <p class="hint" id="m-hint"></p>
       </div>
@@ -317,17 +324,20 @@ function render(){
 
   document.getElementById('empty').style.display=rows.length?'none':'block';
   renderStats();
+  renderDue();
 }
 function renderStats(){
   const s=leads.map(l=>({...l,score:scoreOf(l)}));
   const hot=s.filter(l=>l.score>=70).length;
+  const contacted=s.filter(l=>['Contacted','Replied','Call booked'].includes(l.stage)).length;
+  const replied=s.filter(l=>['Replied','Call booked'].includes(l.stage)).length;
   const won=s.filter(l=>l.stage==='Won').length;
-  const active=s.filter(l=>!['Won','Lost'].includes(l.stage)).length;
   document.getElementById('stats').innerHTML=`
-    <div class="stat"><b>${leads.length}</b>Total leads</div>
+    <div class="stat"><b>${leads.length}</b>Leads</div>
     <div class="stat"><b>${hot}</b>🔥 Hot</div>
-    <div class="stat"><b>${active}</b>Active</div>
-    <div class="stat"><b>${won}</b>Won</div>`;
+    <div class="stat"><b>${contacted}</b>Contacted</div>
+    <div class="stat"><b>${replied}</b>Replied</div>
+    <div class="stat"><b>${won}/3</b>Won · goal</div>`;
 }
 
 /* ── export ── */
@@ -424,6 +434,33 @@ function copyMsg(){
   const seq=SEQS.find(q=>q.key===msgSeq), body=val('m-body');
   const text=seq.type==='email'?('Subject: '+val('m-subject')+'\n\n'+body):body;
   navigator.clipboard.writeText(text).then(()=>{const h=document.getElementById('m-hint'),o=h.textContent;h.textContent='Copied ✓';setTimeout(()=>h.textContent=o,1500)}).catch(()=>{});
+}
+function isoPlus(d){const t=new Date();t.setDate(t.getDate()+d);return t.toISOString().slice(0,10)}
+function markSent(){
+  if(!msgLead)return;
+  if(['New','Preview built'].includes(msgLead.stage)) msgLead.stage='Contacted';
+  const days = msgSeq==='f7'?0 : (msgSeq==='f3'?4:3);   // schedule next follow-up
+  msgLead.next = days? isoPlus(days) : '';
+  msgLead.lastSent = new Date().toISOString().slice(0,10);
+  save(); render();
+  const h=document.getElementById('m-hint');
+  h.textContent = msgLead.next ? ('✓ Marked sent · next follow-up '+msgLead.next) : '✓ Marked sent · sequence complete';
+}
+function snooze(id){const l=leads.find(x=>x.id===id);if(l){l.next=isoPlus(3);save();render()}}
+function renderDue(){
+  const today=new Date().toISOString().slice(0,10);
+  const due=leads.filter(l=>l.next && l.next<=today && !['Won','Lost'].includes(l.stage)).sort((a,b)=>a.next<b.next?-1:1);
+  const p=document.getElementById('due-panel');
+  if(!due.length){p.style.display='none';return}
+  p.style.display='block';
+  document.getElementById('due-list').innerHTML=due.map(l=>`
+    <div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);flex-wrap:wrap">
+      <span class="score" style="background:${l.next<today?'var(--danger)':'var(--warm)'}">${l.next<today?'LATE':'TODAY'}</span>
+      <b>${esc(l.name)}</b><small style="color:var(--muted)">${esc(l.stage)} · due ${esc(l.next)}</small>
+      <div style="flex:1"></div>
+      <button class="btn btn-gold btn-sm" onclick="openMsg('${l.id}')">✉ Follow up</button>
+      <button class="btn btn-ghost btn-sm" onclick="snooze('${l.id}')">Snooze 3d</button>
+    </div>`).join('');
 }
 
 /* tabs */
