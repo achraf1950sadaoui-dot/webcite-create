@@ -54,6 +54,26 @@
   code{background:#f0ead9;padding:1px 5px;border-radius:4px;font-size:.82em}
   @media(max-width:820px){.grid{grid-template-columns:1fr 1fr}.hide-m{display:none}}
   @media(max-width:520px){.grid{grid-template-columns:1fr}}
+  /* settings + message modal */
+  details.settings summary{cursor:pointer;font-weight:600;color:var(--green);font-size:1rem;list-style:none}
+  details.settings summary::-webkit-details-marker{display:none}
+  details.settings summary::before{content:'▸ ';color:var(--gold)}
+  details.settings[open] summary::before{content:'▾ '}
+  .set-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+  @media(max-width:600px){.set-grid{grid-template-columns:1fr}}
+  .modal-bg{position:fixed;inset:0;background:rgba(14,42,36,.55);display:none;align-items:center;justify-content:center;z-index:100;padding:16px}
+  .modal-bg.show{display:flex}
+  .modal{background:#fff;border-radius:14px;max-width:640px;width:100%;max-height:90vh;overflow:auto;box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+  .modal-h{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:2}
+  .modal-h b{color:var(--green);font-size:1.05rem}
+  .modal-b{padding:18px 20px}
+  .seq-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+  .seq-tab{padding:.32rem .8rem;border:1px solid var(--line);border-radius:16px;cursor:pointer;font-size:.78rem;font-weight:600;color:var(--muted);background:#fff}
+  .seq-tab.active{background:var(--gold);border-color:var(--gold);color:#2a2413}
+  .msg-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+  .close-x{background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--muted);line-height:1}
+  #m-body{min-height:230px;font-size:.88rem;line-height:1.55;width:100%}
+  #m-subject{width:100%}
 </style>
 </head>
 <body>
@@ -63,6 +83,19 @@
   </div>
 
   <div class="wrap">
+
+    <!-- SETTINGS -->
+    <details class="panel settings">
+      <summary>⚙️ Your details — used to fill every message</summary>
+      <div class="set-grid">
+        <div class="f"><label>Your name</label><input id="s-name" placeholder="Achraf"/></div>
+        <div class="f"><label>Agency</label><input id="s-agency" placeholder="Nova Web Studio"/></div>
+        <div class="f"><label>Your WhatsApp</label><input id="s-wa" placeholder="+971 5X XXX XXXX"/></div>
+        <div class="f"><label>Your website</label><input id="s-web" placeholder="novaweb.ae"/></div>
+        <div class="f" style="grid-column:span 2"><label>Preview base URL (optional)</label><input id="s-base" placeholder="https://novaweb.ae/preview/"/></div>
+      </div>
+      <p class="hint">Saved in this browser. A lead's preview link = base URL + business slug (e.g. <code>…/preview/zaytoun-kitchen</code>). Leave blank to use a <code>[preview link]</code> placeholder.</p>
+    </details>
 
     <!-- ADD / IMPORT -->
     <div class="panel">
@@ -153,6 +186,23 @@ Bloom Cafe | Cafe | Marina | @bloomcafe |  | hi@bloom.ae | Linktree"></textarea>
       <div id="empty" class="empty">No leads yet. Add one above, or click <b>Load sample</b> to see how it works.</div>
     </div>
 
+  </div>
+
+  <!-- MESSAGE MODAL -->
+  <div class="modal-bg" id="modal" onclick="if(event.target===this)closeMsg()">
+    <div class="modal">
+      <div class="modal-h"><b id="m-title">Message</b><button class="close-x" onclick="closeMsg()">✕</button></div>
+      <div class="modal-b">
+        <div class="seq-tabs" id="seq-tabs"></div>
+        <div class="f" id="m-subject-wrap"><label>Subject</label><input id="m-subject"/></div>
+        <div class="f" style="margin-top:10px"><label>Message (edit before sending)</label><textarea id="m-body"></textarea></div>
+        <div class="msg-actions">
+          <button class="btn btn-gold" onclick="copyMsg()">📋 Copy</button>
+          <button class="btn btn-green" id="m-open" onclick="openChannel()">Open</button>
+        </div>
+        <p class="hint" id="m-hint"></p>
+      </div>
+    </div>
   </div>
 
 <script>
@@ -262,7 +312,7 @@ function render(){
         </select>
       </td>
       <td class="hide-m"><input type="date" value="${l.next||''}" style="padding:.3rem;font-size:.78rem" onchange="setField('${l.id}','next',this.value)"/></td>
-      <td><button class="del" title="Delete" onclick="del('${l.id}')">✕</button></td>
+      <td style="white-space:nowrap"><button class="btn btn-gold btn-sm" title="Generate message" onclick="openMsg('${l.id}')">✉</button> <button class="del" title="Delete" onclick="del('${l.id}')">✕</button></td>
     </tr>`).join('');
 
   document.getElementById('empty').style.display=rows.length?'none':'block';
@@ -296,6 +346,86 @@ function exportCSV(){
 function val(id){return document.getElementById(id).value}
 function esc(s){return String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 
+/* ══════════════════ Phase 2 — message generator ══════════════════ */
+const KEY_S='dubai_leads_settings_v1';
+let msgLead=null, msgSeq='preview';
+const SEQS=[
+  {key:'preview',label:'Preview email',type:'email'},
+  {key:'cold',label:'Cold email',type:'email'},
+  {key:'f3',label:'Follow-up D+3',type:'email'},
+  {key:'f7',label:'Follow-up D+7',type:'email'},
+  {key:'wa',label:'WhatsApp',type:'wa'},
+  {key:'ig',label:'Instagram DM',type:'ig'},
+];
+function readSettings(){
+  const s={name:val('s-name').trim(),agency:val('s-agency').trim(),wa:val('s-wa').trim(),web:val('s-web').trim(),base:val('s-base').trim()};
+  try{localStorage.setItem(KEY_S,JSON.stringify(s))}catch(e){}
+  return s;
+}
+function loadSettings(){let s={};try{s=JSON.parse(localStorage.getItem(KEY_S))||{}}catch(e){}
+  ['name','agency','wa','web','base'].forEach(k=>{const el=document.getElementById('s-'+k);if(el)el.value=s[k]||''});
+}
+function slug(x){return String(x||'').toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')}
+function previewLink(l,s){return s.base?(s.base.replace(/\/?$/,'/')+slug(l.name)):''}
+function catWords(cat){
+  if(cat==='Restaurant'||cat==='Cafe')return{show:'menu',act:'reservations'};
+  if(cat==='Salon / Spa'||cat==='Clinic / Dental')return{show:'services',act:'bookings'};
+  if(cat==='Gym / Fitness')return{show:'classes & memberships',act:'sign-ups'};
+  return{show:'services',act:'enquiries'};
+}
+function sign(s){return (s.name||'[Your name]')+(s.agency?' · '+s.agency:'')+' · Dubai\n📱 '+(s.wa||'[WhatsApp]')+(s.web?' · '+s.web:'')}
+function tpl(key,l,s){
+  const cw=catWords(l.cat), link=previewLink(l,s)||'[preview link]', area=l.area?(' in '+l.area):'', n=l.name;
+  switch(key){
+    case 'preview': return {subject:`A new website for ${n} (built it for you)`,
+      body:`Hi ${n} team,\n\nI came across ${n}${area} and noticed there's no website yet — just Instagram. So I built you a quick preview of what one could look like:\n\n👉 ${link}\n\nIt's mobile-ready, takes ${cw.act} straight to WhatsApp, and shows your ${cw.show}. Free to look — if you like it, I can have the real one live this week.\n\nWant me to walk you through it?\n\n${sign(s)}\n\nNot interested? Reply "no" and I won't follow up.`};
+    case 'cold': return {subject:`${n} on Google — quick thought`,
+      body:`Hi ${n} team,\n\nI'm a web designer here in Dubai. I came across ${n}${area} — looks great, but there's no website for people to see your ${cw.show} or make ${cw.act}.\n\nHere's a live example of what I build: 👉 [demo link]\n\nWant me to build a free preview with your name on it so you can see it first?\n\n${sign(s)}\n\nReply "no" to opt out.`};
+    case 'f3': return {subject:`Re: A new website for ${n}`,
+      body:`Hi ${n} team,\n\nDid the preview come through? 👉 ${link}\n\nOne thing it fixes right away: people searching "${n} Dubai" on Google land on nothing right now — a site captures those ${cw.act}.\n\nHappy to match your colours/photos. 2-minute call?\n\n${s.name||'[Your name]'}`};
+    case 'f7': return {subject:`Should I close the preview for ${n}?`,
+      body:`Hi ${n} team,\n\nI'll take the preview down at the end of the week unless you'd like to keep it. If now's not the time, no problem — just let me know.\n\nEither way it's yours to keep: 👉 ${link}\n\n${s.name||'[Your name]'}`};
+    case 'wa': return {subject:'',
+      body:`Hi ${n} team 👋 I'm ${s.name||'[name]'}, a web designer in Dubai. I actually built you a free preview of what a website could look like 👇\n${link}\n\nIt's mobile, shows your ${cw.show}, and takes ${cw.act} straight to WhatsApp. If you like it I can make it live this week 🙌`};
+    case 'ig': return {subject:'',
+      body:`Love what you're doing at ${n} 🔥 noticed there's no website in your bio — I just built a quick preview of one for you, want me to send it? 👀`};
+  }
+  return {subject:'',body:''};
+}
+function openMsg(id){
+  msgLead=leads.find(l=>l.id===id); if(!msgLead)return;
+  msgSeq='preview';
+  document.getElementById('m-title').textContent=msgLead.name;
+  document.getElementById('seq-tabs').innerHTML=SEQS.map(q=>`<div class="seq-tab ${q.key===msgSeq?'active':''}" data-k="${q.key}" onclick="pickSeq('${q.key}')">${q.label}</div>`).join('');
+  fillMsg();
+  document.getElementById('modal').classList.add('show');
+}
+function pickSeq(k){msgSeq=k;document.querySelectorAll('.seq-tab').forEach(t=>t.classList.toggle('active',t.dataset.k===k));fillMsg()}
+function closeMsg(){document.getElementById('modal').classList.remove('show')}
+function fillMsg(){
+  const s=readSettings(), seq=SEQS.find(q=>q.key===msgSeq), m=tpl(msgSeq,msgLead,s), isEmail=seq.type==='email';
+  document.getElementById('m-subject-wrap').style.display=isEmail?'flex':'none';
+  document.getElementById('m-subject').value=m.subject||'';
+  document.getElementById('m-body').value=m.body;
+  const openBtn=document.getElementById('m-open');
+  if(seq.type==='wa'){openBtn.textContent='Open WhatsApp';openBtn.style.display=msgLead.phone?'inline-flex':'none';}
+  else if(seq.type==='ig'){openBtn.textContent='Open Instagram';openBtn.style.display=msgLead.ig?'inline-flex':'none';}
+  else {openBtn.textContent='Open in email';openBtn.style.display=msgLead.email?'inline-flex':'none';}
+  const link=previewLink(msgLead,s);
+  document.getElementById('m-hint').textContent = link ? ('Preview link: '+link) : 'Tip: set a Preview base URL in ⚙️ above to auto-insert each lead\'s preview link.';
+}
+function openChannel(){
+  const seq=SEQS.find(q=>q.key===msgSeq), body=document.getElementById('m-body').value;
+  if(seq.type==='wa'){window.open('https://wa.me/'+msgLead.phone.replace(/[^0-9]/g,'')+'?text='+encodeURIComponent(body),'_blank');}
+  else if(seq.type==='ig'){window.open('https://instagram.com/'+msgLead.ig.replace('@',''),'_blank');}
+  else {window.open('mailto:'+encodeURIComponent(msgLead.email)+'?subject='+encodeURIComponent(val('m-subject'))+'&body='+encodeURIComponent(body),'_blank');}
+}
+function copyMsg(){
+  const seq=SEQS.find(q=>q.key===msgSeq), body=val('m-body');
+  const text=seq.type==='email'?('Subject: '+val('m-subject')+'\n\n'+body):body;
+  navigator.clipboard.writeText(text).then(()=>{const h=document.getElementById('m-hint'),o=h.textContent;h.textContent='Copied ✓';setTimeout(()=>h.textContent=o,1500)}).catch(()=>{});
+}
+
 /* tabs */
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');
@@ -317,6 +447,10 @@ function loadDemo(){
   save();render();
 }
 
+/* init */
+loadSettings();
+['s-name','s-agency','s-wa','s-web','s-base'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('input',readSettings)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMsg()});
 render();
 </script>
 </body>
