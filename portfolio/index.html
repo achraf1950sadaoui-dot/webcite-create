@@ -254,17 +254,23 @@
 
 <script>
   /* ═══ EDIT THESE TWO LINES ═══ */
-  const BRAND = "Studio";                 // ← your studio / agency name
+  const BRAND = "Achraf Studio";          // ← your studio / agency name
   const WHATSAPP = "9715XXXXXXXX";        // ← your WhatsApp number (no +, no spaces)
   /* ════════════════════════════ */
 
   document.getElementById('brandName').textContent = BRAND;
   document.getElementById('brandName2').textContent = BRAND;
+  const hasWA = WHATSAPP.indexOf('X') === -1;
   const waMsg = encodeURIComponent("Hi " + BRAND + "! I'd like a free website preview for my business.");
   const waUrl = "https://wa.me/" + WHATSAPP + "?text=" + waMsg;
-  document.getElementById('waCta').href = waUrl;
-  document.getElementById('waCta').target = "_blank";
-  document.getElementById('waFoot').innerHTML = '<a href="'+waUrl+'" target="_blank" style="color:var(--brand)">WhatsApp</a>';
+  const cta = document.getElementById('waCta');
+  if (hasWA) {
+    cta.href = waUrl; cta.target = "_blank";
+    document.getElementById('waFoot').innerHTML = '<a href="'+waUrl+'" target="_blank" style="color:var(--brand)">WhatsApp</a>';
+  } else {
+    cta.textContent = "See my work"; cta.href = "#work";
+    document.getElementById('waFoot').textContent = "Dubai";
+  }
 </script>
 </body>
 </html>
