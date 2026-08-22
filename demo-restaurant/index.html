@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maison Noor — Modern Levantine Dining · Dubai</title>
+  <meta name="description" content="Maison Noor — modern Levantine dining in the heart of Dubai. Reserve a table, explore the menu, order for delivery." />
+  <meta property="og:title" content="Maison Noor — Modern Levantine Dining · Dubai" />
+  <meta property="og:description" content="Modern Levantine dining in the heart of Dubai. Reserve your table today." />
+  <meta property="og:type" content="restaurant" />
+  <meta name="theme-color" content="#0e2a24" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ═══════════════════════════════════════════════════════════════
+       MAISON NOOR — DEMO RESTAURANT TEMPLATE
+       This is a sales demo. To make it a real client's site, replace:
+         • --gold / --green / --cream  (brand colours)
+         • restaurant name, tagline, phone, address, WhatsApp number
+         • menu items + prices
+         • the .photo blocks with real <img> photos
+       Everything is in this one file. No build step, no dependencies.
+       ═══════════════════════════════════════════════════════════════ */
+    :root{
+      --green:#0e2a24;      /* deep emerald */
+      --green-2:#12362e;
+      --gold:#c9a24b;       /* brushed gold */
+      --gold-soft:#e3c987;
+      --cream:#f6f1e7;
+      --cream-2:#efe7d6;
+      --ink:#1c1c1a;
+      --muted:#6f6a5f;
+      --line:rgba(201,162,75,.28);
+      --radius:16px;
+      --shadow:0 24px 60px -28px rgba(14,42,36,.45);
+      --maxw:1180px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      color:var(--ink);background:var(--cream);line-height:1.65;
+      -webkit-font-smoothing:antialiased;overflow-x:hidden;
+    }
+    h1,h2,h3,.display{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;line-height:1.08;letter-spacing:.2px}
+    img{max-width:100%;display:block}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+    .eyebrow{font-family:'Inter';font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:var(--gold)}
+    .btn{display:inline-flex;align-items:center;gap:.55rem;font-weight:600;font-size:.95rem;
+      padding:.9rem 1.6rem;border-radius:999px;cursor:pointer;border:1px solid transparent;transition:.25s ease;white-space:nowrap}
+    .btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-soft));color:#2a2413;box-shadow:0 12px 28px -12px rgba(201,162,75,.7)}
+    .btn-gold:hover{transform:translateY(-2px);box-shadow:0 18px 34px -12px rgba(201,162,75,.8)}
+    .btn-ghost{border-color:rgba(255,255,255,.4);color:#fff}
+    .btn-ghost:hover{background:rgba(255,255,255,.1)}
+    .btn-outline{border-color:var(--green);color:var(--green)}
+    .btn-outline:hover{background:var(--green);color:var(--cream)}
+
+    /* arabesque divider */
+    .arabesque{height:26px;background:
+      radial-gradient(circle at 10px 0, transparent 9px, var(--gold) 10px, transparent 11px) 0 0/20px 26px repeat-x;
+      opacity:.5}
+
+    /* ── announce ── */
+    .announce{background:var(--green-2);color:var(--gold-soft);text-align:center;font-size:.82rem;letter-spacing:.08em;padding:.5rem 1rem}
+
+    /* ── nav ── */
+    header.nav{position:sticky;top:0;z-index:50;background:rgba(14,42,36,.92);backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(201,162,75,.18)}
+    .nav-in{display:flex;align-items:center;justify-content:space-between;height:74px}
+    .brand{display:flex;flex-direction:column;line-height:1}
+    .brand b{font-family:'Cormorant Garamond';font-size:1.5rem;color:var(--cream);letter-spacing:.06em}
+    .brand small{font-size:.62rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);margin-top:3px}
+    .nav-links{display:flex;gap:2rem;align-items:center}
+    .nav-links a{color:#e9e4d7;font-size:.9rem;font-weight:500;opacity:.85;transition:.2s}
+    .nav-links a:hover{opacity:1;color:var(--gold-soft)}
+    .nav-cta{display:flex;gap:.6rem;align-items:center}
+    .burger{display:none;background:none;border:0;cursor:pointer;flex-direction:column;gap:5px}
+    .burger span{width:24px;height:2px;background:var(--cream);display:block}
+
+    /* ── hero ── */
+    .hero{position:relative;color:var(--cream);
+      background:
+        radial-gradient(1100px 520px at 78% -10%, rgba(201,162,75,.22), transparent 60%),
+        radial-gradient(900px 500px at 10% 110%, rgba(201,162,75,.12), transparent 60%),
+        linear-gradient(160deg,var(--green) 0%,#0a201b 100%);
+      overflow:hidden}
+    .hero-pattern{position:absolute;inset:0;opacity:.09;background-size:64px 64px;
+      background-image:
+        linear-gradient(45deg,var(--gold) 1px,transparent 1px),
+        linear-gradient(-45deg,var(--gold) 1px,transparent 1px)}
+    .hero-in{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;
+      padding:76px 0 84px}
+    .hero h1{font-size:clamp(2.8rem,6vw,5rem);margin:1rem 0 1.2rem}
+    .hero h1 em{font-style:italic;color:var(--gold-soft)}
+    .hero p.lede{font-size:1.12rem;max-width:38ch;color:#e5decf;font-weight:300}
+    .hero-actions{display:flex;gap:.9rem;margin-top:2rem;flex-wrap:wrap}
+    .hero-meta{display:flex;gap:2rem;margin-top:2.6rem;flex-wrap:wrap}
+    .hero-meta div{border-left:2px solid var(--gold);padding-left:.9rem}
+    .hero-meta b{display:block;font-family:'Cormorant Garamond';font-size:1.6rem;color:var(--gold-soft)}
+    .hero-meta span{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:#cfc7b4}
+
+    /* hero visual card (photo slot) */
+    .hero-card{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:4/5;
+      background:
+        radial-gradient(120% 90% at 30% 20%, rgba(201,162,75,.35), transparent 55%),
+        linear-gradient(150deg,#153b31,#0a1f1a);
+      border:1px solid rgba(201,162,75,.35);box-shadow:var(--shadow);
+      display:flex;align-items:flex-end;padding:26px}
+    .hero-card .plate{position:absolute;inset:0;display:grid;place-items:center;opacity:.9}
+    .hero-card svg{width:62%;height:auto}
+    .hero-card .tag{position:relative;z-index:2;background:rgba(10,31,26,.72);backdrop-filter:blur(6px);
+      border:1px solid var(--line);border-radius:12px;padding:.7rem 1rem}
+    .hero-card .tag b{font-family:'Cormorant Garamond';font-size:1.2rem;color:var(--cream)}
+    .hero-card .tag span{display:block;font-size:.74rem;color:var(--gold-soft);letter-spacing:.06em}
+
+    /* ── strip ── */
+    .strip{background:var(--green-2);color:var(--cream)}
+    .strip-in{display:flex;justify-content:space-around;flex-wrap:wrap;gap:1rem;padding:18px 0;text-align:center}
+    .strip-in div{display:flex;align-items:center;gap:.6rem;font-size:.9rem;letter-spacing:.02em}
+    .strip-in svg{width:20px;height:20px;stroke:var(--gold);fill:none;stroke-width:1.6}
+
+    /* ── section base ── */
+    section.block{padding:88px 0}
+    .sec-head{text-align:center;max-width:640px;margin:0 auto 54px}
+    .sec-head h2{font-size:clamp(2rem,4vw,3rem);margin:.6rem 0 .8rem}
+    .sec-head p{color:var(--muted)}
+
+    /* ── menu ── */
+    .menu-tabs{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+    .menu-tab{border:1px solid var(--line);background:transparent;color:var(--green);
+      padding:.55rem 1.3rem;border-radius:999px;cursor:pointer;font-weight:600;font-size:.9rem;transition:.2s}
+    .menu-tab.active{background:var(--green);color:var(--cream);border-color:var(--green)}
+    .menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 48px}
+    .menu-cat{display:none}
+    .menu-cat.show{display:contents}
+    .dish{display:flex;gap:1rem;align-items:baseline;padding:16px 0;border-bottom:1px dashed var(--line)}
+    .dish .d-main{flex:1}
+    .dish h3{font-size:1.35rem;display:inline}
+    .dish .d-tags{margin-left:.5rem}
+    .badge{display:inline-block;font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+      padding:.15rem .45rem;border-radius:5px;vertical-align:middle}
+    .badge.veg{background:#e2f0d9;color:#3d6b2b}
+    .badge.chef{background:#f3e7c8;color:#8a6a1e}
+    .badge.spicy{background:#f6ddd6;color:#a24a34}
+    .dish p{color:var(--muted);font-size:.9rem;margin-top:.15rem}
+    .dish .price{font-family:'Cormorant Garamond';font-size:1.4rem;font-weight:600;color:var(--gold);white-space:nowrap}
+    .price small{font-size:.7rem;color:var(--muted);font-family:'Inter'}
+
+    /* ── gallery ── */
+    .gallery{background:var(--cream-2)}
+    .gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:180px;gap:14px}
+    .photo{border-radius:14px;overflow:hidden;position:relative;
+      background:linear-gradient(150deg,#17403492,#0a1f1a),conic-gradient(from 210deg,#1c4a3e,#0e2a24,#2a3e1c,#1c4a3e);
+      display:flex;align-items:flex-end;padding:14px;color:var(--cream);border:1px solid rgba(14,42,36,.12)}
+    .photo::after{content:"";position:absolute;inset:0;opacity:.14;
+      background-image:radial-gradient(circle at 30% 30%,var(--gold) 1px,transparent 2px);background-size:22px 22px}
+    .photo span{position:relative;z-index:2;font-family:'Cormorant Garamond';font-size:1.15rem}
+    .photo.tall{grid-row:span 2}
+    .photo.wide{grid-column:span 2}
+    .gal-note{text-align:center;color:var(--muted);font-size:.82rem;margin-top:18px;font-style:italic}
+
+    /* ── about / split ── */
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+    .split .visual{border-radius:20px;aspect-ratio:1/1;background:
+        radial-gradient(120% 100% at 20% 10%, rgba(201,162,75,.3), transparent 55%),
+        linear-gradient(160deg,var(--green),#0a1f1a);border:1px solid var(--line);
+      display:grid;place-items:center;box-shadow:var(--shadow)}
+    .split .visual svg{width:55%;opacity:.9}
+    .split h2{font-size:clamp(2rem,4vw,2.9rem);margin:.6rem 0 1rem}
+    .split p{color:var(--muted);margin-bottom:1rem}
+    .sig{font-family:'Cormorant Garamond';font-style:italic;font-size:1.5rem;color:var(--green);margin-top:.6rem}
+
+    /* ── reserve ── */
+    .reserve{background:linear-gradient(160deg,var(--green),#0a1f1a);color:var(--cream)}
+    .reserve .sec-head h2{color:var(--cream)}
+    .reserve .sec-head p{color:#cfc7b4}
+    .res-card{max-width:720px;margin:0 auto;background:rgba(255,255,255,.04);border:1px solid var(--line);
+      border-radius:20px;padding:34px;backdrop-filter:blur(6px)}
+    .res-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .field{display:flex;flex-direction:column;gap:.4rem}
+    .field.full{grid-column:1/-1}
+    .field label{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-soft)}
+    .field input,.field select{background:rgba(255,255,255,.06);border:1px solid rgba(201,162,75,.3);
+      border-radius:10px;padding:.8rem .9rem;color:var(--cream);font-size:.95rem;font-family:inherit}
+    .field input::placeholder{color:#9fb3ab}
+    .field input:focus,.field select:focus{outline:none;border-color:var(--gold)}
+    .field select option{color:#000}
+    .res-card .btn-gold{width:100%;justify-content:center;margin-top:6px;font-size:1rem}
+    .res-hint{text-align:center;font-size:.8rem;color:#a9c2b9;margin-top:1rem}
+
+    /* ── hours / contact ── */
+    .info-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px}
+    .info-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:0 20px 40px -34px rgba(14,42,36,.5)}
+    .info-card h3{font-size:1.5rem;margin-bottom:.8rem;color:var(--green)}
+    .info-card .row{display:flex;justify-content:space-between;font-size:.9rem;padding:.3rem 0;color:var(--ink)}
+    .info-card .row span:last-child{color:var(--muted)}
+    .info-card a{color:var(--gold);font-weight:600}
+
+    /* ── reviews ── */
+    .reviews{background:var(--cream-2)}
+    .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .rev{background:#fff;border-radius:16px;padding:26px;border:1px solid var(--line)}
+    .stars{color:var(--gold);letter-spacing:2px;margin-bottom:.6rem}
+    .rev p{font-size:.96rem;color:var(--ink);font-style:italic}
+    .rev b{display:block;margin-top:1rem;font-size:.9rem}
+    .rev span{color:var(--muted);font-size:.8rem}
+
+    /* ── footer ── */
+    footer{background:var(--green);color:#cfc7b4;padding:56px 0 28px}
+    .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px;margin-bottom:32px}
+    footer .brand b{color:var(--cream)}
+    footer h4{color:var(--gold);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:1rem}
+    footer a{display:block;font-size:.9rem;padding:.2rem 0;opacity:.85}
+    footer a:hover{opacity:1;color:var(--gold-soft)}
+    .foot-bottom{border-top:1px solid rgba(201,162,75,.2);padding-top:20px;display:flex;justify-content:space-between;
+      flex-wrap:wrap;gap:10px;font-size:.8rem}
+    .demo-flag{background:var(--gold);color:#2a2413;text-align:center;font-size:.78rem;font-weight:600;padding:.5rem;letter-spacing:.04em}
+
+    /* floating whatsapp */
+    .fab{position:fixed;right:20px;bottom:20px;z-index:60;width:56px;height:56px;border-radius:50%;
+      background:#25d366;display:grid;place-items:center;box-shadow:0 14px 30px -8px rgba(37,211,102,.6);transition:.2s}
+    .fab:hover{transform:scale(1.06)}
+    .fab svg{width:30px;height:30px;fill:#fff}
+
+    /* ── responsive ── */
+    @media(max-width:900px){
+      .hero-in{grid-template-columns:1fr;padding:52px 0 60px}
+      .hero-card{max-width:360px;order:-1}
+      .split{grid-template-columns:1fr;gap:32px}
+      .info-grid{grid-template-columns:1fr}
+      .rev-grid{grid-template-columns:1fr}
+      .gal-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:680px){
+      .nav-links{display:none}
+      .burger{display:flex}
+      .nav-links.open{display:flex;position:absolute;top:74px;left:0;right:0;flex-direction:column;
+        background:var(--green-2);padding:18px 24px;gap:1rem;border-bottom:1px solid var(--line)}
+      .menu-grid{grid-template-columns:1fr;gap:0 0}
+      .res-grid{grid-template-columns:1fr}
+      .hero-meta{gap:1.2rem}
+      section.block{padding:60px 0}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="demo-flag">✦ DEMO TEMPLATE — this is a sample website. Your restaurant's name, menu &amp; photos go here.</div>
+
+  <div class="announce">Now open in DIFC · Dubai — Dinner reservations recommended</div>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="wrap nav-in">
+      <a href="#top" class="brand"><b>MAISON NOOR</b><small>Levantine · Dubai</small></a>
+      <nav class="nav-links" id="navlinks">
+        <a href="#menu">Menu</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#about">Our Story</a>
+        <a href="#visit">Visit</a>
+      </nav>
+      <div class="nav-cta">
+        <a href="#reserve" class="btn btn-gold">Reserve a Table</a>
+        <button class="burger" id="burger" aria-label="menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-pattern"></div>
+      <div class="wrap hero-in">
+        <div>
+          <p class="eyebrow">Modern Levantine Kitchen</p>
+          <h1>Where the <em>spice road</em><br/>meets Dubai.</h1>
+          <p class="lede">Charcoal-grilled mezze, saffron &amp; sumac, and a cellar of natural wines — served in the heart of DIFC.</p>
+          <div class="hero-actions">
+            <a href="#reserve" class="btn btn-gold">Reserve a Table</a>
+            <a href="#menu" class="btn btn-ghost">View the Menu</a>
+          </div>
+          <div class="hero-meta">
+            <div><b>4.9★</b><span>1,200+ reviews</span></div>
+            <div><b>DIFC</b><span>Gate Village</span></div>
+            <div><b>5 PM</b><span>Open daily</span></div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="plate">
+            <!-- decorative plate SVG -->
+            <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="100" cy="100" r="86" stroke="#c9a24b" stroke-width="2" opacity=".7"/>
+              <circle cx="100" cy="100" r="66" stroke="#e3c987" stroke-width="1" opacity=".5"/>
+              <circle cx="100" cy="100" r="40" fill="#c9a24b" opacity=".18"/>
+              <path d="M100 62c14 10 14 30 0 40-14-10-14-30 0-40z" fill="#e3c987" opacity=".7"/>
+              <path d="M74 96c16-4 36 0 52 0" stroke="#e3c987" stroke-width="2" opacity=".6"/>
+              <circle cx="100" cy="118" r="5" fill="#e3c987" opacity=".8"/>
+            </svg>
+          </div>
+          <div class="tag"><b>Chef's Tasting</b><span>7 courses · AED 320</span></div>
+        </div>
+      </div>
+      <div class="arabesque"></div>
+    </section>
+
+    <!-- STRIP -->
+    <div class="strip">
+      <div class="wrap strip-in">
+        <div><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a7 7 0 1114 0c0 5.5-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/></svg> DIFC, Gate Village 8</div>
+        <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Open 5 PM – 1 AM</div>
+        <div><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg> Dine-in · Delivery · Private events</div>
+        <div><svg viewBox="0 0 24 24"><path d="M20 8a4 4 0 00-8 0M4 8a4 4 0 018 0v13"/></svg> Halal · Vegetarian friendly</div>
+      </div>
+    </div>
+
+    <!-- MENU -->
+    <section class="block" id="menu">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="eyebrow">Our Kitchen</p>
+          <h2>The Menu</h2>
+          <p>A modern journey through Levantine flavours — sharing plates designed for the table.</p>
+        </div>
+
+        <div class="menu-tabs" id="menuTabs">
+          <button class="menu-tab active" data-cat="starters">Mezze &amp; Starters</button>
+          <button class="menu-tab" data-cat="mains">From the Grill</button>
+          <button class="menu-tab" data-cat="desserts">Desserts</button>
+          <button class="menu-tab" data-cat="drinks">Drinks</button>
+        </div>
+
+        <div class="menu-grid" id="menuGrid">
+          <!-- STARTERS -->
+          <div class="menu-cat show" data-cat="starters">
+            <div class="dish"><div class="d-main"><div><h3>Hummus Beiruti</h3><span class="d-tags"><span class="badge veg">Veg</span></span></div><p>Silky chickpea, tahini, olive oil, toasted pine nuts.</p></div><div class="price">42<small> AED</small></div></div>
+            <div class="dish"><div class="d-main"><div><h3>Muhammara</h3><span class="d-tags"><span class="badge veg">Veg</span><span class="badge spicy">Spicy</span></span></div><p>Roasted red pepper, walnut, pomegranate molasses.</p></div><div class="price">46<small> AED</small></div></div>
+            <div class="dish"><div class="d-main"><div><h3>Charred Halloumi</h3></div><p>Grilled halloumi, date syrup, za'atar, fresh mint.</p></div><div class="price">55<small> AED</small></div></div>
+            <div class="dish"><div class="d-main"><div><h3>Smoked Baba Ganoush</h3><span class="d-tags"><span class="badge chef">Chef</span></span></div><p>Charcoal-smoked aubergine, tahini, burnt lemon.</p></div><div class="price">48<small> AED</small></div></div>
+            <div class="dish"><div class="d-main"><div><h3>Fattoush Royale</h3><span class="d-tags"><span class="badge veg">Veg</span></span></div><p>Sumac, crisp pita, heritage tomato, pomegranate.</p></div><div class="price">52<small> AED</small></div></div>
+            <div class="dish"><div class="d-main"><div><h3>Lamb Kibbeh</h3></div><p>Bulgur shell, spiced minced lamb, pine nut, yoghurt.</p></div><div class="price">58<small> AED</small></div></div>
+          </div>
+          <!-- MAINS -->
+          <div class="menu-cat" data-cat="mains">
+            <div class="dish"><div class="d-main"><div><h3>Saffron Lamb Chops</h3><span class="d-tags"><span class="badge chef">Chef</span></span></div><p>Charcoal-grilled, saffron rub, grilled lemon, jus.</p></div><div class="price">145<small> AED</small></div></div>
+            <div class="dish"><div class="d-main"><div><h3>Shish Taouk</h3></div><p>Marinated chicken skewers, garlic toum, sumac onion.</p></div><div class="price">92<small> AED</small></div></div>
+            <div class="dish"><div class="d-main"><div><h3>Sea Bream Harra</h3><span class="d-tags"><span class="badge spicy">Spicy</span></span></div><p>Whole grilled bream, chilli-coriander, tahini.</p></div><div class="price">128<small> AED</small></div></div>
+            <div class="dish"><div class="d-main"><div><h3>Mixed Grill Noor</h3><span class="d-tags"><span class="badge chef">For 2</span></span></div><p>Lamb, kofta, taouk, kebab — served on the coal board.</p></div><div class="price">210<small> AED</small></div></div>
+            <div class="dish"><div class="d-main"><div><h3>Aubergine Maqluba</h3><span class="d-tags"><span class="badge veg">Veg</span></span></div><p>Upside-down spiced rice, aubergine, caramelised onion.</p></div><div class="price">78<small> AED</small></div></div>
+            <div class="dish"><div class="d-main"><div><h3>Slow Lamb Ouzi</h3></div><p>12-hour lamb shoulder, jewelled rice, almonds.</p></div><div class="price">155<small> AED</small></div></div>
+          </div>
+          <!-- DESSERTS -->
+          <div class="menu-cat" data-cat="desserts">
+            <div class="dish"><div class="d-main"><div><h3>Pistachio Baklava</h3><span class="d-tags"><span class="badge chef">Chef</span></span></div><p>Layered filo, Aleppo pistachio, orange blossom.</p></div><div class="price">44<small> AED</small></div></div>
+            <div class="dish"><div class="d-main"><div><h3>Rose Muhalabia</h3></div><p>Milk pudding, rosewater, crushed pistachio.</p></div><div class="price">38<small> AED</small></div></div>
+            <div class="dish"><div class="d-main"><div><h3>Knafeh Noor</h3></div><p>Warm cheese pastry, sugar syrup, clotted cream.</p></div><div class="price">46<small> AED</small></div></div>
+            <div class="dish"><div class="d-main"><div><h3>Date &amp; Tahini Tart</h3></div><p>Medjool date, tahini caramel, sea salt.</p></div><div class="price">42<small> AED</small></div></div>
+          </div>
+          <!-- DRINKS -->
+          <div class="menu-cat" data-cat="drinks">
+            <div class="dish"><div class="d-main"><div><h3>Saffron Lemonade</h3></div><p>Fresh lemon, saffron, mint, sparkling.</p></div><div class="price">32<small> AED</small></div></div>
+            <div class="dish"><div class="d-main"><div><h3>Pomegranate Cooler</h3></div><p>Pressed pomegranate, rose, soda.</p></div><div class="price">34<small> AED</small></div></div>
+            <div class="dish"><div class="d-main"><div><h3>Arabic Coffee</h3></div><p>Cardamom-spiced, served the traditional way.</p></div><div class="price">24<small> AED</small></div></div>
+            <div class="dish"><div class="d-main"><div><h3>Mint &amp; Sage Tea</h3></div><p>Fresh mint, sage, wildflower honey.</p></div><div class="price">26<small> AED</small></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="block gallery" id="gallery">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="eyebrow">The Experience</p>
+          <h2>A Feast for the Senses</h2>
+          <p>Warm light, charcoal smoke, and plates made to share.</p>
+        </div>
+        <div class="gal-grid">
+          <div class="photo tall"><span>Charcoal Grill</span></div>
+          <div class="photo wide"><span>The Dining Room</span></div>
+          <div class="photo"><span>Mezze Table</span></div>
+          <div class="photo"><span>Saffron Lamb</span></div>
+          <div class="photo wide"><span>Terrace at Dusk</span></div>
+          <div class="photo"><span>Baklava</span></div>
+        </div>
+        <p class="gal-note">↑ These tiles are placeholders — in your live site they become real photos of your restaurant &amp; dishes.</p>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="block" id="about">
+      <div class="wrap split">
+        <div class="visual">
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M100 24c8 22 30 30 30 58a30 30 0 01-60 0c0-28 22-36 30-58z" fill="#e3c987" opacity=".75"/>
+            <path d="M60 150c26-10 54-10 80 0" stroke="#c9a24b" stroke-width="2"/>
+            <path d="M64 164c24-8 48-8 72 0" stroke="#c9a24b" stroke-width="2" opacity=".6"/>
+            <circle cx="100" cy="96" r="8" fill="#0e2a24"/>
+          </svg>
+        </div>
+        <div>
+          <p class="eyebrow">Our Story</p>
+          <h2>Recipes carried across generations.</h2>
+          <p>Maison Noor began with a grandmother's spice tin and a simple belief: that the best conversations happen over food meant to be shared. Our kitchen brings the soul of Beirut, Aleppo and Amman to a modern Dubai table.</p>
+          <p>Every dish is grilled over natural charcoal, seasoned by hand, and plated to gather people around it. No shortcuts — just fire, spice, and hospitality.</p>
+          <p class="sig">— Chef Layla Noor</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESERVE -->
+    <section class="block reserve" id="reserve">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="eyebrow">Book Your Table</p>
+          <h2>Reserve at Maison Noor</h2>
+          <p>Tell us the details — your request goes straight to our team on WhatsApp for instant confirmation.</p>
+        </div>
+        <div class="res-card">
+          <form id="resForm">
+            <div class="res-grid">
+              <div class="field"><label>Full name</label><input name="name" required placeholder="Your name" /></div>
+              <div class="field"><label>Phone</label><input name="phone" required placeholder="+971 5X XXX XXXX" /></div>
+              <div class="field"><label>Date</label><input name="date" type="date" required /></div>
+              <div class="field"><label>Time</label><input name="time" type="time" required /></div>
+              <div class="field"><label>Guests</label>
+                <select name="guests">
+                  <option>1 guest</option><option selected>2 guests</option><option>3 guests</option>
+                  <option>4 guests</option><option>5 guests</option><option>6 guests</option>
+                  <option>7+ guests (private)</option>
+                </select>
+              </div>
+              <div class="field"><label>Occasion</label>
+                <select name="occasion">
+                  <option>Dinner</option><option>Birthday</option><option>Anniversary</option>
+                  <option>Business</option><option>Other</option>
+                </select>
+              </div>
+              <div class="field full"><label>Notes (optional)</label><input name="notes" placeholder="Allergies, seating, high chair…" /></div>
+            </div>
+            <button type="submit" class="btn btn-gold">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="#2a2413"><path d="M20 4a10 10 0 00-15 13l-1 4 4-1A10 10 0 1020 4zm-6 14a8 8 0 01-4-1l-3 1 1-3a8 8 0 1110-10 8 8 0 01-4 13z"/></svg>
+              Confirm on WhatsApp
+            </button>
+            <p class="res-hint">No account needed. We reply within minutes during opening hours.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISIT -->
+    <section class="block" id="visit">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="eyebrow">Find Us</p>
+          <h2>Hours &amp; Location</h2>
+        </div>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3>Opening Hours</h3>
+            <div class="row"><span>Mon – Thu</span><span>5 PM – 12 AM</span></div>
+            <div class="row"><span>Fri – Sat</span><span>5 PM – 1 AM</span></div>
+            <div class="row"><span>Sunday</span><span>1 PM – 12 AM</span></div>
+            <div class="row"><span>Brunch (Sat)</span><span>1 PM – 4 PM</span></div>
+          </div>
+          <div class="info-card">
+            <h3>Location</h3>
+            <p style="color:var(--muted);font-size:.92rem;margin-bottom:.6rem">Gate Village 8, DIFC<br/>Dubai, United Arab Emirates</p>
+            <div class="row"><span>Valet parking</span><span>Available</span></div>
+            <div class="row"><span>Metro</span><span>Financial Centre</span></div>
+            <a href="#" style="margin-top:.8rem;display:inline-block">Open in Google Maps →</a>
+          </div>
+          <div class="info-card">
+            <h3>Contact</h3>
+            <div class="row"><span>Reservations</span><a href="#reserve">Book online</a></div>
+            <div class="row"><span>Phone</span><span>+971 4 000 0000</span></div>
+            <div class="row"><span>WhatsApp</span><a href="#reserve">Message us</a></div>
+            <div class="row"><span>Instagram</span><a href="#">@maisonnoor</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section class="block reviews">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="eyebrow">Guest Love</p>
+          <h2>What Our Guests Say</h2>
+        </div>
+        <div class="rev-grid">
+          <div class="rev"><div class="stars">★★★★★</div><p>"The saffron lamb chops are the best I've had in Dubai. Atmosphere is stunning — booked again for next week."</p><b>Sarah M.</b><span>Google review</span></div>
+          <div class="rev"><div class="stars">★★★★★</div><p>"Took a client here to close a deal. The private mezze board and the service sealed it. Faultless."</p><b>Omar H.</b><span>Google review</span></div>
+          <div class="rev"><div class="stars">★★★★★</div><p>"Booked on WhatsApp in 2 minutes, table was ready. Knafeh is unreal. New favourite spot."</p><b>Priya R.</b><span>Instagram</span></div>
+        </div>
+        <p class="gal-note" style="color:var(--muted)">↑ Replace with your real Google/Instagram reviews.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <a href="#top" class="brand"><b style="font-size:1.7rem">MAISON NOOR</b></a>
+          <p style="margin-top:.8rem;max-width:34ch;font-size:.9rem">Modern Levantine dining in the heart of DIFC, Dubai. Fire, spice &amp; hospitality.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <a href="#menu">Menu</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#about">Our Story</a>
+          <a href="#reserve">Reservations</a>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <a href="#visit">DIFC, Gate Village 8</a>
+          <a href="#reserve">+971 4 000 0000</a>
+          <a href="#">@maisonnoor</a>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 Maison Noor. All rights reserved.</span>
+        <span>Demo site — built to be your restaurant's new home online.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- floating WhatsApp -->
+  <a class="fab" id="fab" href="#reserve" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M20 4a10 10 0 00-15 13l-1 4 4-1A10 10 0 1020 4zm-6 14a8 8 0 01-4-1l-3 1 1-3a8 8 0 1110-10 8 8 0 01-4 13z"/></svg>
+  </a>
+
+  <script>
+    /* ── CONFIG: change one number to make WhatsApp live ──────────── */
+    const WHATSAPP_NUMBER = "9714XXXXXXX"; // e.g. 971501234567 (no +, no spaces)
+    const RESTAURANT_NAME = "Maison Noor";
+
+    /* mobile menu */
+    const burger = document.getElementById('burger');
+    const navlinks = document.getElementById('navlinks');
+    burger.addEventListener('click', () => navlinks.classList.toggle('open'));
+    navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navlinks.classList.remove('open')));
+
+    /* menu tabs */
+    const tabs = document.querySelectorAll('.menu-tab');
+    const cats = document.querySelectorAll('.menu-cat');
+    tabs.forEach(t => t.addEventListener('click', () => {
+      tabs.forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      cats.forEach(c => c.classList.toggle('show', c.dataset.cat === t.dataset.cat));
+    }));
+
+    /* reservation → WhatsApp */
+    document.getElementById('resForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const f = e.target;
+      const msg =
+        `Hello ${RESTAURANT_NAME}! I'd like to reserve a table.%0A%0A` +
+        `👤 Name: ${encodeURIComponent(f.name.value)}%0A` +
+        `📞 Phone: ${encodeURIComponent(f.phone.value)}%0A` +
+        `📅 Date: ${encodeURIComponent(f.date.value)}%0A` +
+        `🕐 Time: ${encodeURIComponent(f.time.value)}%0A` +
+        `👥 Guests: ${encodeURIComponent(f.guests.value)}%0A` +
+        `🎉 Occasion: ${encodeURIComponent(f.occasion.value)}%0A` +
+        (f.notes.value ? `📝 Notes: ${encodeURIComponent(f.notes.value)}` : '');
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
+    });
+
+    /* floating fab → whatsapp (general) */
+    document.getElementById('fab').addEventListener('click', e => {
+      e.preventDefault();
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello ' + RESTAURANT_NAME + '! I have a question.')}`, '_blank');
+    });
+  </script>
+</body>
+</html>
