@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lead Manager — Dubai Web Clients</title>
+<style>
+  :root{
+    --green:#0e2a24;--green2:#12362e;--gold:#c9a24b;--gold-soft:#e3c987;
+    --cream:#f6f1e7;--ink:#1c1c1a;--muted:#6f6a5f;--line:#e4dcc9;
+    --hot:#2e8b57;--warm:#c9a24b;--cold:#9a9a9a;--danger:#b5462f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--cream);color:var(--ink);line-height:1.5}
+  .top{background:var(--green);color:var(--cream);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  .top h1{font-size:1.25rem;letter-spacing:.02em}.top h1 span{color:var(--gold-soft)}
+  .stats{display:flex;gap:10px;flex-wrap:wrap}
+  .stat{background:rgba(255,255,255,.06);border:1px solid rgba(201,162,75,.3);border-radius:10px;padding:6px 12px;font-size:.82rem}
+  .stat b{color:var(--gold-soft);font-size:1.05rem;display:block}
+  .wrap{max-width:1240px;margin:0 auto;padding:22px}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:20px;box-shadow:0 18px 40px -34px rgba(14,42,36,.5)}
+  .panel h2{font-size:1rem;color:var(--green);margin-bottom:14px;letter-spacing:.02em}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .f{display:flex;flex-direction:column;gap:4px}.f.full{grid-column:1/-1}
+  label{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+  input,select,textarea{font-family:inherit;font-size:.9rem;padding:.55rem .7rem;border:1px solid var(--line);border-radius:8px;background:#fdfbf6}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
+  textarea{resize:vertical;min-height:70px}
+  .btn{font-family:inherit;font-weight:600;font-size:.88rem;padding:.6rem 1.2rem;border-radius:8px;border:1px solid transparent;cursor:pointer;transition:.15s}
+  .btn-gold{background:var(--gold);color:#2a2413}.btn-gold:hover{background:var(--gold-soft)}
+  .btn-green{background:var(--green);color:var(--cream)}.btn-green:hover{background:var(--green2)}
+  .btn-ghost{background:transparent;border-color:var(--line);color:var(--ink)}.btn-ghost:hover{border-color:var(--gold)}
+  .btn-sm{padding:.35rem .7rem;font-size:.78rem}
+  .row-actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+  .toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+  .toolbar input,.toolbar select{padding:.45rem .6rem}
+  table{width:100%;border-collapse:collapse;font-size:.85rem}
+  th{text-align:left;padding:10px 8px;border-bottom:2px solid var(--line);color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;cursor:pointer;white-space:nowrap}
+  th:hover{color:var(--gold)}
+  td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+  tr:hover{background:#fbf8f1}
+  .score{font-weight:700;padding:2px 8px;border-radius:20px;color:#fff;font-size:.78rem;display:inline-block;min-width:34px;text-align:center}
+  .biz b{display:block}.biz small{color:var(--muted)}
+  .links a{color:var(--gold);text-decoration:none;margin-right:8px;font-size:.8rem}
+  .links a:hover{text-decoration:underline}
+  select.stage,select.web{padding:.35rem .5rem;font-size:.8rem;border-radius:6px}
+  .del{color:var(--danger);cursor:pointer;background:none;border:none;font-size:1rem}
+  .empty{text-align:center;color:var(--muted);padding:40px;font-style:italic}
+  .tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+  .tab{padding:.4rem .9rem;border:1px solid var(--line);border-radius:20px;background:#fff;cursor:pointer;font-size:.82rem;font-weight:600;color:var(--muted)}
+  .tab.active{background:var(--green);color:var(--cream);border-color:var(--green)}
+  .hint{font-size:.8rem;color:var(--muted);margin-top:6px}
+  .paste-area{display:none}.paste-area.show{display:block}
+  code{background:#f0ead9;padding:1px 5px;border-radius:4px;font-size:.82em}
+  @media(max-width:820px){.grid{grid-template-columns:1fr 1fr}.hide-m{display:none}}
+  @media(max-width:520px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <div class="top">
+    <h1>🎯 Lead Manager <span>· Dubai Web Clients</span></h1>
+    <div class="stats" id="stats"></div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ADD / IMPORT -->
+    <div class="panel">
+      <div class="tabs">
+        <div class="tab active" data-mode="single">＋ Add one lead</div>
+        <div class="tab" data-mode="paste">📋 Paste from Google Maps</div>
+      </div>
+
+      <!-- single -->
+      <div id="single-form">
+        <div class="grid">
+          <div class="f full"><label>Business name *</label><input id="i-name" placeholder="e.g. Zaytoun Kitchen"/></div>
+          <div class="f"><label>Category</label>
+            <select id="i-cat">
+              <option>Restaurant</option><option>Cafe</option><option>Salon / Spa</option>
+              <option>Clinic / Dental</option><option>Gym / Fitness</option><option>Boutique / Retail</option>
+              <option>Real estate</option><option>Other</option>
+            </select></div>
+          <div class="f"><label>Area</label><input id="i-area" placeholder="JLT, Marina, DIFC…"/></div>
+          <div class="f"><label>Website status</label>
+            <select id="i-web">
+              <option value="None">None ✅ best</option>
+              <option value="Linktree">Linktree only</option>
+              <option value="Broken">Broken / outdated</option>
+              <option value="Basic">Basic / weak</option>
+              <option value="Good">Good (skip)</option>
+            </select></div>
+          <div class="f"><label>Instagram</label><input id="i-ig" placeholder="@handle"/></div>
+          <div class="f"><label>Phone / WhatsApp</label><input id="i-phone" placeholder="+971 5X…"/></div>
+          <div class="f"><label>Email</label><input id="i-email" placeholder="hello@…"/></div>
+          <div class="f"><label>Google rating</label><input id="i-rating" placeholder="4.6" inputmode="decimal"/></div>
+          <div class="f full"><label>Notes</label><input id="i-notes" placeholder="Great food photos, new opening…"/></div>
+        </div>
+        <div class="row-actions">
+          <button class="btn btn-gold" onclick="addSingle()">＋ Add lead</button>
+          <span class="hint">Fit score is calculated automatically. Data saves in this browser only.</span>
+        </div>
+      </div>
+
+      <!-- paste -->
+      <div id="paste-form" class="paste-area">
+        <label>Paste lines — one lead per line. Format: <code>Name | Category | Area | @instagram | phone | email | websiteStatus</code></label>
+        <textarea id="paste-box" placeholder="Zaytoun Kitchen | Restaurant | JLT | @zaytoundxb | +9715012345 |  | None
+Bloom Cafe | Cafe | Marina | @bloomcafe |  | hi@bloom.ae | Linktree"></textarea>
+        <div class="row-actions">
+          <button class="btn btn-gold" onclick="importPaste()">Import lines</button>
+          <span class="hint">Only <b>Name</b> is required. Leave a field empty (keep the <code>|</code>) if unknown.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIST -->
+    <div class="panel">
+      <div class="toolbar">
+        <input id="search" placeholder="🔍 Search…" oninput="render()"/>
+        <select id="filter-stage" onchange="render()">
+          <option value="">All stages</option>
+          <option>New</option><option>Preview built</option><option>Contacted</option>
+          <option>Replied</option><option>Call booked</option><option>Won</option><option>Lost</option>
+        </select>
+        <select id="filter-score" onchange="render()">
+          <option value="0">All scores</option>
+          <option value="70">🔥 Hot only (70+)</option>
+          <option value="45">Warm+ (45+)</option>
+        </select>
+        <div style="flex:1"></div>
+        <button class="btn btn-ghost btn-sm" onclick="exportCSV()">⬇ Export CSV</button>
+        <button class="btn btn-ghost btn-sm" onclick="loadDemo()">Load sample</button>
+        <button class="btn btn-ghost btn-sm" onclick="clearAll()">Clear all</button>
+      </div>
+      <div style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr>
+              <th onclick="sortBy('score')">Score</th>
+              <th onclick="sortBy('name')">Business</th>
+              <th class="hide-m" onclick="sortBy('area')">Area</th>
+              <th class="hide-m">Web</th>
+              <th>Contact</th>
+              <th onclick="sortBy('stage')">Stage</th>
+              <th class="hide-m">Next</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <div id="empty" class="empty">No leads yet. Add one above, or click <b>Load sample</b> to see how it works.</div>
+    </div>
+
+  </div>
+
+<script>
+/* ══════════════════ Lead Manager — data in localStorage ══════════════════ */
+const KEY='dubai_leads_v1';
+let leads = load();
+let sortKey='score', sortDir=-1;
+
+const STAGES=['New','Preview built','Contacted','Replied','Call booked','Won','Lost'];
+const WEBS=['None','Linktree','Broken','Basic','Good'];
+const TARGET_CATS=['Restaurant','Cafe','Salon / Spa','Clinic / Dental','Gym / Fitness','Boutique / Retail'];
+
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch(e){return[]}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(leads))}catch(e){}}
+
+/* ── fit score 0–100 ── */
+function scoreOf(l){
+  let s=0;
+  const w=(l.web||'None');
+  s += w==='None'?40 : w==='Broken'?34 : w==='Linktree'?30 : w==='Basic'?16 : 0;
+  if(l.ig) s+=18;
+  if(TARGET_CATS.includes(l.cat)) s+=18;
+  if(l.phone) s+=10;
+  if(l.email) s+=8;
+  const r=parseFloat(l.rating);
+  if(!isNaN(r)){ if(r>=4.3) s+=6; else if(r<3.8) s-=10; }
+  return Math.max(0,Math.min(100,s));
+}
+function scoreColor(s){return s>=70?getCss('--hot'):s>=45?getCss('--warm'):getCss('--cold')}
+function getCss(v){return getComputedStyle(document.documentElement).getPropertyValue(v)}
+
+/* ── add ── */
+function addSingle(){
+  const name=val('i-name').trim();
+  if(!name){alert('Business name is required');return}
+  leads.push({
+    id:Date.now()+Math.random().toString(36).slice(2,6),
+    name, cat:val('i-cat'), area:val('i-area').trim(), web:val('i-web'),
+    ig:cleanIg(val('i-ig')), phone:val('i-phone').trim(), email:val('i-email').trim(),
+    rating:val('i-rating').trim(), notes:val('i-notes').trim(),
+    stage:'New', next:'', added:Date.now()
+  });
+  ['i-name','i-area','i-ig','i-phone','i-email','i-rating','i-notes'].forEach(id=>document.getElementById(id).value='');
+  save();render();
+  document.getElementById('i-name').focus();
+}
+function importPaste(){
+  const lines=val('paste-box').split('\n').map(l=>l.trim()).filter(Boolean);
+  let n=0;
+  lines.forEach(line=>{
+    const p=line.split('|').map(x=>x.trim());
+    if(!p[0])return;
+    leads.push({
+      id:Date.now()+Math.random().toString(36).slice(2,6),
+      name:p[0], cat:normCat(p[1]), area:p[2]||'', ig:cleanIg(p[3]||''),
+      phone:p[4]||'', email:p[5]||'', web:normWeb(p[6]), rating:'', notes:'',
+      stage:'New', next:'', added:Date.now()
+    });n++;
+  });
+  document.getElementById('paste-box').value='';
+  save();render();
+  if(n)alert('Imported '+n+' lead'+(n>1?'s':''));
+}
+function normCat(c){if(!c)return'Other';const m=TARGET_CATS.find(t=>t.toLowerCase().startsWith(c.toLowerCase()));return m||'Other'}
+function normWeb(w){if(!w)return'None';const m=WEBS.find(t=>t.toLowerCase()===w.toLowerCase());return m||'None'}
+function cleanIg(v){if(!v)return'';v=v.trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i,'').replace(/\/$/,'');return v?('@'+v.replace(/^@/,'')):''}
+
+/* ── mutations ── */
+function setField(id,f,v){const l=leads.find(x=>x.id===id);if(l){l[f]=v;save();render()}}
+function del(id){leads=leads.filter(x=>x.id!==id);save();render()}
+function clearAll(){if(confirm('Delete ALL leads? This cannot be undone.')){leads=[];save();render()}}
+
+/* ── render ── */
+function sortBy(k){if(sortKey===k)sortDir*=-1;else{sortKey=k;sortDir=(k==='name'||k==='area'||k==='stage')?1:-1}render()}
+function render(){
+  const q=val('search').toLowerCase();
+  const fs=val('filter-stage'), fmin=parseInt(val('filter-score'))||0;
+  let rows=leads.map(l=>({...l,score:scoreOf(l)}));
+  rows=rows.filter(l=>{
+    if(fs&&l.stage!==fs)return false;
+    if(l.score<fmin)return false;
+    if(q){const hay=(l.name+l.area+l.cat+l.ig+l.notes).toLowerCase();if(!hay.includes(q))return false}
+    return true;
+  });
+  rows.sort((a,b)=>{let x=a[sortKey],y=b[sortKey];if(typeof x==='string'){x=x.toLowerCase();y=(y||'').toLowerCase()}return x<y?-1*sortDir:x>y?1*sortDir:0});
+
+  const tb=document.getElementById('tbody');
+  tb.innerHTML=rows.map(l=>`
+    <tr>
+      <td><span class="score" style="background:${scoreColor(l.score)}">${l.score}</span></td>
+      <td class="biz"><b>${esc(l.name)}</b><small>${esc(l.cat)}${l.rating?' · ⭐'+esc(l.rating):''}${l.notes?' · '+esc(l.notes):''}</small></td>
+      <td class="hide-m">${esc(l.area)||'—'}</td>
+      <td class="hide-m">
+        <select class="web" onchange="setField('${l.id}','web',this.value)">
+          ${WEBS.map(w=>`<option ${w===l.web?'selected':''}>${w}</option>`).join('')}
+        </select>
+      </td>
+      <td class="links">
+        ${l.ig?`<a href="https://instagram.com/${esc(l.ig.replace('@',''))}" target="_blank">IG</a>`:''}
+        ${l.phone?`<a href="https://wa.me/${l.phone.replace(/[^0-9]/g,'')}" target="_blank">WA</a>`:''}
+        ${l.email?`<a href="mailto:${esc(l.email)}">✉</a>`:''}
+        ${!(l.ig||l.phone||l.email)?'<small style="color:var(--muted)">—</small>':''}
+      </td>
+      <td>
+        <select class="stage" onchange="setField('${l.id}','stage',this.value)">
+          ${STAGES.map(s=>`<option ${s===l.stage?'selected':''}>${s}</option>`).join('')}
+        </select>
+      </td>
+      <td class="hide-m"><input type="date" value="${l.next||''}" style="padding:.3rem;font-size:.78rem" onchange="setField('${l.id}','next',this.value)"/></td>
+      <td><button class="del" title="Delete" onclick="del('${l.id}')">✕</button></td>
+    </tr>`).join('');
+
+  document.getElementById('empty').style.display=rows.length?'none':'block';
+  renderStats();
+}
+function renderStats(){
+  const s=leads.map(l=>({...l,score:scoreOf(l)}));
+  const hot=s.filter(l=>l.score>=70).length;
+  const won=s.filter(l=>l.stage==='Won').length;
+  const active=s.filter(l=>!['Won','Lost'].includes(l.stage)).length;
+  document.getElementById('stats').innerHTML=`
+    <div class="stat"><b>${leads.length}</b>Total leads</div>
+    <div class="stat"><b>${hot}</b>🔥 Hot</div>
+    <div class="stat"><b>${active}</b>Active</div>
+    <div class="stat"><b>${won}</b>Won</div>`;
+}
+
+/* ── export ── */
+function exportCSV(){
+  const H=['Business Name','Category','Area','Instagram','Phone/WhatsApp','Email','Website Status','Fit Score','Rating','Stage','Next Action','Notes'];
+  const rows=leads.map(l=>[l.name,l.cat,l.area,l.ig,l.phone,l.email,l.web,scoreOf(l),l.rating,l.stage,l.next,l.notes]
+      .map(v=>`"${String(v||'').replace(/"/g,'""')}"`).join(','));
+  const csv=[H.join(','),...rows].join('\n');
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download='dubai-leads-'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
+}
+
+/* ── helpers ── */
+function val(id){return document.getElementById(id).value}
+function esc(s){return String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+
+/* tabs */
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');
+  const m=t.dataset.mode;
+  document.getElementById('single-form').style.display=m==='single'?'block':'none';
+  document.getElementById('paste-form').classList.toggle('show',m==='paste');
+});
+
+/* sample */
+function loadDemo(){
+  if(leads.length && !confirm('Add 4 sample leads to your list?'))return;
+  const demo=[
+    {name:'Zaytoun Kitchen',cat:'Restaurant',area:'JLT',ig:'@zaytoundxb',phone:'+971501234567',email:'',web:'None',rating:'4.7',notes:'Great food photos, no site'},
+    {name:'Bloom Cafe',cat:'Cafe',area:'Marina',ig:'@bloomcafe',phone:'',email:'hi@bloomcafe.ae',web:'Linktree',rating:'4.5',notes:'Busy brunch spot'},
+    {name:'Glow Beauty Lounge',cat:'Salon / Spa',area:'Business Bay',ig:'@glowdxb',phone:'+971502223344',email:'',web:'Broken',rating:'4.8',notes:'Old wix site down'},
+    {name:'CorePulse Gym',cat:'Gym / Fitness',area:'JVC',ig:'@corepulse',phone:'+971509998877',email:'team@corepulse.ae',web:'Basic',rating:'4.4',notes:'Weak one-pager'},
+  ];
+  demo.forEach(d=>leads.push({id:Date.now()+Math.random().toString(36).slice(2,6),stage:'New',next:'',added:Date.now(),...d}));
+  save();render();
+}
+
+render();
+</script>
+</body>
+</html>
